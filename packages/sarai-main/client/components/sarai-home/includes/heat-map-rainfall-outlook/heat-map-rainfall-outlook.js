@@ -10,7 +10,7 @@ Template.HeatMapRainfallOutlook.onCreated(() => {
 
 Template.HeatMapRainfallOutlook.onRendered(() => {
 
-  var tooltip = d3.select("#heatmap").append("div").attr("id", "tooltip");
+  var tooltip = d3.select("body").append("div").attr("id", "tooltip");
   d3.xml("rainfall-outlook/PH-province.svg",
     function(error,documentFragment){
       if(error) {console.log(error); return;}
@@ -62,6 +62,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
 
         var color = d3.scaleLinear().domain([0,100,200,800]).range([color_low,color_mid,color_high,color_max]).interpolate(d3.interpolateHcl);
         var svg_map = d3.select("#svgPHfullmap");
+        $('svg').attr('id', 'svgMainMap');
 
         d3.select("svg").append("text").attr("id","svg_mainlbl")
         .style("font-size","30")
