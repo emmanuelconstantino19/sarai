@@ -1,10 +1,12 @@
 Meteor.methods({
 	'cms-rainfall-outlook-content-update' : (text) => {
-		var xlsx = Npm.require('node-xlsx');
-		var fs = Npm.require('fs');
-		var obj = xlsx.parse(fs.readFileSync(text));
-		var map = obj[0];
-		rainfall_data = map['data'];
+		var allTextLines = text.split(/\r\n|\n/);
+		var rainfall_data = [];
+		for(var i = 0; i < allTextLines.length; i++){
+			rainfall_data.push(allTextLines[i].split(','));
+		}
+		rainfall_data.pop();
+
 		if(rainfall_data[0][1].toLowerCase()=='municipality'){
 			Meteor.call('cms-rainfall-outlook-content-parser',rainfall_data,0);	
 		}else{
@@ -18,8 +20,6 @@ Meteor.methods({
 		var province, municipality;
 		var data, data_start;
 
-		var utf8 = Npm.require('utf8');
-
 		data_start = (type==0) ? 2 : 1;
 
 		for(var i = data_start ; i < rainfall_data[0].length ; i++){
@@ -28,7 +28,7 @@ Meteor.methods({
 
 		for(var i = 1; i < rainfall_data.length; i++){
 			province = rainfall_data[i][0];
-			municipality = (type==0) ? utf8.decode(rainfall_data[i][data_start-1]) : "All";
+			municipality = (type==0) ? rainfall_data[i][data_start-1] : "All";
 			console.log(municipality);
 			data = WeatherOutlook.findOne({province: province, municipality: municipality}).data;
 			for(var j = data_start; j < rainfall_data[i].length ; j++){
