@@ -52,7 +52,10 @@ Template.WeatherMonitoringV2.onRendered(() => {
 
   const showWeatherData = (stationID, label, event) => {
     Session.set('stationID', stationID)
-
+    const station = this.stations.find((element) => {
+      return element.id == stationID
+    })
+    $('#monitoring-station-select').val(station.markerID)
     displayWeatherData(stationID, this.apiKey)
   }
 
