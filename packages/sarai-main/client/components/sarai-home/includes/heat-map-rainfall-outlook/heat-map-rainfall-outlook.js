@@ -20,15 +20,15 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
       d3.select("#sidebar").append("svg").attr("id","svgSideBar")
       $('#svgSideBar').css('width','100%')
 
-      var color_low = "red";
-      var color_mid = "yellow"
-      var color_high = "green";
-      var color_max = "#003300";
+      var color_low = "yellow";
+      var color_mid = "#1D4350"
+      var color_high = "#003366";
+      var color_max = "#000046";
       var y_start;
       var x_start;
       var k_last = 1;
-      var five_months = getFiveConsecMonths();
-      console.log(five_months);
+      var six_months = getSixConsecMonths();
+      console.log(six_months);
 
       var drag1 = d3.drag()
       .on("start",function (d) {                
@@ -68,7 +68,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
         ;
 
         function changeMonth(month){                        
-          d3.select("#svg_mainlbl").text("Philippines Rainfall MAP: "+month+" 2018");                        
+          var year = (month=="Jan") ? "2019" : "2018";
+          d3.select("#svg_mainlbl").text("Philippines Rainfall MAP: "+month+" "+year);                        
           svg_map.selectAll("path.land")
           .data(provinces, function(d){ 
               console.log((d && d.province) || d3.select(this).attr("title"));                
@@ -102,7 +103,25 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
         $('#slt_mnth').change(function(){
             changeMonth($('#slt_mnth').val());                  
         });                
-        changeMonth(five_months[0]);
+        changeMonth(six_months[0]);
+
+        $('#btn_animatedata').click(function(){
+              if($('#btn_animatedata').html()==="Animate"){
+                  window.timer = d3.interval(function(elapsed){
+                      var index = $('#slt_mnth').prop('selectedIndex');
+                      index++;
+                      if(index===6){
+                          index=0;
+                      }                               
+                      $('#slt_mnth option').eq(index).prop('selected', true);
+                      $('#slt_mnth').change();
+                  },1500);
+                  $('#btn_animatedata').html("Stop");
+              } else{
+                  timer.stop();
+                  $('#btn_animatedata').html("Animate");                         
+              }
+          });
 
 
         var gradient = d3.select("#svgMainMap").append("defs")
@@ -189,7 +208,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .attr("y",-30)
                   .attr("x",0);
           heatMap.selectAll("text.mnth")
-                      .data(five_months)
+                      .data(six_months)
                       .enter()
                       .append("text")
                       .attr("class","mnth")
@@ -200,7 +219,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
           function renderHeatMap(data,isProvince){
               $('#svgSideBar').css('height',((data.length*40)+100)+'px')
               d3.select("#ht_main").text(isProvince===true?"Provincial Average Rainfall Data":"Municipal Rainfall Data")
-              .attr("x", isProvince===true? -20:20);                        
+              .attr("x", isProvince===true? 0:30);                        
               heatMap.selectAll("g.hmap").remove();
               
               var row = heatMap.selectAll("g.hmap")
@@ -244,8 +263,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .duration(200)    
                   .style("opacity", .9);    
               tooltip.html(function(){
-                //console.log(five_months[i]);
-                return  "Rainfall: "+(d.data.month[five_months[0]])+" mm";
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[0]])+" mm";
 
               }) 
                   .style("left", (d3.event.pageX) + "px")   
@@ -257,7 +276,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                       .style("opacity", 0); 
               })
              .transition().duration(1000)
-             .style("fill",function(d){return color(d.data.month[five_months[0]]);});
+             .style("fill",function(d){return color(d.data.month[six_months[0]]);});
 
              row.append("rect")
              .attr("width", gridSize)
@@ -270,8 +289,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .duration(200)    
                   .style("opacity", .9);    
               tooltip.html(function(){
-                //console.log(five_months[i]);
-                return  "Rainfall: "+(d.data.month[five_months[1]])+" mm";
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[1]])+" mm";
 
               }) 
                   .style("left", (d3.event.pageX) + "px")   
@@ -283,7 +302,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                       .style("opacity", 0); 
               })
              .transition().duration(1000)
-             .style("fill",function(d){return color(d.data.month[five_months[1]]);});
+             .style("fill",function(d){return color(d.data.month[six_months[1]]);});
 
              row.append("rect")
              .attr("width", gridSize)
@@ -296,8 +315,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .duration(200)    
                   .style("opacity", .9);    
               tooltip.html(function(){
-                //console.log(five_months[i]);
-                return  "Rainfall: "+(d.data.month[five_months[2]])+" mm";
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[2]])+" mm";
 
               }) 
                   .style("left", (d3.event.pageX) + "px")   
@@ -309,7 +328,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                       .style("opacity", 0); 
               })
              .transition().duration(1000)
-             .style("fill",function(d){return color(d.data.month[five_months[2]]);});
+             .style("fill",function(d){return color(d.data.month[six_months[2]]);});
 
              row.append("rect")
              .attr("width", gridSize)
@@ -322,8 +341,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .duration(200)    
                   .style("opacity", .9);    
               tooltip.html(function(){
-                //console.log(five_months[i]);
-                return  "Rainfall: "+(d.data.month[five_months[3]])+" mm";
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[3]])+" mm";
 
               }) 
                   .style("left", (d3.event.pageX) + "px")   
@@ -335,7 +354,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                       .style("opacity", 0); 
               })
              .transition().duration(1000)
-             .style("fill",function(d){return color(d.data.month[five_months[3]]);});
+             .style("fill",function(d){return color(d.data.month[six_months[3]]);});
 
              row.append("rect")
              .attr("width", gridSize)
@@ -348,8 +367,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                   .duration(200)    
                   .style("opacity", .9);    
               tooltip.html(function(){
-                //console.log(five_months[i]);
-                return  "Rainfall: "+(d.data.month[five_months[4]])+" mm";
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[4]])+" mm";
 
               }) 
                   .style("left", (d3.event.pageX) + "px")   
@@ -361,7 +380,33 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                       .style("opacity", 0); 
               })
              .transition().duration(1000)
-             .style("fill",function(d){return color(d.data.month[five_months[4]]);});  
+             .style("fill",function(d){return color(d.data.month[six_months[4]]);});
+
+             row.append("rect")
+             .attr("width", gridSize)
+             .attr("height", gridSize)
+             .attr("rx",8)
+             .attr("ry",8)
+             .attr("x",gridSize*5)                        
+             .on("mouseover", function(d) {   
+              tooltip.transition()    
+                  .duration(200)    
+                  .style("opacity", .9);    
+              tooltip.html(function(){
+                //console.log(six_months[i]);
+                return  "Rainfall: "+(d.data.month[six_months[5]])+" mm";
+
+              }) 
+                  .style("left", (d3.event.pageX) + "px")   
+                  .style("top", (d3.event.pageY - 28) + "px");  
+              })          
+              .on("mouseout", function(d) {   
+                  tooltip.transition()    
+                      .duration(500)    
+                      .style("opacity", 0); 
+              })
+             .transition().duration(1000)
+             .style("fill",function(d){return color(d.data.month[six_months[5]]);});  
               
             
               row.exit().remove();
@@ -372,7 +417,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
 
 
           var lineGraph = d3.select("#svgMainMap").append("g").attr("id","lngrph").attr("transform","translate(60,400)").style("opacity",0).style("display","none");
-          lineGraph.append("rect").attr("width","700").attr("height","500").style("fill","#FFFFFF").style("stroke","#000000").style("opacity",0.8);                    
+          lineGraph.append("rect").attr("width","800").attr("height","500").style("fill","#FFFFFF").style("stroke","#000000").style("opacity",0.8);                    
 
 
           var x = d3.scaleLinear().domain([0,5]).range([0,700-160]);
@@ -384,6 +429,8 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
               .style("fill","url(#gradient2)")
               .attr("transform","translate(80,80)")
               .call(d3.axisLeft(y))
+              .selectAll("text")
+              .attr("x",-30)
             .append("text")
               .attr("fill", "#000")
               .attr("transform", "rotate(-90)")
@@ -394,7 +441,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
 
           //X axis display
           lineGraph.selectAll(".mnth")
-                      .data(five_months)
+                      .data(six_months)
                       .enter()
                       .append("text")
                       .attr("class","mnth")
@@ -412,7 +459,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
           lineGraph.append("text").text('[close]')
               .style("text-anchor","end")                
               .style("cursor","pointer")
-              .attr("transform","translate(690,27)")
+              .attr("transform","translate(790,27)")
               .on('click',function(d){
                   console.log("closing");
                   lineGraph.transition().duration(1000).style("opacity",0)
@@ -424,11 +471,12 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
     
               d3.select("#ln_main").text(isProvince===true?"Provincial Average Rainfall Data:"+data.province:"Municipal Rainfall Data:"+data.municipality);
               
-              var ln_data = [data.data.month[five_months[0]],
-                            data.data.month[five_months[1]],
-                            data.data.month[five_months[2]],
-                            data.data.month[five_months[3]],
-                            data.data.month[five_months[4]]];
+              var ln_data = [data.data.month[six_months[0]],
+                            data.data.month[six_months[1]],
+                            data.data.month[six_months[2]],
+                            data.data.month[six_months[3]],
+                            data.data.month[six_months[4]],
+                            data.data.month[six_months[5]]];
 
               var x = d3.scaleLinear().domain([0,4]).range([0,700-160]);
               var y = d3.scaleLinear().domain([0,800]).range([500-160, 0]);
@@ -492,17 +540,17 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
 
 Template.HeatMapRainfallOutlook.helpers({
   months: () => {
-      return getFiveConsecMonths();
+      return getSixConsecMonths();
   }
 })
 
-function getFiveConsecMonths(){
+function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = d.getMonth();
-    var five_months = [];
-    for(var i = 0 ; i < 5 ; i++){
-      five_months[i] = months[(i + current_month)%months.length];
+    var current_month = 7;
+    var six_months = [];
+    for(var i = 0 ; i < 6 ; i++){
+      six_months[i] = months[(i + current_month)%months.length];
     }
-    return five_months;
+    return six_months;
 }

@@ -63,16 +63,16 @@ Template.RainfallOutlookView.helpers({
       const weatherOutlook = WeatherOutlook.findOne({province: province, municipality: municipality})
       const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
       var d = new Date()
-      var current_month = d.getMonth(); 
+      var current_month = 7; 
       var val;
 
       if (weatherOutlook){
         let outlook = []
 
-        for(var i = current_month ; i < current_month + 5; i++){
-          val = (weatherOutlook.data.month[months[i]]==null) ? "--" : Math.round(weatherOutlook.data.month[months[i]])
+        for(var i = 0 ; i < 6; i++){
+          val = (weatherOutlook.data.month[months[(i + current_month)%months.length]]==null) ? "--" : Math.round(weatherOutlook.data.month[months[(i + current_month)%months.length]])
           outlook.push({
-            head: months[i],
+            head: months[(i + current_month)%months.length],
             value: val
           })
         }
