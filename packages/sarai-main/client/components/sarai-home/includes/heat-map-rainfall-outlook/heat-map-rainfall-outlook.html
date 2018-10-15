@@ -2,50 +2,48 @@
   <div class="mdl-grid mdl-grid--no-spacing">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
       <div class="mdl-cell mdl-cell--12-col preview-title"><h3>Rainfall Outlook for 2018</h3>
-        <h6><strong>Know the 5-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</strong><br/>
+        <h6><strong>Know the 6-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</strong><br/>
             Source: SEAMS; NOAA-Climate Prediction Center</h6>
-      </div>
-
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-
-
-      <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <div class="select-container">
-      <select id="slt_mnth" class="mdl-select" style="width:70px;">
-        {{#each month in months}}
-            <option value="{{month[@index]}}">{{month[@index]}}</option>>
-        {{/each}}
-      </select>
-      </div>
-      </div>
-      <div class="mdl-cell  mdl-cell--1-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <button id="btn_ldrgdata" class="btn btn-default">Show Provincial Data</button>
-      </div>
-
-      <div class="mdl-cell  mdl-cell--1-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <button id="btn_animatedata" class="btn btn-default">Animate</button>
-      </div>
-
       </div>
     </div>
   </div>
 
   <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-    <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-    <div id="instructions">
-      <h6 class="heatmap-rainfall-header">Heat Map</h6>
-            <p><b>Hover on the different parts of the map</b> to see the provinces</p>
-            <p>You can <b>click on each province</b> on the heatmap to see the municipality level data</p>
-      <h6 class="heatmap-rainfall-header">Rainfall Data</h6>
-            <p><b>Hover on the boxes</b> to see the value of rainfall for each place at a specific month</p>
-            <p>To see more details on the rainfall data, you can <b>scroll it up and down</b></p>
-            <p><b>Click on the boxes</b> to see the graphical representation of data</p>
+    <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <svg height="20px" id="legend_red" class="legend"></svg>
     </div>
+    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <svg height="20px" id="legend_yellow" class="legend"></svg>
     </div>
-     <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <div id="heatmap"></div>
+    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <svg height="20px" id="legend_green" class="legend"></svg>
     </div>
-    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <svg height="20px" id="legend_blue" class="legend"></svg>
+    </div>
+  </div>
+
+  <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
+
+  <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+  <div class="scrolling-wrapper">
+    <div id="heatmap" class="card"></div>
+    <div id="heatmap2" class="card"></div>
+    <div id="heatmap3" class="card"></div>
+    <br/>
+    <div id="heatmap4" class="card"></div>
+    <div id="heatmap5" class="card"></div>
+    <div id="heatmap6" class="card"></div>
+  </div>
+  </div>
+
+
+     <div id="tabular_data" class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <button id="btn_ldrgdata" class="btn btn-default">Show Provincial Data</button>
+      <div id="header">
+        <svg id="svgHeader">
+        </svg>
+      </div>
       <div id="sidebar"></div>
     </div>
   </div>

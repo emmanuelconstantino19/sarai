@@ -20,20 +20,7 @@
 }
 
 #btn_ldrgdata {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#btn_animatedata {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#btn_help{
-  background-color : green;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: white;
+  margin-top: 20px;
 }
 
 /*******HELP MODAL*******/
@@ -213,13 +200,29 @@ select.mdl-select:focus {
 }
 
 #sidebar{
-    overflow: auto;
-    max-height: 650px;
-    max-width: 420px;
-    margin-top: 30px;
-    margin-bottom:20px;
- }
- #instructions{
+    overflow-y: scroll;
+    max-height: 600px;
+    width: 885px;
+    margin: auto;
+    margin-bottom:20px;  
+}
+
+.scrolling-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.card {
+    display: inline-block;
+    width: 270px;
+    border-top: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+}
+
+#instructions{
     text-align:left;
     margin-top: 40px;
     background-color:#1b5334;
@@ -227,6 +230,33 @@ select.mdl-select:focus {
     padding: 1px 15px;
     color: white;	
 }
- .heatmap-rainfall-header{
+
+.heatmap-rainfall-header{
     border-bottom: 1px solid white;
+}
+
+#lg_container{
+	overflow: auto;
+}
+
+#lineGraph{
+	width: 800px;
+	height: 500px;
+}
+
+#tabular_data{
+    border-top: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+    overflow-x: auto;
+    text-align: center;
+}
+
+#svgHeader{
+	height: 50px;
+}
+
+#header{
+	width:100%;
 }
