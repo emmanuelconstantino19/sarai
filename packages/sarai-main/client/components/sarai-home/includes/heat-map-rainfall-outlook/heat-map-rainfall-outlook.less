@@ -8,7 +8,6 @@
   background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
   cursor: pointer;*/
-  /*background-image: url("/rainfall-outlook/weather-icon-rain-cloud.jpg");*/
 }
 
 .preview-title {
@@ -95,9 +94,10 @@
 }
 /*********SELECT**********/
 
-.select-container {
+.select-container-rainfall {
   border: 1px solid #ccc;
   /*width: 120px;*/
+  width:100%;
   border-radius: 3px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -215,7 +215,7 @@ select.mdl-select:focus {
 
 .card {
     display: inline-block;
-    width: 270px;
+    width: 200px;
     border-top: 1px solid #C0C0C0;
     border-right: 1px solid #C0C0C0;
     border-bottom: 1px solid #C0C0C0;
@@ -259,4 +259,70 @@ select.mdl-select:focus {
 
 #header{
 	width:100%;
+}
+
+
+.rainfall-preview-col {
+  padding: 10px;
+  text-align: center;
+}
+
+.rainfall-outlook-preview-col .head {
+  text-align: center;
+  margin-bottom: 17px;
+  margin-top: 15%;
+}
+
+.rainfall-outlook-preview-col .head .month {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.rainfall-outlook-preview-col .rainfall {
+  text-align: center;
+}
+
+.rainfall .value-rainfall{
+  font-size: 1.6em;
+  margin-top:10px;
+}
+
+.rainfall .unit {
+  font-size: 1.1em;
+}
+
+.rainfall-boxes{
+  margin-right:6px;
+  margin-left: 6px;
+  height:100px;
+  width:13%;
+
+}
+
+.rainfall-boxes .head{
+  margin-top: 15%;
+}
+
+.rainfall{
+  margin-top:10px;
+}
+
+.select-place{
+  width:45%;
+  margin-right:10px;
+}
+
+#agritips{
+  font-size:20px;
+  width:50%;
+}
+
+#legend{
+  width:50%;
+  text-align: left;
+  padding-left: 60px;
+}
+
+.label-place{
+  font-size: 1.1em;
 }

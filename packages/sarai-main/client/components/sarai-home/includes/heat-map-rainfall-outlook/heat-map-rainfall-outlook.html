@@ -8,19 +8,79 @@
     </div>
   </div>
 
-  <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-    <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <svg height="20px" id="legend_red" class="legend"></svg>
-    </div>
-    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <svg height="20px" id="legend_yellow" class="legend"></svg>
-    </div>
-    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <svg height="20px" id="legend_green" class="legend"></svg>
-    </div>
-    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <svg height="20px" id="legend_blue" class="legend"></svg>
-    </div>
+  <div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
+      <div class="mdl-grid mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <div class="select-place">
+       <label for="preview-select-province-rainfall" class="label-place">PROVINCE</label><br/>
+       <div class="select-container-rainfall">
+          <select class="mdl-select" id="preview-select-province-rainfall">
+            {{#each province in provinces}}
+              <option value="{{province.province}}">{{province.province}}</option>
+              {{currentlySelectedProvince}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="select-place">
+        <label for="preview-select-municipality-rainfall" class="label-place">MUNICIPALITY</label><br/>
+        <div class="select-container-rainfall">
+          <select class="mdl-select" id="preview-select-municipality-rainfall">
+            {{#each municipality in municipalities}}
+              <option value="{{municipality.[@index]}}">{{municipality[@index]}}</option>
+              {{currentlySelectedMunicipality}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <br/>
+      {{#each monthlyRainfall}}
+        <div class="rainfall-boxes" style="border: solid 1px {{color}}; border-radius:2px">
+        <div class="head"><span class="month">{{head}}</span></div>
+          <div class="rainfall"><span class="value-rainfall">{{value}}</span><br/><span class="unit">mm</span></div>
+        </div>
+      {{/each}}
+
+      <div id="agritips">
+        <h5>AGRITIPS</h5>
+        <p>If rainfall is <strong>more than 100mm</strong>, planting corn is advisable. If rainfall is <strong>more than 200mm</strong>, planting corn and rice is advisable.</p>
+      </div>
+      <div id="legend">
+        <h5>LEGEND</h5>
+        <div>
+        <svg width="15" height="15">
+          <rect id="low" width="15" height="15" style="fill:#d9e0dc" /> 
+        </svg>
+        <strong>&lt; 100 mm</strong>
+        <br/>
+        <svg width="15" height="15">
+          <rect id="mid" width="15" height="15" style="fill:#74dcfd" /> 
+        </svg>
+        <strong>100-250 mm</strong>
+        <br/>
+        <svg width="15" height="15">
+          <rect id="high" width="15" height="15" style="fill:#0957eb" /> 
+        </svg>
+        <strong>250-500 mm</strong>
+        <br/>
+        <svg width="15" height="15">
+          <rect id="max" width="15" height="15" style="fill:#1e3bb4" /> 
+        </svg>
+        <strong>&gt; 500 mm</strong>
+        </div>
+      </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="barGraph">
+        <label class="label-place">SELECT THEME</label><br/>
+        <div class="select-container-rainfall">
+          <select class="mdl-select" id="theme">
+            <option value="1">Theme 1 (Shades of blue)</option>
+            <option value="2">Theme 2 (Red,Yellow,Green,Blue)</option>
+          </select>
+        </div>
+        <h6 id="bg_label" style="margin:0">
+        </h6>
+      </div>
   </div>
 
   <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
@@ -30,7 +90,6 @@
     <div id="heatmap" class="card"></div>
     <div id="heatmap2" class="card"></div>
     <div id="heatmap3" class="card"></div>
-    <br/>
     <div id="heatmap4" class="card"></div>
     <div id="heatmap5" class="card"></div>
     <div id="heatmap6" class="card"></div>
