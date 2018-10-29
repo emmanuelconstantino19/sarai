@@ -56,22 +56,22 @@ Template.RainHeatmap.onRendered(() => {
           text: 'Location'
         },
         categories: [
-      'IAMBOAN4',
-      'IBICOLGU2',
-      'ICAGAYAN2',
-      'ICAGAYAN3',
-      'ICALABAR18',
-      'ICALABAR25',
-      'ICENTRAL91',
-      'ICENTRAL94',
-      'IDAVAORE19',
-      'IMIMAROP6',
-      'IMIMAROP7',
-      'IMIMAROP8',
-      'INORTHER86',
-      'INORTHER117',
-      'IWESTERN596',
-      'IWESTERN635']
+      'PCA, San Ramon, Zamboanga',
+      'BUCAF, Albay, Bicol',
+      'ISU, Echague, Isabela',
+      'ISU, Cabagan, Isabela',
+      'IPB, Bay Laguna',
+      'DA-QAES, Tiaong, Quezon',
+      'CLSU, Muñoz, Nueva Ecija',
+      'CTU, Barili, Cebu',
+      'SPAMAST, Matanao, Davao del Sur',
+      'WPU, Aborlan, Palawan',
+      'MinSCAT, Victoria, Oriental Mindoro',
+      'PhilRice, Sta. Cruz, Occidental Mindoro',
+      'USTP, Claveria, Misamis Oriental',
+      'CMU, Maramag, Bukidnon',
+      'UPLBCA-LGRTS La Carlota, Negros Occidental',
+      'WVSU, Lambunao, Iloilo']
       },
 
       colorAxis: {
