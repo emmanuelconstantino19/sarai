@@ -10,11 +10,18 @@ Template.Slider.helpers({
     if (record) {
       const sorted = record.slides
 
-      sorted.sort((a, b) => {
+      const filtered = sorted.filter(function(value, index, arr){
+        return value.title!="SARAi KNOWLEDGE PORTAL"
+              && value.title!="SARAI-Enhanced Agricultural Monitoring System"
+              && value.title!="SMARTER PEST IDENTIFICATION TECHNOLOGY"
+              && value.title!="CHAMPIONING SARAi"
+      })
+
+      filtered.sort((a, b) => {
         return a.rank > b.rank ? 1 : ((b.rank > a.rank ? -1 : 0))
       })
 
-      return sorted
+      return filtered
     }
   },
 

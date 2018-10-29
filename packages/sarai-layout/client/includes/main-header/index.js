@@ -62,7 +62,13 @@ Template.MainHeader.events({
 
 
 sortByRank = (items) => {
-  const sorted = items.sort((a, b) => {
+  //temporary code to remove SPIDTech and SARAi Eskwela as sublink for Services
+  const filtered = items.filter(function(value, index, arr){
+    return value.name!="SPIDTech" && value.name!="SARAi Eskwela" && value.name!="Crop Production Area"
+  })
+
+  
+  const sorted = filtered.sort((a, b) => {
     return a.rank - b.rank
   })
 

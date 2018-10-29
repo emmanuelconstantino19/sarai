@@ -2,9 +2,13 @@ Template.MonitoringHeader.helpers({
 
   monitoringLinks: function(){
     var obj = Main.findOne({'name': 'monitoringHeader'}, {sort: {rank: 1}});
-
-    if (obj) {
-      return sortByRank(obj.links)
+    
+    if(obj){
+    const monitoring_links = obj.links;
+    const filtered = monitoring_links.filter(function(value, index, arr){
+      return value.name!="Comparative Satellite Images"
+    })
+      return sortByRank(filtered)
     }
   },
 
