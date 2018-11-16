@@ -1,11 +1,10 @@
 <template name="MainHeader">
   	<header class="mdl-layout__header mdl-layout--fixed-header" id="my-header" style="z-index: 10;"><!-- mdl-layout__headerdashdashwaterfall-->
 
-      {{#if mainH.enabled}}
       <div class="mdl-layout__header-row" id="navClass">
 
         <a href="/" class="mdl-layout-title alerts-and-advisories-header-title-anchor">
-        	<img class="main-logo" src="{{mainH.img}}"/>
+        	<img class="main-logo" src="/header_green.png"/>
           <!-- <span class="alerts-and-advisories-header-title">Integrated Pest Management</span> -->
 
         </a>
@@ -22,7 +21,7 @@
               </a>
               {{#if hasSubLinks mainLink}}
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="{{mainLink.id}}">
-                  {{#each link in sortByRank mainLink.links}}
+                  {{#each link in mainLink.links}}
                   <li class="mdl-menu__item mdl-menu__item-full--bleed-divider" data-link-href="{{link.href}}"><a href="{{link.href}}" id="sublinkclass">{{link.name}}</a></li>
                   {{/each}}
                 </ul>
@@ -33,12 +32,9 @@
           	     {{> loginButtons align="right"}}
               </div> -->
               <img class="dost-pcaarrd-uplb-logo" src="/layout/dost-pcaarrd-uplb.png"/>
-              {{#if mainH.buttonEnabled}}
-              <button type='button' class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' id="versionbutton"> {{mainH.buttonText}}</button>
-              {{/if}}
         </nav>
       </div>
-      {{/if}}
+
     </header>
 </template>
 

@@ -69,52 +69,53 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         d3.select("#svgMainMap2").append("text").attr("id","svg_mainlbl2")
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         d3.select("#svgMainMap3").append("text").attr("id","svg_mainlbl3")
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         d3.select("#svgMainMap4").append("text").attr("id","svg_mainlbl4")
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         d3.select("#svgMainMap5").append("text").attr("id","svg_mainlbl5")
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         d3.select("#svgMainMap6").append("text").attr("id","svg_mainlbl6")
         .style("font-size","70px")
         .style("font-weight","bold")
         .style("text-anchor","start")
-        .attr("transform","translate(0,65)")
+        .attr("transform","translate(15,80)")
         ;
 
         function changeMonth(month, svgMap_curr, label){                        
-          var year = (month=="Jan") ? "2019" : "2018";
+          var year = (month=="Nov" || month=="Dec") ? "2018" : "2019";
           d3.select(label).text(month+" "+year);                        
           svgMap_curr.selectAll("path.land")
           .data(provinces, function(d){                 
               return (d && d.province) || d3.select(this).attr("title");})
           .on('click',function(d){
               renderHeatMap(d.municipalities,false, d.province);
+              $('#select-rainfall-tabular').val(d.province);
           })
           .on("mouseover", function(d) {    
               tooltip.transition()    
@@ -145,7 +146,15 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
           	  }               
               return color(color_category);}
           );                    
-        }                
+        }
+
+        $('#select-rainfall-tabular').on('change', function() {
+            for(var i = 0 ; i < provinces.length; i++){
+              if($('#select-rainfall-tabular').val() == provinces[i].province){
+                renderHeatMap(provinces[i].municipalities,false, provinces[i].province) 
+              }
+            }
+          });              
 
         $("#theme").on('change', function() {
             if($('#theme').val()=='1'){
@@ -215,8 +224,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
 
           function renderHeatMap(data,isProvince, province){
               $('#svgSideBar').css('height',((data.length*40)+100)+'px')
-              d3.select("#ht_main").text(isProvince===true?"Provincial Average Rainfall Data":"Municipal Rainfall Data: " + province)
-              .attr("x", isProvince===true? 180:220);                        
+              $("#tabular_title").text(isProvince===true?"Provincial Average Rainfall Data":"Municipal Rainfall Data: " + province)                        
               heatMap.selectAll("g.hmap").remove();
               
               var row = heatMap.selectAll("g.hmap")
@@ -228,6 +236,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
                           return "translate(0,"+i*gridSize+")"
               }).on('click',function(d){
               	  if(isProvince){
+                    $('#select-rainfall-tabular').val(d.province);
               	  	renderHeatMap(d.municipalities,false, d.province);
               	  }
               });                        
@@ -631,7 +640,7 @@ Template.HeatMapRainfallOutlook.onRendered(() => {
               .enter()
               .append('rect')
               .attr('class', 'bar')
-              .attr("fill", "#585858")
+              .attr("fill", "#1e3bb4")
               .attr('width', xscale.bandwidth())
               .attr('height', 0)
               .attr('y', height)
@@ -808,7 +817,7 @@ var color_max_global = '#1e3bb4';
 function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = 7;
+    var current_month = 10;
     var six_months = [];
     for(var i = 0 ; i < 6 ; i++){
       six_months[i] = months[(i + current_month)%months.length];

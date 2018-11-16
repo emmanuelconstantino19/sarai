@@ -117,7 +117,11 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/partner-institutions/partner-institutions.less",
 
     "client/components/sarai-home/includes/weather-advisory/weather-advisory.html",
-    "client/components/sarai-home/includes/weather-advisory/weather-advisory.js"
+    "client/components/sarai-home/includes/weather-advisory/weather-advisory.js",
+
+    "client/components/sarai-home/includes/suitability-maps/suitability-maps.html",
+    "client/components/sarai-home/includes/suitability-maps/suitability-maps.js",
+    "client/components/sarai-home/includes/suitability-maps/suitability-maps.less",    
   ]
 
   api.addFiles(client, "client")

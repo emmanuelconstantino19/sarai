@@ -63,7 +63,7 @@ Template.RainfallOutlookView.helpers({
       const weatherOutlook = WeatherOutlook.findOne({province: province, municipality: municipality})
       const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
       var d = new Date()
-      var current_month = 7; 
+      var current_month = 10; 
       var val;
 
       if (weatherOutlook){

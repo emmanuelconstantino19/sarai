@@ -1,41 +1,18 @@
 Template.MainHeader.helpers({
-
-  isSuitability: function(){
-    var routeName = FlowRouter.getRouteName();
-    console.log("Current route name is: ", routeName);
-    if("SuitabilityMaps"== routeName){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  navAdmin: function(){
-    if(Meteor.userId()===null){
-      $("#navA").hide();
-    }
-    else{
-      $("#navA").show();
-    }
-  },
-
-  topHeader: function(){
-    //return Home.find({'title': 'Hello World'});
-    return Main.find({'name': 'topHeader'}).fetch()[0];
-  },
-
   mainLinks: function(){
-    var obj = Main.findOne({'name': 'mainHeader'}, {sort: {rank: 1}});
+    return [ 
 
-    if (obj) {
-      return sortByRank(obj.links)
-    }
-  },
+    { "name" : "About Us", "href" : "/about-us", "links" : [ ], "id" : "about-us-link", "withsublinks" : false}, 
 
-  mainH: function(){
-    var obj = Main.findOne({'name' : 'mainHeader'}, {sort: {rank: 1}});
-    if(typeof obj !== 'undefined'){
-      return obj;
-    }
+    { "name" : "Crops", "href" : "", "links" : [ { "name" : "Rice", "href" : "/icm-rice"}, { "name" : "Corn", "href" : "/icm-corn"}, { "name" : "Banana", "href" : "/icm-banana"}, { "name" : "Coconut", "href" : "/icm-coconut"}, { "name" : "Coffee", "href" : "/icm-coffee"}, { "name" : "Cacao", "href" : "/icm-cacao"} ], "id" : "explore-link", "withsublinks" : true}, 
+
+    { "name" : "Maps", "href" : "", "links" : [ { "name" : "Suitability Maps", "href" : "http://202.92.144.49/suitability-maps"}, { "name" : "Rainfall Map", "href" : "http://202.92.144.49/rainfall-maps"} ], "id" : "dss-link", "withsublinks" : true}, 
+
+    { "name" : "Services", "href" : "", "links" : [ { "name" : "Weather Monitoring", "href" : "/weather-monitoring"}, { "name" : "Rainfall Outlook", "href" : "/heat-map-rainfall-outlook"}, { "name" : "Open Data", "href" : "http://opendata.sarai.ph/"},  { "name" : "Suitability", "href" : "/suitability-gallery"}], "id" : "get-involved-link", "withsublinks" : true}, 
+      
+    { "name" : "Contact Us", "href" : "", "links" : [ { "name" : "Subscribe", "href" : "https://goo.gl/forms/i4jW7LshCSQpuyZ23"} ], "id" : "contact-us-link", "withsublinks" : true} 
+
+    ]
   },
 
   hasSubLinks: (mainLink) => {
@@ -44,10 +21,6 @@ Template.MainHeader.helpers({
     } else {
       return false
     }
-  },
-
-  sortByRank: (links) => {
-    return sortByRank(links)
   }
 
 });
@@ -59,21 +32,6 @@ Template.MainHeader.events({
         FlowRouter.go("/pests");
     }
 });
-
-
-sortByRank = (items) => {
-  //temporary code to remove SPIDTech and SARAi Eskwela as sublink for Services
-  const filtered = items.filter(function(value, index, arr){
-    return value.name!="SPIDTech" && value.name!="SARAi Eskwela" && value.name!="Crop Production Area"
-  })
-
-  
-  const sorted = filtered.sort((a, b) => {
-    return a.rank - b.rank
-  })
-
-  return sorted
-}
 
 LoggedIn = function(){
   if(Meteor.userId()===null){

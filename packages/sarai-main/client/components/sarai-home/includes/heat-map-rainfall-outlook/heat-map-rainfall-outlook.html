@@ -1,7 +1,8 @@
 <template name="HeatMapRainfallOutlook">
   <div class="mdl-grid mdl-grid--no-spacing">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title"><h3>Rainfall Outlook for 2018</h3>
+      <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">Rainfall Outlook</h3>
+        <h5 style="margin:0">(November 2018 - April 2019)</h5>
         <h6><strong>Know the 6-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</strong><br/>
             Source: SEAMS; NOAA-Climate Prediction Center</h6>
       </div>
@@ -98,9 +99,18 @@
 
 
      <div id="tabular_data" class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <button id="btn_ldrgdata" class="btn btn-default">Show Provincial Data</button>
+      <h5 id="tabular_title" style="margin-top:20px;margin-bottom:0"></h5>
+      <button id="btn_ldrgdata" class="btn btn-default">Show Provincial Level Data</button>
+       <div class="select-container-rainfall" style="display:inline-table;width: 200px">
+          <select class="mdl-select" id="select-rainfall-tabular">
+            {{#each province in provinces}}
+              <option value="{{province.province}}">{{province.province}}</option>
+              {{currentlySelectedProvince}}
+            {{/each}}
+          </select>
+        </div>
       <div id="header">
-        <svg id="svgHeader">
+        <svg id="svgHeader" style="margin-top:-25px">
         </svg>
       </div>
       <div id="sidebar"></div>
