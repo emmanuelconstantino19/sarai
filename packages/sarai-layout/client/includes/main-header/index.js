@@ -8,7 +8,7 @@ Template.MainHeader.helpers({
 
     { "name" : "Maps", "href" : "", "links" : [ { "name" : "Suitability Maps", "href" : "http://202.92.144.49/suitability-maps"}, { "name" : "Rainfall Map", "href" : "http://202.92.144.49/rainfall-maps"} ], "id" : "dss-link", "withsublinks" : true}, 
 
-    { "name" : "Services", "href" : "", "links" : [ { "name" : "Weather Monitoring", "href" : "/weather-monitoring"}, { "name" : "Rainfall Outlook", "href" : "/heat-map-rainfall-outlook"}, { "name" : "Open Data", "href" : "http://opendata.sarai.ph/"},  { "name" : "Suitability", "href" : "/suitability-gallery"}], "id" : "get-involved-link", "withsublinks" : true}, 
+    { "name" : "Services", "href" : "", "links" : [ { "name" : "Rainfall Outlook", "href" : "/heat-map-rainfall-outlook"}, { "name" : "Open Data", "href" : "http://opendata.sarai.ph/"},  { "name" : "Suitability", "href" : "/suitability-gallery"}], "id" : "get-involved-link", "withsublinks" : true}, 
       
     { "name" : "Contact Us", "href" : "", "links" : [ { "name" : "Subscribe", "href" : "https://goo.gl/forms/i4jW7LshCSQpuyZ23"} ], "id" : "contact-us-link", "withsublinks" : true} 
 
