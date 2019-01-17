@@ -121,7 +121,10 @@ Package.onUse(function(api) {
 
     "client/components/sarai-home/includes/suitability-maps/suitability-maps.html",
     "client/components/sarai-home/includes/suitability-maps/suitability-maps.js",
-    "client/components/sarai-home/includes/suitability-maps/suitability-maps.less",    
+    "client/components/sarai-home/includes/suitability-maps/suitability-maps.less",
+
+    "lib/rainfall-graph-helpers.js",
+    "lib/rainfall-map-helpers.js"    
   ]
 
   api.addFiles(client, "client")

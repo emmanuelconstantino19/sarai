@@ -125,6 +125,9 @@ Meteor.chartHelpers = {
       let tickQPFMap = {}
 
       for (let a = 0; a < ticks.length - 1; a++) {
+        if(qpf[a] == '0'){
+          qpf[a] = '< 1';
+        }
         tickQPFMap[ticks[a]] = qpf[a] + ' mm'
       }
 

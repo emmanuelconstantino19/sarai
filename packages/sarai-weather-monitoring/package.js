@@ -49,7 +49,8 @@ Package.onUse(function(api) {
     "lib/chart-helpers.js",
     "lib/accumulated-rain-helpers.js",
     "lib/year-chart-helpers.js",
-    "lib/sample-data.js"
+    "lib/sample-data.js",
+    "lib/rainfall-forecast-helpers.js"
   ]
 
   api.addFiles(client, "client")

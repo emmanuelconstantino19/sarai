@@ -10,12 +10,11 @@ Template.WeatherMonitoringV2.onCreated(() => {
 
     //display default station
     Session.set('stationID', 'ICALABAR18')
+    getForecast('ICALABAR18')
     displayWeatherData(Session.get('stationID'), this.apiKey)
+    getCurrentWeather(this.apiKey)
 
   })
-
-  this.visibleChart = 'forecast'
-  $('#forecast button').addClass('active')
 
   Highcharts.setOptions({
   // This is for all plots, change Date axis to local timezone
@@ -26,6 +25,23 @@ Template.WeatherMonitoringV2.onCreated(() => {
 })
 
 Template.WeatherMonitoringV2.onRendered(() => {
+  var tenday = [];
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+  ];
+  $('#rainfall-forecast-table').find('tr').append("<th>Station ID</th>")
+
+  for(var i = 0 ; i <= 9; i++){
+    var someDate = new Date();
+    someDate.setDate(someDate.getDate() + i);
+    $('#rainfall-forecast-table').find('tr').append("<th>" + monthNames[someDate.getMonth()] + " " + someDate.getDate() + " (mm)</th>")
+    tenday.push(monthNames[someDate.getMonth()] + " " + someDate.getDate())
+  }
+
+  $('#rainfall-forecast-table').dataTable();
+
+  displayRainfallGraph(tenday);
+
   /****MAP****/
   const northEast = L.latLng(21.924058, 115.342984);
   const southWest = L.latLng(4.566972, 128.614468);
@@ -56,6 +72,7 @@ Template.WeatherMonitoringV2.onRendered(() => {
       return element.id == stationID
     })
     $('#monitoring-station-select').val(station.markerID)
+    $('#main_title').text('10-Day Forecast: ' + $('#monitoring-station-select option:selected').text())
     displayWeatherData(stationID, this.apiKey)
   }
 
@@ -82,7 +99,7 @@ Template.WeatherMonitoringV2.onRendered(() => {
         //save option value, pan to marker, and open popup
         if (stationID == 'ICALABAR18') {
           defaultStation = group.getLayerId(marker)
-          weatherMap.setView(marker.getLatLng(), 10)
+          weatherMap.setView(marker.getLatLng(), 5)
           marker.openPopup()
         }
       }
@@ -114,29 +131,9 @@ Template.WeatherMonitoringV2.onRendered(() => {
 })
 
 Template.WeatherMonitoringV2.events({
-  'click #forecast': () => {
-    this.visibleChart = 'forecast'
-
-    activateButton('forecast')
-    displayWeatherData(Session.get('stationID'), this.apiKey)
-  },
-
-  'click #accumulated': () => {
-    this.visibleChart = 'accumulated'
-    activateButton('accumulated')
-
-    displayWeatherData(Session.get('stationID'), this.apiKey)
-  },
-
-  'click #year': () => {
-    this.visibleChart =  'year'
-    activateButton('year')
-
-    displayWeatherData(Session.get('stationID'), this.apiKey)
-  },
-
   'change #monitoring-station-select': () => {
     const markerID = $('#monitoring-station-select').val()
+    $('#main_title').text('10-Day Forecast: ' + $('#monitoring-station-select option:selected').text())
 
     const station = this.stations.find((element) => {
       return element.markerID == markerID
@@ -152,56 +149,280 @@ Template.WeatherMonitoringV2.events({
 })
 
 Template.WeatherMonitoringV2.helpers({
-  forecastIsSelected: () => {
-    if (this.visibleChart == 'forecast' ) {
-      return true
-    } else {
-      return false
+  forecastToday: () => {
+      const stationID = Session.get('stationID')
+      const forecast = Session.get('forecast')
+      const weatherData = WeatherData.find({id: stationID})
+
+      if (forecast && weatherData) {
+        let forecastToday = forecast[0]
+        const rainfall = Meteor.previewHelpers.get30DayRainfall(weatherData.fetch())
+
+        forecastToday.head = 'Today'
+        forecastToday.today = true
+        forecastToday['cumulative'] = rainfall
+
+        return forecastToday
+      }
+  },
+
+  forecastFirst4: () => {
+    //quantitative preciptation forecast
+    //probability of precipitation
+    const forecast = Session.get('forecast')
+
+    if (forecast) {
+      return forecast.splice(1, 4)
     }
   },
 
-  stationsRainfall: () => {
-    const stationsRainfall = WeatherStations.find({}, {fields: {id: 1}}).fetch()
+  forecastNext5: () => {
+    const forecast = Session.get('forecast')
 
-    stationsRainfall.forEach((element, index) => {
-      const weatherData = WeatherData.find({id: element.id}).fetch()
-
-      const rainfallTotals = Meteor.AccumulatedRainfall.getTotal(weatherData)
-
-      element['rainfall10'] = rainfallTotals[0]
-      element['rainfall30'] = rainfallTotals[1]
-    })
-
-    return stationsRainfall
-  },
-
-  stations: () => {
-    const stations = WeatherStations.find({}).fetch()
-
-    stations.forEach((element, index) => {
-      element.label = stripTitle(element.label)
-    })
-
-    return stations
+    if (forecast) {
+      return forecast.splice(5, 5)
+    }
   }
-
 })
 
 const displayWeatherData = (stationID, apiKey) => {
-
-  //Remove any existing chart
-  $('div.meteogram').remove()
-
-  //Display temporary spinner
   $('<div class="meteogram meteogram-stub"><div class="mdl-spinner mdl-js-spinner is-active"></div></div>').appendTo('#meteogram-container')
+  const forecast = getForecast(stationID)
+  displayForecast(stationID, apiKey)
+}
 
-  if (this.visibleChart == 'forecast') {
-    displayForecast(stationID, apiKey)
-  } else if (this.visibleChart == 'accumulated') {
-    displayAccumulatedRain(stationID, apiKey)
-  } else {
-    displayYear(stationID)
+const getForecast = (stationID) => {
+
+  const apiKey = DSSSettings.findOne({name: 'wunderground-api-key'}).value
+
+  $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (result) => {
+    // const result = Meteor.PreviewSampleData.sampleData()
+
+    const completeTxtForecast = result.forecast.txt_forecast.forecastday
+
+    const simpleForecast = result.forecast.simpleforecast.forecastday
+    let txtForecast = []
+    let forecast = []
+
+    for (let a = 0; a < completeTxtForecast.length; a+=2) {
+      txtForecast.push(completeTxtForecast[a])
+    }
+
+    simpleForecast.forEach((element, index) => {
+      const date = `${element.date.day} ${element.date.monthname_short}`
+
+      forecast.push({
+        head: txtForecast[index].title.substring(0, 3),
+        date,
+        icon: txtForecast[index].icon_url,
+        qpf: element.qpf_allday.mm,
+        pop: element.pop })
+    })
+
+    Session.set('forecast', forecast)
+
+  })
+
+}
+
+const getCurrentWeather = (apiKey) => {
+	var weather_stations2 = [
+		'BUCAF-Albay',	 
+		'CLSU-Munoz',	 
+		'CMU-Maramag',	 
+		'CTU-Barili',	 
+		'DAQAES-Tiaong',	 
+		'IPB-UPLB',	 
+		'ISU-Cabagan',	 
+		'ISU-Echague',	 
+		'MINSCAT-Mindoro',	 
+		'MMSU-Batac',	 
+		'NCAS-UPLB',	 
+		'PCA-Zamboanga',	 
+		'PHILRICE-Mindoro',	 
+		'SPAMAST-Malita',	 
+		'SPAMAST-Matanao',	 
+		'UPLBCA-LaGranja',	 
+		'USM-Kabacan',	 
+		'USTP-Claveria',	 
+		'WPU-Aborlan',	 
+		'WVSU-Iloilo'
+	]
+
+	var rainfall, temp, hum, pres, ws, sr;
+
+	for(var i = 0; i < weather_stations2.length; i++){
+		$.getJSON(`http://202.92.144.43/WL/JSON/${weather_stations2[i]}.json`,(result) => {
+			//rainfall = (result.hasOwnProperty('')) ? '--' : result.davis_current_observation.rain_day_in;
+			temp = (result.hasOwnProperty('temp_c')) ? result.temp_c : '--';
+			hum = (result.hasOwnProperty('relative_humidity')) ? result.relative_humidity : '--';
+			pres = (result.hasOwnProperty('pressure_mb')) ? result.pressure_mb : '--';
+			ws = (result.hasOwnProperty('wind_mph')) ? result.wind_mph : '--';
+			sr = (result.davis_current_observation.hasOwnProperty('solar_radiation')) ? result.davis_current_observation.solar_radiation : '--';
+			$('#current-weather-data').DataTable().row.add([
+        result.davis_current_observation.station_name,
+				result.observation_time_rfc822,
+				result.davis_current_observation.rain_day_in,
+				temp,
+				hum,
+				pres,
+				ws,
+				sr
+      ]).draw();		
+		})
   }
+
+}
+
+
+const displayRainfallGraph = (tenday) => {
+  var graphData = [];
+  $.when(
+    $.getJSON(`http://202.92.144.43/WU/JSON/BUCAF-Albay.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['BUCAF-Albay', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'BUCAF-Albay', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/CLSU-Munoz.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['CLSU-Munoz', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'CLSU-Munoz', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/CMU-Maramag.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['CMU-Maramag', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'CMU-Maramag', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/CTU-Barili.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['CTU-Barili', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'CTU-Barili', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/DAQAES-Tiaong.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['DAQAES-Tiaong', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'DAQAES-Tiaong', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/IPB-UPLB.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['IPB-UPLB', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'IPB-UPLB', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/ISU-Cabagan.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Cabagan', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'ISU-Cabagan', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/ISU-Echague.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Echague', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'ISU-Echague', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/MINSCAT-Mindoro.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['MINSCAT-Mindoro', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'MINSCAT-Mindoro', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/MMSU-Batac.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['MMSU-Batac', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'MMSU-Batac', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/NCAS-UPLB.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['NCAS-UPLB', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'NCAS-UPLB', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/PCA-Zamboanga.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['PCA-Zamboanga', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'PCA-Zamboanga', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/PHILRICE-Mindoro.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['PHILRICE-Mindoro', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'PHILRICE-Mindoro', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/SPAMAST-Malita.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Malita', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'SPAMAST-Malita', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/SPAMAST-Matanao.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Matanao', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'SPAMAST-Matanao', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/UPLBCA-LaGranja.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['UPLBCA-LaGranja', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'UPLBCA-LaGranja', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/USM-Kabacan.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['USM-Kabacan', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'USM-Kabacan', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/USTP-Claveria.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['USTP-Claveria', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'USTP-Claveria', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/WPU-Aborlan.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['WPU-Aborlan', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'WPU-Aborlan', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    }),
+    $.getJSON(`http://202.92.144.43/WU/JSON/WVSU-Iloilo.json`,(result) => {
+      if(result.hasOwnProperty('forecast')){
+        var dailyRecords = result.forecast.simpleforecast.forecastday
+        $('#rainfall-forecast-table').DataTable().row.add(['WVSU-Iloilo', dailyRecords[0].qpf_allday.mm, dailyRecords[1].qpf_allday.mm, dailyRecords[2].qpf_allday.mm, dailyRecords[3].qpf_allday.mm, dailyRecords[4].qpf_allday.mm, dailyRecords[5].qpf_allday.mm, dailyRecords[6].qpf_allday.mm, dailyRecords[7].qpf_allday.mm, dailyRecords[8].qpf_allday.mm, dailyRecords[9].qpf_allday.mm]).draw();
+        graphData.push({name: 'WVSU-Iloilo', data: [dailyRecords[0].qpf_allday.mm,dailyRecords[1].qpf_allday.mm,dailyRecords[2].qpf_allday.mm,dailyRecords[3].qpf_allday.mm,dailyRecords[4].qpf_allday.mm,dailyRecords[5].qpf_allday.mm,dailyRecords[6].qpf_allday.mm,dailyRecords[7].qpf_allday.mm,dailyRecords[8].qpf_allday.mm,dailyRecords[9].qpf_allday.mm]})
+      }
+    })
+  ).then(function() {
+    console.log("Finished table")
+    console.log(graphData)
+    $('<div class="meteogram">').appendTo('#rainfall-container').highcharts(Meteor.RainfallForecast.constructChart(graphData,tenday))
+  });
 }
 
 const displayForecast = (stationID, apiKey) => {
@@ -225,6 +446,20 @@ const displayForecast = (stationID, apiKey) => {
 
       const charts = [
         {
+          element: '#rain-meteogram',
+          title: 'Chance of Rain',
+          name: 'Chance of Rain',
+          id: 'pop',
+          data: hourlySeries.pop,
+          unit: '%',
+          tickPositions: tickPositions,
+          altTickPositions: altTickPositions,
+          color: '#0073e6',
+          dateTicksEnabled: true,
+          plotLines,
+          altTickLabels: tickQPFMap
+        },
+        {
           element: '#temp-meteogram',
           title: 'Temperature',
           name: 'Temp',
@@ -237,25 +472,11 @@ const displayForecast = (stationID, apiKey) => {
           dateTicksEnabled: true,
           plotLines,
           altTickLabels: tickTempMap,
-        },
-        {
-          element: '#rain-meteogram',
-          title: 'Chance of Rain',
-          name: 'Chance of Rain',
-          id: 'pop',
-          data: hourlySeries.pop,
-          unit: '%',
-          tickPositions: tickPositions,
-          altTickPositions: altTickPositions,
-          color: '#0073e6',
-          dateTicksEnabled: false,
-          plotLines,
-          altTickLabels: tickQPFMap
         }
       ]
 
       //remove any existing charts first
-      $('div.meteogram').remove()
+      $('#meteogram-container .meteogram').remove()
 
       //add new charts
       charts.forEach((chart, index) => {
@@ -269,61 +490,6 @@ const displayForecast = (stationID, apiKey) => {
 
 }
 
-const displayAccumulatedRain = (stationID, apiKey) => {
-  const weatherData = WeatherData.find({id: stationID}).fetch()
-
-  //have to reconcile missing entries
-  if (weatherData) {
-    const fixedData = Meteor.AccumulatedRainfall.fillMissingEntries(weatherData.reverse())
-
-    const pastRainfall = Meteor.AccumulatedRainfall.getPastRainfall(fixedData)
-
-    if (apiKey) {
-      $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (result) => {
-
-        // const result = Meteor.RainfallSampleData.sampleData()
-
-        //remove any existing chart first
-        $('div.meteogram').remove()
-
-        const runningTotal = pastRainfall.pastAccRainfall[29].y
-
-        const forecast = Meteor.AccumulatedRainfall.getForecast(result, runningTotal)
-
-        const completeData = Meteor.AccumulatedRainfall.assembleRainfallData(pastRainfall.pastRainfall, pastRainfall.pastAccRainfall, forecast.forecastRainfall, forecast.forecastAccumulated)
-
-        $('<div class="meteogram">').appendTo('#meteogram-container').highcharts(Meteor.AccumulatedRainfall.constructChart(completeData.completeRainfall, completeData.completeAccumulatedRainfall, forecast.plotBandStart, forecast.plotBandEnd))
-      })
-    }
-  }
-}
-
-const displayYear = (stationID) => {
-  //remove any existing chart first
-  $('div.meteogram').remove()
-
-  Meteor.subscribe('heat-map-data-by-id', stationID, () => {
-    const records = HeatMapData.find({stationID: stationID})
-
-    const data = Meteor.YearWeather.constructSeries(records.fetch())
-
-    $('<div class="meteogram">').appendTo('#meteogram-container').highcharts('StockChart', Meteor.YearWeather.constructChart(data[0], data[1]))
-  })
-
-}
-
-const activateButton = (id) => {
-  $(`#${id} > button`).addClass('active')
-
-  const charts = ['forecast', 'accumulated', 'year']
-
-  charts.forEach((element) => {
-    if (element != id) {
-      $(`#${element} > button`).removeClass('active')
-    }
-  })
-}
-
 const stripTitle = (title) => {
   let result = title
 
@@ -335,3 +501,15 @@ const stripTitle = (title) => {
 
   return result
 }
+
+/********* PREVIEW COL ***********/
+Template.PreviewColWM.helpers({
+  formatQPF: (qpf) => {
+    if (qpf < 1) {
+      return "< 1"
+    }
+    else {
+      return qpf
+    }
+  }
+})

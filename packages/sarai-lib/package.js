@@ -55,6 +55,7 @@ Package.onUse(function(api) {
     // "cfs:gridfs",
     "udondan:slick",
     "summernote:summernote",
+    "j4507:datatables-bootstrap-3",
     // "jhuenges:highstock",
     // "highcharts:highcharts-meteor",
     "random"

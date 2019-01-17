@@ -2,18 +2,17 @@
   <div class="mdl-grid mdl-grid--no-spacing">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
       <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">Rainfall Outlook</h3>
-        <h5 style="margin:0">(November 2018 - April 2019)</h5>
+        <h5 style="margin:0">(February 2019 - July 2019)</h5>
         <h6><strong>Know the 6-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</strong><br/>
             Source: SEAMS; NOAA-Climate Prediction Center</h6>
       </div>
     </div>
   </div>
 
-  <div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-      <div class="mdl-grid mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <div class="select-place">
-       <label for="preview-select-province-rainfall" class="label-place">PROVINCE</label><br/>
-       <div class="select-container-rainfall">
+  <div class="mdl-grid preview-controls" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+       <label for="preview-select-province-rainfall">PROVINCE</label><br/>
+       <div class="select-container" style="width:100%">
           <select class="mdl-select" id="preview-select-province-rainfall">
             {{#each province in provinces}}
               <option value="{{province.province}}">{{province.province}}</option>
@@ -22,10 +21,11 @@
           </select>
         </div>
       </div>
-      <div class="select-place">
-        <label for="preview-select-municipality-rainfall" class="label-place">MUNICIPALITY</label><br/>
-        <div class="select-container-rainfall">
-          <select class="mdl-select" id="preview-select-municipality-rainfall">
+
+      <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <label for="preview-select-municipality-rainfall">MUNICIPALITY</label><br/>
+        <div class="select-container" style="width:100%">
+          <select class="mdl-select" id="preview-select-municipality-rainfall">          
             {{#each municipality in municipalities}}
               <option value="{{municipality.[@index]}}">{{municipality[@index]}}</option>
               {{currentlySelectedMunicipality}}
@@ -33,87 +33,75 @@
           </select>
         </div>
       </div>
-      <br/>
-      {{#each monthlyRainfall}}
-        <div class="rainfall-boxes" style="border: solid 1px {{color}}; border-radius:2px">
-        <div class="head"><span class="month">{{head}}</span></div>
-          <div class="rainfall"><span class="value-rainfall">{{value}}</span><br/><span class="unit">mm</span></div>
-        </div>
-      {{/each}}
-
-      <div id="agritips">
-        <h5>AGRITIPS</h5>
-        <p>If rainfall is <strong>more than 100mm</strong>, planting corn is advisable. If rainfall is <strong>more than 200mm</strong>, planting corn and rice is advisable.</p>
-      </div>
-      <div id="legend">
-        <h5>LEGEND</h5>
-        <div>
-        <svg width="15" height="15">
-          <rect id="low" width="15" height="15" style="fill:#d9e0dc" /> 
-        </svg>
-        <strong>&lt; 100 mm</strong>
-        <br/>
-        <svg width="15" height="15">
-          <rect id="mid" width="15" height="15" style="fill:#74dcfd" /> 
-        </svg>
-        <strong>100-250 mm</strong>
-        <br/>
-        <svg width="15" height="15">
-          <rect id="high" width="15" height="15" style="fill:#0957eb" /> 
-        </svg>
-        <strong>250-500 mm</strong>
-        <br/>
-        <svg width="15" height="15">
-          <rect id="max" width="15" height="15" style="fill:#1e3bb4" /> 
-        </svg>
-        <strong>&gt; 500 mm</strong>
-        </div>
-      </div>
-      </div>
-
-      <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="barGraph">
-        <label class="label-place">SELECT THEME</label><br/>
-        <div class="select-container-rainfall">
-          <select class="mdl-select" id="theme">
-            <option value="1">Theme 1 (Shades of blue)</option>
-            <option value="2">Theme 2 (Red,Yellow,Green,Blue)</option>
-          </select>
-        </div>
-        <h6 id="bg_label" style="margin:0">
-        </h6>
-      </div>
   </div>
 
-  <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-
-  <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-  <div class="scrolling-wrapper">
-    <div id="heatmap" class="card"></div>
-    <div id="heatmap2" class="card"></div>
-    <div id="heatmap3" class="card"></div>
-    <div id="heatmap4" class="card"></div>
-    <div id="heatmap5" class="card"></div>
-    <div id="heatmap6" class="card"></div>
-  </div>
-  </div>
-
-
-     <div id="tabular_data" class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-      <h5 id="tabular_title" style="margin-top:20px;margin-bottom:0"></h5>
-      <button id="btn_ldrgdata" class="btn btn-default">Show Provincial Level Data</button>
-       <div class="select-container-rainfall" style="display:inline-table;width: 200px">
-          <select class="mdl-select" id="select-rainfall-tabular">
-            {{#each province in provinces}}
-              <option value="{{province.province}}">{{province.province}}</option>
-              {{currentlySelectedProvince}}
-            {{/each}}
-          </select>
-        </div>
-      <div id="header">
-        <svg id="svgHeader" style="margin-top:-25px">
-        </svg>
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    {{#each monthlyRainfall}}
+    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+     <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background:{{color}};width:100%;text-align:center;color:{{fontcolor}};padding-top:25%;padding-bottom:25%;min-height:0px">
+        <h5 style="margin-top:5px;margin-bottom:5px;font-weight:bold">
+          {{head}}
+        </h5>
+        <h3 style="margin-top:15px;margin-bottom:0px;font-weight:bold">
+            {{value}}
+        </h3>
+        <span style="font-size:20px;font-weight:bold">mm</span>
       </div>
-      <div id="sidebar"></div>
+    </div>
+    {{/each}}
+
+  </div>
+
+<!--
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell- -12-col-desktop mdl-cell- -6-col-tablet mdl-cell- -6-col-phone">
+     <div class="demo-card-event mdl-card mdl-shadow- -2dp" style="background:white;width:100%;text-align:center;color:black;padding-bottom:3%;min-height:0px">
+        <h3>
+            AGRI TIPS
+        </h3>
+        <span style="font-size:15px">If rainfall is more than 100mm, planting corn is advisable. Furthermore, rainfall is more than 200mm, planting corn and rice is advisable.</span>
+     </div>
+    </div>
+  </div> -->
+
+
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall_graph"></div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">National Rainfall Outlook</h3>
+    <h5 style="margin:0">(February 2019 - July 2019)</h5>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <table id = "rainfall-datatable" style="text-align:center" class="table table-bordered table-striped">
+      </table>
+    </div>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map1"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map2"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map3"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map4"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map5"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="rainfall-map6"></div>
     </div>
   </div>
 </template>

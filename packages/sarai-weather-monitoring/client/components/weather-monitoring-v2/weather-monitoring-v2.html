@@ -1,8 +1,25 @@
 <template name="WeatherMonitoringV2">
 
   <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col preview-title"><h3>Weather Monitoring</h3>
+
+      <!-- <button title="Download" type="button" class="mdl-button mdl-js-button mdl-button- -fab mdl-button- -mini-fab download">
+          <i class="material-icons md-36">get_app</i>
+      </button> -->
+      <!-- <a href="/weather-monitoring" id="view-weather-monitoring">Click here to view more details</a> -->
+      <h6><strong>Be proactive! Know the expected amount of rainfall and temperature on your farm for today and for the next nine days.</strong><br/>
+          Maging handa! Alamin ang inaasahang dami ng ulan at tindi ng init at lamig sa iyong taniman ngayon at sa susunod na siyam na araw.<br/>
+          Source: SARAI AWS; WU</h6>
+
+      <!-- <div id="download-container">
+      </div> -->
+
+      <h4 id="main_title">10-Day Forecast: IPB</h4>
+
+      </div>
+
     <div class="mdl-cell mdl-cell--3-col-desktop">
-      <select class="form-control" id="monitoring-station-select">
+      <select class="form-control" id="monitoring-station-select" style="font-size:1.2em;font-weight:bold;height:40px">
         <!-- {{#each station in stations}}
           <option value="{{station.id}}">{{station.label}}</option>
         {{/each}} -->
@@ -10,45 +27,79 @@
       <div id="weather-map-v2"></div>
     </div>
     <div class="mdl-cell mdl-cell--9-col-desktop">
+      <div class="mdl-grid mdl-grid--no-spacing forecast-grid">
+        {{#with forecastToday}}
+          {{> PreviewColWM}}
+        {{/with}}
 
-      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <div id="forecast" class="btn-group" role="group">
-          <button type="button" class="btn btn-default">
-            10-Day Forecast
-          </button>
-        </div>
-        <div id="accumulated" class="btn-group" role="group">
-          <button type="button" class="btn btn-default">
-            Accumulated Rainfall
-          </button>
-        </div>
-        <div id="year" class="btn-group" role="group">
-          <button type="button" class="btn btn-default">
-            Past Year's Data
-          </button>
-        </div>
+        {{#each forecastFirst4}}
+          {{> PreviewColWM}}
+        {{/each}}
+
+
+        {{#each forecastNext5}}
+          {{> PreviewColWM}}
+        {{/each}}
       </div>
-
-      <div id="meteogram-container">
-
-      </div>
+      <div id="meteogram-container"></div>
     </div>
-
     <div class="mdl-cell mdl-cell--12-col-desktop">
       <hr>
     </div>
 
     <div class="mdl-cell mdl-cell--12-col-desktop">
-      {{> TemperatureHeatmap }}
+      <div id="rainfall-container"></div>
+      <hr>
     </div>
 
-    <div class="mdl-cell mdl-cell--12-col-desktop">
-      {{> RainHeatmap }}
-    </div>
+<div class="mdl-cell mdl-cell--12-col-desktop">
+<h4 style="text-align:center">Project SARAi Weather Data</h4>
+<table id = "current-weather-data" style="text-align:center" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Station ID</th>
+        <th>Last Update</th>
+        <th>Rainfall(mm)</th>
+        <th>Temperature(c)</th>
+        <th>Humidity(%)</th>
+        <th>Pressure(mb)</th>
+        <th>Wind Speed(kph)</th>
+        <th>Solar Radiation(W/m2)</th>                  
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
 
-    <div class="mdl-cell mdl-cell--12-col-desktop">
-      {{> WeatherStations }}
-    </div>
+<div class="mdl-cell mdl-cell--12-col-desktop">
+  <hr>
+</div>
 
+<div class="mdl-cell mdl-cell--12-col-desktop">
+<h4 style="text-align:center">10-Day Rainfall Forecast</h4>
+<table id="rainfall-forecast-table" style="text-align:center" class="table table-bordered table-striped">
+    <thead>
+      <tr>      
+      </tr>
+    </thead>
+    <tbody>
+  </tbody>
+</table>
+
+</div>
+
+  </div>
+</template>
+
+<template name="PreviewColWM">
+  <div class="forecast-preview-col" style="width:10%;padding:5px">
+    <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><br/><span class="date">{{date}}</span></div>
+    <div class="icon"><img src="{{icon}}"></div>
+    <div class="qpf"><span class="value">{{formatQPF qpf}}</span> <span class="unit">mm</span></div>
+    <div class="pop" style="margin-bottom:0px"><span class="value">{{pop}}</span><span class="unit">%</span> chance of rain</div>
+    <!-- {{#if today}}
+      <div class="cumulative">Past 30 days: <span class="value">{{cumulative}}</span><span class="unit"> mm</span></div>
+    {{/if}} -->
   </div>
 </template>

@@ -63,7 +63,7 @@ Template.RainfallOutlookView.helpers({
       const weatherOutlook = WeatherOutlook.findOne({province: province, municipality: municipality})
       const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
       var d = new Date()
-      var current_month = 10; 
+      var current_month = 1; 
       var val;
 
       if (weatherOutlook){
@@ -123,7 +123,7 @@ Template.RainfallOutlookView.helpers({
 
   provinces: () => {
     const region = Session.get('region')
-    const provinces = Provinces.find({}, {sort: {id: 1}}).fetch()
+    const provinces = Provinces.find({province: {$ne:'All'}}, {sort: {province: 1}}).fetch()
 
     return provinces
   },
