@@ -108,6 +108,15 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/heat-map-rainfall-outlook/heat-map-rainfall-outlook.less",
     "client/components/sarai-home/includes/heat-map-rainfall-outlook/route.js",
 
+    "client/components/sarai-home/includes/drought-outlook/drought-outlook.html",
+    "client/components/sarai-home/includes/drought-outlook/drought-outlook.js",
+    "client/components/sarai-home/includes/drought-outlook/drought-outlook.less",
+    "client/components/sarai-home/includes/drought-outlook/route.js",
+
+    "client/components/sarai-home/includes/drought-landing/drought-landing-view.html",
+    "client/components/sarai-home/includes/drought-landing/drought-landing-view.js",
+    "client/components/sarai-home/includes/drought-landing/drought-landing-view.less",
+
     "client/components/sarai-home/includes/weather-preview/graph/graph-view.html",
     "client/components/sarai-home/includes/weather-preview/graph/graph-view.js",
     "client/components/sarai-home/includes/weather-preview/graph/graph-view.less",
@@ -124,7 +133,8 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/suitability-maps/suitability-maps.less",
 
     "lib/rainfall-graph-helpers.js",
-    "lib/rainfall-map-helpers.js"    
+    "lib/rainfall-map-helpers.js",
+    "lib/drought-map-helpers.js"    
   ]
 
   api.addFiles(client, "client")

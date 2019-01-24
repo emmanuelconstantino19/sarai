@@ -1,0 +1,104 @@
+<template name="DroughtOutlook">
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+      <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">Drought and Crop Assessment Forecast</h3>
+        <h5 style="margin:0">(January 2019 - June 2019)</h5>
+        <h6><strong>Plan ahead! Know which areas are affected and will be affected by moisture stress.</strong><br/>
+            Source: DCAF Project</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+     <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background:white;width:100%;text-align:center;color:black;padding:3%;min-height:0px">
+        <span style="font-size:15px;color:#333"><b>Important note:</b> Areas with mild to severe SVTR may also have stressed vegetation due to factors aside from drier conditions, such as typhoons. Hence, events during the month of interest should be considered when interpreting the SVTR map.
+        </span>
+     </div>
+    </div>
+  </div>
+
+  <div class="mdl-grid preview-controls" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--4-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+       <label for="preview-select-province-drought">PROVINCE</label><br/>
+       <div class="select-container" style="width:100%">
+          <select class="mdl-select" id="preview-select-province-drought">
+            {{#each province in provinces}}
+              <option value="{{province.province}}">{{province.province}}</option>
+              {{currentlySelectedProvince}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
+  </div>
+
+  <div class="mdl-grid" style="margin-left: 15%;margin-right: 15%;/* text-align:center */">
+    <svg height="16" width="16" style="
+        margin-left: auto;">
+      <circle cx="10" cy="10" r="6" fill="#FAFAFA" stroke="black" stroke-width="0.5"></circle>
+      Sorry, your browser does not support inline SVG.  
+    </svg> <span style="font-size:15px;margin-left: 5px;margin-right: auto;font-weight:bold">Normal (&gt; -0.5)</span>
+    <svg height="16" width="16" style="margin-left: auto;">
+      <circle cx="10" cy="10" r="6" fill="yellow" stroke="black" stroke-width="0.5"></circle>
+      Sorry, your browser does not support inline SVG.  
+    </svg> <span style="font-size:15px;margin-left: 5px;margin-right: auto;font-weight:bold">Mild (-0.51 to -1.00)</span>
+    <svg height="16" width="16" style="margin-left: auto;">
+      <circle cx="10" cy="10" r="6" fill="orange" stroke="black" stroke-width="0.5"></circle>
+      Sorry, your browser does not support inline SVG.  
+    </svg> <span style="font-size:15px;margin-left: 5px;margin-right: auto;font-weight:bold">Moderate (-1.01 to -2)</span>
+    <svg height="16" width="16" style="margin-left: auto;">
+      <circle cx="10" cy="10" r="6" fill="red" stroke="black" stroke-width="0.5"></circle>
+      Sorry, your browser does not support inline SVG.  
+    </svg> <span style="font-size:15px;margin-left: 5px;margin-right: auto;font-weight:bold">Severe (&lt; -2.01)</span>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    {{#each monthlyDrought}}
+    <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+     <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background:{{color}};width:100%;text-align:center;color:{{fontcolor}};padding-top:25%;padding-bottom:25%;min-height:0px">
+        <h5 style="margin-top:5px;margin-bottom:5px;font-weight:bold">
+          {{head}}
+        </h5>
+        <h6 style="margin-top:15px;margin-bottom:0px;font-weight:bold">
+            {{value}}
+        </h6>
+        <span style="font-size:20px;font-weight:bold">{{rawValue}}</span>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+
+  <hr>
+  <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">National Drought and Crop Assessment Forecast</h3>
+        <h5 style="margin:0">(January 2019 - June 2019)</h5>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <table id = "drought-datatable" style="text-align:center" class="table table-bordered table-striped">
+      </table>
+    </div>
+  </div>
+
+  <div class="mdl-grid" style="margin-left:15%;margin-right:15%">
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map1"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map2"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map3"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map4"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map5"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
+      <div id="drought-map6"></div>
+    </div>
+  </div>
+</template>

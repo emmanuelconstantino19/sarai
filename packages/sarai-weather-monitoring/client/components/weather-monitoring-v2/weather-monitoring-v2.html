@@ -14,12 +14,14 @@
       <!-- <div id="download-container">
       </div> -->
 
-      <h4 id="main_title">10-Day Forecast: IPB</h4>
+      <h4 id="main_title">10-Day Forecast: <b>IPB</b></h4>
+      <h6 id="subtitle"></h6>
 
       </div>
 
     <div class="mdl-cell mdl-cell--3-col-desktop">
       <select class="form-control" id="monitoring-station-select" style="font-size:1.2em;font-weight:bold;height:40px">
+        <option value="initial" selected disabled>Select Weather Station</option>
         <!-- {{#each station in stations}}
           <option value="{{station.id}}">{{station.label}}</option>
         {{/each}} -->
@@ -93,7 +95,7 @@
 </template>
 
 <template name="PreviewColWM">
-  <div class="forecast-preview-col" style="width:10%;padding:5px">
+  <div class="forecast-preview-col" style="width:10%;padding:5px;display:inline-table">
     <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><br/><span class="date">{{date}}</span></div>
     <div class="icon"><img src="{{icon}}"></div>
     <div class="qpf"><span class="value">{{formatQPF qpf}}</span> <span class="unit">mm</span></div>

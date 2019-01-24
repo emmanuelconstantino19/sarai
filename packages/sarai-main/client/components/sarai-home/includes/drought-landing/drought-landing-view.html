@@ -1,0 +1,44 @@
+<template name="DroughtOutlookView">
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+      <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">Drought and Crop Assessment Forecast</h3>
+        <h5 style="margin:0">(January 2019 - June 2019)</h5>
+        
+        <h6><strong>Plan ahead! Know which areas are affected and will be affected by moisture stress.</strong><br/>
+            Source: DCAF Project</h6>
+      </div>
+      
+      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
+      
+      <div class="mdl-cell mdl-cell--4-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+       <label for="preview-select-province-drought">PROVINCE</label><br/>
+       <div class="select-container" style="width:100%">
+          <select class="mdl-select" id="preview-select-province-drought">
+            {{#each province in provinces}}
+              <option value="{{province.province}}">{{province.province}}</option>
+              {{currentlySelectedProvince}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--1-offset-tablet mdl-cell--10-col-tablet mdl-cell--1-offset-phone mdl-cell--10-col-phone">
+        {{#each monthlyDrought}}
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--3-col-tablet mdl-cell--3-col-phone drought-outlook-preview-col ">
+          <div class="head"><span class="month">{{head}}</span></div>
+            <div class="drought"><span class="value">{{value}}</span></div>
+          </div>
+        {{/each}}
+      </div>
+      
+      <div class="mdl-cell mdl-cell--12-col drought-outlook-more">
+        <button class="mdl-button mdl-js-button mdl-button--raised">
+          More
+        </button>
+      </div>
+
+    </div>
+  </div>
+</template>

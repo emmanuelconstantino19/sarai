@@ -1,0 +1,320 @@
+.rainfall-outlook-grid {
+  /*background: rgba(255,255,255,1);
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(50%, rgba(111,211,247,1)), color-stop(100%, rgba(255,255,255,1)));
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(111,211,247,1) 50%, rgba(255,255,255,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+  cursor: pointer;*/
+}
+
+.preview-title {
+  text-align: center;
+}
+
+#preview-controls {
+  text-align: center;
+}
+
+/*******HELP MODAL*******/
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+/*********SELECT**********/
+
+.select-container-rainfall {
+  border: 1px solid #ccc;
+  /*width: 120px;*/
+  width:100%;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #fafafa url('/icons/triangle-down.gif') no-repeat 99% 70%;
+  display: inline-block;
+}
+
+select.mdl-select {
+  padding: 5px 8px;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+select.mdl-select:focus {
+  outline: none;
+}
+
+#heat-map-select-province, {
+  width: 15em;
+}
+
+#heat-map-select-region{
+  width: 22em;
+}
+
+/*********HEAT MAP**********/
+
+#heat-map-rainfall-container {
+  width: 100%;
+}
+
+.rainfall-heat-map {
+  width: 100%;
+  text-align: center;
+}
+
+
+/****d3 heat map****/
+#tooltip {   
+	position: absolute;           
+	text-align: center;
+	padding: 20px;             
+	margin: 10px;
+	font: 12px sans-serif;        
+	background: lightsteelblue;   
+	border: 1px;      
+	border-radius:2px;           
+	pointer-events:none;         
+	z-index:1;
+}
+#tooltip h4{
+	margin:0;
+	font-size:14px;
+}
+#tooltip{
+	background:rgba(0,0,0,0.9);
+	border:1px solid grey;
+	border-radius:5px;
+	font-size:12px;
+	width:auto;
+	padding:4px;
+	color:white;
+	opacity:0;
+}        
+#svgMainMap text{
+    font-size: 15pt;
+    text-anchor:middle;   
+    
+    paint-order: stroke;
+    stroke: #FFFFFF;
+    stroke-width: 1px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;            
+}
+
+.hmap rect{            
+    fill: #E6E6E6;
+    stroke: #CCCCCC;
+    stroke-width: 4px;            
+}
+
+.hmap text{            
+    cursor:pointer;  
+}
+
+.land {
+    cursor:pointer;            
+}
+
+.tick text{
+    text-anchor:end;
+}
+
+.hmap rect{
+    cursor:move;            
+}
+
+#sidebar{
+    overflow-y: scroll;
+    max-height: 600px;
+    width: 885px;
+    margin: auto;
+    margin-bottom:20px;  
+}
+
+.scrolling-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.card {
+    display: inline-block;
+    width: 200px;
+    border-top: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    border-left: 1px solid #C0C0C0;
+}
+
+#instructions{
+    text-align:left;
+    margin-top: 40px;
+    background-color:#1b5334;
+    border-radius:4px;
+    padding: 1px 15px;
+    color: white;	
+}
+
+.heatmap-rainfall-header{
+    border-bottom: 1px solid white;
+}
+
+#lg_container{
+	overflow: auto;
+}
+
+#lineGraph{
+	width: 800px;
+	height: 500px;
+}
+
+#tabular_data{
+    overflow-x: auto;
+    text-align: center;
+}
+
+#svgHeader{
+	height: 50px;
+}
+
+#header{
+	width:100%;
+}
+
+
+.rainfall-preview-col {
+  padding: 10px;
+  text-align: center;
+}
+
+.rainfall-outlook-preview-col .head {
+  text-align: center;
+  margin-bottom: 17px;
+  margin-top: 15%;
+}
+
+.rainfall-outlook-preview-col .head .month {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.rainfall-outlook-preview-col .rainfall {
+  text-align: center;
+}
+
+.rainfall .value-rainfall{
+  font-size: 1.6em;
+  margin-top:10px;
+}
+
+.rainfall .unit {
+  font-size: 1.1em;
+}
+
+.rainfall-boxes{
+  margin-right:6px;
+  margin-left: 6px;
+  height:100px;
+  width:13%;
+
+}
+
+.rainfall-boxes .head{
+  margin-top: 15%;
+}
+
+.rainfall{
+  margin-top:10px;
+}
+
+.select-place{
+  width:45%;
+  margin-right:10px;
+}
+
+#agritips{
+  font-size:20px;
+  width:50%;
+}
+
+#legend{
+  width:50%;
+  text-align: left;
+  padding-left: 60px;
+}
+
+.label-place{
+  font-size: 1.1em;
+}
