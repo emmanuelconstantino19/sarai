@@ -220,6 +220,14 @@ const getForecast = (stationID) => {
 		$('#main_title').html('10-Day Forecast: <b>' + $('#monitoring-station-select option:selected').text() + '</b>')
 	}
 })
+.error(function(){ 
+  var snackbarContainer = document.querySelector('#demo-snackbar-example');
+  var data = {
+      message: 'Selected site is currently unavailable',
+      timeout: 2000
+    };
+  snackbarContainer.MaterialSnackbar.showSnackbar(data);
+})
 .complete(function() { console.log('Complete') });
 
 }
@@ -260,7 +268,7 @@ const getCurrentWeather = (apiKey) => {
 			sr = (result.davis_current_observation.hasOwnProperty('solar_radiation')) ? result.davis_current_observation.solar_radiation : '--';
 			$('#current-weather-data').DataTable().row.add([
         result.davis_current_observation.station_name,
-				result.observation_time_rfc822,
+				result.observation_time_rfc822.replace('+0800',''),
 				result.davis_current_observation.rain_day_in,
 				temp,
 				hum,

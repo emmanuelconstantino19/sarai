@@ -104,6 +104,9 @@ Meteor.RainfallForecast = {
     title: {
         text: '10-Day Rainfall Forecast'
     },
+    subtitle: {
+        text: 'Click the name of the AWS to filter the display of the graph.'
+    },
     xAxis: {
         categories: tenday,
         crosshair: true

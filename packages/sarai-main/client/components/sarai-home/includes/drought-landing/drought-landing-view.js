@@ -119,6 +119,7 @@ Template.DroughtOutlookView.helpers({
       var val;
       let outlook = []
       var current_data;
+      var color;
       
       if(province == "Occidental Mindoro"){
         current_data = {name: province, data: droughtOutlook[56].data}
@@ -139,16 +140,21 @@ Template.DroughtOutlookView.helpers({
         val  = current_data.data[i]
         if(val >= -0.5){
           val = 'Normal';
+          color = "black";
         }else if(val <= -0.51 && val >= -1.00 ){
           val = 'Mild';
+          color = "#ffcc00";
         }else if(val <= -1.01 && val >= -2.00){
           val = 'Moderate';
+          color = "orange";
         }else if(val <= -2.01){
           val = 'Severe';
+          color = "red";
         }
         outlook.push({
           head: months[(i + current_month)%months.length],
-          value: val
+          value: val,
+          color: color
         })
       }
       return outlook
