@@ -1,108 +1,452 @@
 <template name="RainfallDistribution">
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
   <div id="rainfall-distribution-map">
+    <div id="tooltip" class="tooltip" style="position: absolute; text-align: center; margin: 10px; font: 12px sans-serif; pointer-events: none; background: rgba(0, 0, 0, 0.9); border: 1px solid grey; border-radius: 5px; width: auto; padding: 4px; color: white; opacity: 0; left: 0px; top: 0px;"><strong>ORCHIDS</strong><br>No.
+        of Commodities:27</div>
 
-    <!-- DIALOG FOR INTRODUCTION -->
-    <dialog id="introduction-dialog" class="mdl-dialog">
-      <button type="button" class="mdl-button mdl-js-button mdl-button--icon cancel" style="float:right">
-        <i class="material-icons md-10">close</i>
-      </button>
+    <div class="container-fluid mb-3 mt-3">
+        <div>
+            <h3 style="text-align:center">
+                GUIDE TO PLANTING DATES
+                <p style="font-size:20px">based on historical weather
+                    data</p>
+            </h3>
+            <h4 style="text-align:center">
+                Rainfall Distribution for <span class="spn_location_" style="font-weight:bold">XXXX</span>
+            </h4>
 
-      <h6 id="introduction-dialog-title" class="mdl-dialog__title"></h6>
+            <div id="rainfall-distribution-dialog-desc">
+                <p>Planting dates are guided by rainfall distribution.
+                    Please select crop, variety, location, and date below then click view for the cumulative rainfall
+                    and expected yield based on the chosen crop, variety, location, and date.
+                    <p><strong>NOTE:</strong> SARAI Planting Guide for
+                        rainfed rice and corn uses a combination of real-time weather data and expected yields to
+                        determine when is the optimal time to plant. This tool does not consider extreme events like
+                        pest infestation and typhoon occurrence.
+                    </p>
+                    <p>Ang SARAI Planting Guide para sa sahod-ulan na palay
+                        at mais ay pinagsasama ang kasalukuyang lagay ng panahon at ang inaasahang ani upang malaman
+                        kung kailan maipapayong magtanim. Hindi nito isinasaalang-alang ang mga matitinding kalagayan
+                        tulad ng bagyo at pananalasa ng mga peste.
+                    </p>
+                </p>
+            </div>
 
-      <div id="introduction-dialog-desc">
-      
-      </div>
+            <div class="row">
+                <div class="col-lg-9 py-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label>Crop</label>
+                            <select class="form-control" id="slct_dspMap">
+                                <option>Corn</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Variety</label>
+                            <select class="form-control" id="slct_variety">
+                                <option>IPB911</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Province</label>
+                            <select class="form-control" id="slct_prov"></select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Municipality</label>
+                            <select class="form-control" id="slct_muni"></select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Year type</label>
+                            <select class="form-control" id="slct_brgy"></select>
+                        </div>
+                    </div>
 
-      <center><input id="proceed" class="mdl-button mdl-js-button mdl-button--raised" type="submit" style="background-color:#2b72e5; color:white;" value="PROCEED"></center>
-    </dialog>
+                    <div class="form-inline">
+                        AWS location:&nbsp;
+                        <select class="form-control mr-sm-2 mb-1" id="slct_loc"></select>
+                        <input id="inpt_date" class="form-control mr-sm-2 mb-1" type="date">
+                    </div>
+                    <div>
+                        <div style="margin-top: 10px;border: 1px solid lightgrey;border-radius: 3px;padding: 20px;margin-bottom: 10px;">
+                            <p style="font-size:22px; font-weight:bold">Planting of rainfed <span class="spn_crop"></span>
+                                (<span class="spn_var"></span>) is <span class="spn_low_yld_eng">NOT</span> recommended
+                                (<span class="spn_date" id="spn_date_1">XX/XX/XXXX</span>).</p>
 
-     <!-- DIALOG FOR RAINFALL DISTRIBUTION GRAPH -->
-    <dialog id="rainfall-distribution-dialog" class="mdl-dialog">
-      
-      <button type="button" class="mdl-button mdl-js-button mdl-button--icon cancel" style="float:right">
-        <i class="material-icons md-10">close</i>
-      </button>
+                            <p style="font-size:17px"><span class="spn_location_">XXXX</span> does <span class="spn_low_yld_eng">not</span>
+                                have sufficient soil moisture with <span style="color:red"><span id="spn_rainfall_1">X</span>
+                                    mm</span> total rainfall for the past 30 days. If you plant <span style="color:blue">rainfed
+                                    <span class="spn_crop"></span> (<span class="spn_var"></span>)</span> today (<span
+                                    id="spn_date_1">XX/XX/XXXX</span>), expected yield may be <span style="color:red"><span
+                                        class="spn_yld_diff"></span>%
+                                    <span id="spn_yld_diff_eng"></span> </span> than the average*.</p>
+                            <p style="font-size:17px">
+                                <span class="spn_low_yld_eng">Hindi pa</span> sapat ang tubig sa lupa sa <span class="spn_location_">XXXX</span>
+                                na may <span style="color:red"><span id="spn_rainfall_2">X</span> mm</span>
+                                kabuuang pag-ulan sa nakalipas na 30 araw. Kung magtatanim ngayon (<span id="spn_date_2">XX/XX/XXXX</span>),
+                                ang inaasahang
+                                ani ay maaaring <span style="color:red"><span class="spn_yld_diff"></span> porsyento
+                                    mas </span><span id="spn_yld_diff_fil"></span> kaysa
+                                    pangkaraniwan*.</p>
+                            <p style="font-size:15px">*simulated using <span class="spn_location_">XXXX</span>
+                                historical weather data from PAGASA
+                                (assuming no extreme events like typhoon and pest incidence)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 py-3">
+                    <div class="card border-success mb-3" style="border-color: green;border-radius: 3px;width:100%">
+                        <div class="card-header" style="background-color: green;padding: 10px;color: white;"><span class="card-header"><i class="fas fa-map-marked-alt"></i> Corn Areas (<span class="spn_var">XXX</span>) <small>Recommended Planting locations on <span class="spn_date"></span> is in green</small></span></div>
+                        <div id="svg_rainmap_1" class="card-body bg-light p-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <h6 id="rainfall-distribution-dialog-title" class="mdl-dialog__title"></h6>
-      
-      <div id="rainfall-distribution-dialog-desc">
-      
-      </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="select-container" id="select-crop" style="margin-top: 0px;">
-          <select class="mdl-select" id="preview-select-crop">
-            <option value="Rice">Rice</option>
-            <option value="Corn">Corn</option>
-          </select>
+
+            <div id="rainfall-chart-text-container" style="margin-top:10px">
+                <div class="card border-success mb-3" style="border-color: green;border-radius: 3px;width:100%">
+                        <div class="card-header" style="background-color: green;padding: 10px;color: white;"><span class="card-header"><i class="fas fa-calendar-check"></i> Recommended Planting Dates of <span class="spn_location_"></span> </span> </div>
+                    <div class="card-body bg-light p-0">
+                        <table class="table table-striped text-center table-sm m-0" style="margin-bottom:0">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Week</th>
+                                    <th style="text-align:center">Jan</th>
+                                    <th style="text-align:center">Feb</th>
+                                    <th style="text-align:center">Mar</th>
+                                    <th style="text-align:center">Apr</th>
+                                    <th style="text-align:center">May</th>
+                                    <th style="text-align:center">Jun</th>
+                                    <th style="text-align:center">Jul</th>
+                                    <th style="text-align:center">Aug</th>
+                                    <th style="text-align:center">Sep</th>
+                                    <th style="text-align:center">Oct</th>
+                                    <th style="text-align:center">Nov</th>
+                                    <th style="text-align:center">Dec</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th style="text-align:center">Week 1</th>
+
+                                    <td class="dt_jan">
+                                        <h4>
+                                            <i class="fas fa-calendar-check"></i>
+                                        </h4>
+                                    </td>
+                                    <td class="dt_feb"><i class="fas fa-calendar-minus"></i></td>
+                                    <td class="dt_mar"><i class="fas fa-calendar-check"></i></td>
+                                    <td class="dt_apr"></td>
+                                    <td class="dt_may"></td>
+                                    <td class="dt_jun"></td>
+                                    <td class="dt_jul"></td>
+                                    <td class="dt_aug"></td>
+                                    <td class="dt_sept"></td>
+                                    <td class="dt_oct"></td>
+                                    <td class="dt_nov"></td>
+                                    <td class="dt_dec"></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:center">Week 2</th>
+                                    <td class="dt_jan"></td>
+                                    <td class="dt_feb"></td>
+                                    <td class="dt_mar"></td>
+                                    <td class="dt_apr"></td>
+                                    <td class="dt_may"></td>
+                                    <td class="dt_jun"></td>
+                                    <td class="dt_jul"></td>
+                                    <td class="dt_aug"></td>
+                                    <td class="dt_sept"></td>
+                                    <td class="dt_oct"></td>
+                                    <td class="dt_nov"></td>
+                                    <td class="dt_dec"></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:center">Week 3</th>
+                                    <td class="dt_jan"></td>
+                                    <td class="dt_feb"></td>
+                                    <td class="dt_mar"></td>
+                                    <td class="dt_apr"></td>
+                                    <td class="dt_may"></td>
+                                    <td class="dt_jun"></td>
+                                    <td class="dt_jul"></td>
+                                    <td class="dt_aug"></td>
+                                    <td class="dt_sept"></td>
+                                    <td class="dt_oct"></td>
+                                    <td class="dt_nov"></td>
+                                    <td class="dt_dec"></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:center">Week 4</th>
+                                    <td class="dt_jan"></td>
+                                    <td class="dt_feb"></td>
+                                    <td class="dt_mar"></td>
+                                    <td class="dt_apr"></td>
+                                    <td class="dt_may"></td>
+                                    <td class="dt_jun"></td>
+                                    <td class="dt_jul"></td>
+                                    <td class="dt_aug"></td>
+                                    <td class="dt_sept"></td>
+                                    <td class="dt_oct"></td>
+                                    <td class="dt_nov"></td>
+                                    <td class="dt_dec"></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:center">Week 5</th>
+                                    <td class="dt_jan"></td>
+                                    <td class="dt_feb"></td>
+                                    <td class="dt_mar"></td>
+                                    <td class="dt_apr"></td>
+                                    <td class="dt_may"></td>
+                                    <td class="dt_jun"></td>
+                                    <td class="dt_jul"></td>
+                                    <td class="dt_aug"></td>
+                                    <td class="dt_sept"></td>
+                                    <td class="dt_oct"></td>
+                                    <td class="dt_nov"></td>
+                                    <td class="dt_dec"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 py-3" style="margin-top:10px">
+                    <div class="card border-success mb-3" style="border-color: green;border-radius: 3px;width:100%">
+                        <div class="card-header" style="background-color: green;padding: 10px;color: white;"><span class="card-header"><i class="fas fa-umbrella"></i> Cumulative Rainfall of <span class="spn_location_"></span> </span>
+                        </div>
+                        <div class="card-body bg-light p-0">
+                            <svg id="svg_rainpain_gg" style="height:382px;width:100%;"></svg>
+                            <center class="text-dark" style="font-size:12px;">
+                                Legend:
+
+                            <div style="margin-right:10px;display:inline-table">
+                              <svg height="14" width="12" style="
+                                  margin-left: auto;">
+                                <circle cx="6" cy="6" r="6" fill="#94CCFF" stroke="black" stroke-width="0.5"></circle>
+                                Sorry, your browser does not support inline SVG.  
+                              </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">Daily Average Rainfall</span>
+                            </div>
+                            <div style="margin-right:10px;display:inline-table">
+                              <svg height="14" width="12" style="margin-left: auto;">
+                                <circle cx="6" cy="6" r="6" fill="#8DDE7A" stroke="black" stroke-width="0.5"></circle>
+                                Sorry, your browser does not support inline SVG.  
+                              </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">Cumulative Rainfall</span>
+                            </div>
+                            <div style="margin-right:10px;display:inline-table">
+                              <svg height="14" width="12" style="margin-left: auto;">
+                                <circle cx="6" cy="6" r="6" fill="#FCFFC3" stroke="black" stroke-width="0.5"></circle>
+                                Sorry, your browser does not support inline SVG.  
+                              </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">10 Day Rainfail Forecast</span>
+                            </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 pt-3" style="margin-top:10px">
+                    <div class="card border-success mb-3" style="border-color: green;border-radius: 3px;width:100%; height:475px">
+                        <div class="card-header" style="background-color: green;padding: 10px;color: white;"><span class="card-header"><i class="fas fa-map-marked-alt"></i> Map (AWS)</span></div>
+                        <div id="svg_rainmap" class="card-body bg-light p-0" style="margin-top:30px;margin-bottom:30px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 pt-3" style="margin-top:10px">
+                    <div class="card border-success mb-3" style="border-color: green;border-radius: 3px;width:100%; height: 475px">
+                        <div class="card-header" style="background-color: green;padding: 10px;color: white;"><span class="card-header"><i class="fas fa-umbrella"></i> Rainfall and Temperature of <span class="spn_location_"></span> </span> </div>
+                        <div class="card-body bg-light p-0">
+                            <svg id="svg_rainpain" style="height:410px;width:100%;"></svg>
+                            <center class="text-dark" style="font-size:12px;">
+                                Legend:
+                                <div style="margin-right:10px;display:inline-table">
+                                <svg height="14" width="12" style="
+                                    margin-left: auto;">
+                                  <circle cx="6" cy="6" r="6" fill="#1e3bb4" stroke="black" stroke-width="0.5"></circle>
+                                  Sorry, your browser does not support inline SVG.  
+                                </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">Weekly Average Rainfall</span>
+                              </div>
+                              <div style="margin-right:10px;display:inline-table">
+                                <svg height="14" width="12" style="margin-left: auto;">
+                                  <circle cx="6" cy="6" r="6" fill="orange" stroke="black" stroke-width="0.5"></circle>
+                                  Sorry, your browser does not support inline SVG.  
+                                </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">Average Max Temp</span>
+                              </div>
+                              <div style="margin-right:10px;display:inline-table">
+                                <svg height="14" width="12" style="margin-left: auto;">
+                                  <circle cx="6" cy="6" r="6" fill="yellow" stroke="black" stroke-width="0.5"></circle>
+                                  Sorry, your browser does not support inline SVG.  
+                                </svg> <span style="margin-left: 5px;margin-right: auto;font-weight:bold">Average Min Temp</span>
+                              </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 15px;">by Project 1. Model Development and Crop Forecasting (Dr. Felino P. Lansigan et
+                al.)</p>
         </div>
 
-        &nbsp;&nbsp;
-        <div class="select-container" id="select-variety" style="margin-top: 0px;">
-          <select class="mdl-select" id="preview-select-variety">
-            {{#if isRice}}
-            <option value="PSBRc14">PSB Rc14</option>
-            {{else}}
-            <!-- <option value="IPB911">IPB911 (hybrid)</option> -->
-            <option value="DK6919s">DK 6919s (Monsanto, hybrid)</option>
-            <option value="IPBVar13">IPB Var 13</option>
-            <option value="NK8840">NK 8840 (Syngenta, hybrid)</option>
-            <option value="P30T80">P30T80 (Pioneer, hybrid)</option>
-            {{/if}}
-          </select>
+    </div>
+
+
+
+    <div class="input-group input-group-sm" id="inlineEditor" style="position: absolute;top:100px;display:none;">
+        <div class="input-group-prepend">
+            <div class="input-group-text bg-warning border border-warning"><i class="far fa-edit"></i> : <span id="inl_lockey"></span></div>
         </div>
-
-        &nbsp;&nbsp;
-        <div class="select-container" id="select-location" style="margin-top: 0px;">
-          <select class="mdl-select" id="preview-select-location">
-            {{#each station in weatherStations2}}
-              <option value="{{station.label}}">{{station.label}}</option>
-              {{currentlySelected}}
-            {{/each}}
-          </select>
+        <div class="input-group-append">
+            <button id="inl_save" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="bottom"
+                title="" data-original-title="Save localization key"><i class="far fa-save"></i></button>
         </div>
-        
+    </div>
 
-        &nbsp;&nbsp;
-        <input id="enter-date" class="mdl-button mdl-js-button mdl-button--raised" type="text" name="date_input" min="2016-01-01" max="2016-12-31" value="" size="17" style="margin-top: 0px;">
-        &nbsp;&nbsp;
-        <input id="submit-date" class="mdl-button mdl-js-button mdl-button--raised" type="submit" style="background-color:#2b72e5; color:white; margin-top: 0px;" value="VIEW">
 
-      <div class="mdl-dialog__content">
-        <div id="rainfall-distribution-chart-container">
 
+
+    <div class="" id="lngLangEditor" style="display:none;position: absolute;top:150px;left:200px;">
+        <!-- class="modal fade" -->
+        <div class="shadow-lg">
+            <!-- class="modal-dialog modal-lg" -->
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div>
+                        <div id="lck_move" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom"
+                            title="" data-original-title="drag to move">
+                            <i class="fas fa-arrows-alt"></i>
+                        </div>
+                        <label class="modal-title"> Dev mode </label>
+                        <div class="btn-group" role="group" aria-label="">
+                            <div class="btn-group-sm" role="group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-file-excel"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header">Live Excel Files</h6>
+                                    <span id="xclFlKey">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="btn-group-sm" role="group">
+                                <button id="btnMisc" type="button" class="btn btn-secondary dropdown-toggle"
+                                    data-toggle="tooltip" data-placement="bottom" title="" data-original-title="misc">
+                                    <i class="fas fa-sliders-h"></i>
+                                </button>
+
+                                <div id="lngPnlMisc" class="dropdown-menu" style="padding:10px;width:300px;display:none;left:initial;right:-3px;">
+                                    <button class="btn btn-sm btn-default btnDrpDwn" style="margin-right:0px;width:100%;"
+                                        onclick="convert_to_unicode();" data-toggle="tooltip" data-placement="bottom"
+                                        title="" data-original-title="get rid of obselete kutri dev font replacing it with UTF-8 compliant characters">
+                                        Kill Kutri Dev 10
+                                    </button>
+                                    <button class="btn btn-default btnDrpDwn" style="margin-right:0px;width:100%;"
+                                        onclick="makeCache();" data-toggle="tooltip" data-placement="bottom" title=""
+                                        data-original-title="generates new cache">
+                                        Generate Cache
+                                    </button>
+                                    <button class="btn btn-default btnDrpDwn" style="width:100%;" data-toggle="tooltip"
+                                        data-placement="bottom" title="" onclick="" data-original-title="compress H2 database">
+                                        Compress Database</button>
+                                    <button class="btn btn-default btnDrpDwn" style="width:100%;" data-toggle="tooltip"
+                                        data-placement="bottom" title="" onclick="" data-original-title="stamp database as latest and stamp source code as well, this serves as database versioning, also compresses database">
+                                        Stamp date</button>
+
+                                    <button class="btn btn-default btnDrpDwn" style="width:100%;" data-toggle="tooltip"
+                                        data-placement="bottom" title="" onclick="" data-original-title="open browser-based version of database viewer">
+                                        Online DB Viewer
+                                    </button>
+                                    <hr>
+                                    <label style="width: 100%;margin-bottom: 0px;">Image to SVG:</label>
+                                    <div id="svgPreview"></div>
+                                    <hr>
+                                    <label style="width: 100%;margin-bottom: 0px;">Database files:</label>
+                                    <label style="font-size:9px;margin-bottom: 0px;">Existing database files:</label>
+                                    <div class="input-group">
+                                        <select id="fileList" class="form-control" data-toggle="tooltip" data-placement="bottom"
+                                            title="" data-original-title="files that are already in the database">
+                                            <option value="welcome_obj">welcome_obj</option>
+                                        </select>
+                                        <span class="input-group-btn" data-toggle="tooltip" data-placement="bottom"
+                                            title="" data-original-title="download selected database file">
+                                            <button class="btn btn-default mrgnR0 btnDrpDwn" type="button" style="border-radius:0px;"
+                                                onclick="">
+                                                <span class="glyphicon glyphicon-download-alt"></span>
+                                            </button>
+                                        </span>
+                                        <span class="input-group-btn" data-toggle="tooltip" data-placement="bottom"
+                                            title="" data-original-title="delete selected database file">
+                                            <button class="btn btn-default mrgnR0 btnDrpDwn" type="button" onclick="">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <label style="font-size:9px;">Upload new database file:</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fileUp" data-toggle="tooltip"
+                                            data-placement="bottom" title="" data-original-title="developper may add files to database">
+                                        <span class="input-group-btn" data-toggle="tooltip" data-placement="bottom"
+                                            title="" data-original-title="upload file (file name used as key)">
+                                            <button class="btn btn-default mrgnR0  btnDrpDwn" type="button" onclick="">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <input id="fileUpPW" class="form-control" type="text" placeholder="upload file password"
+                                        data-toggle="tooltip" data-placement="bottom" title="" data-original-title="uploaded files may optionally be password protected">
+                                    <hr>
+                                    <button class="btn btn-default btnDrpDwn" style="margin-right:0px;width:100%;"
+                                        data-toggle="tooltip" data-placement="bottom" title="" onclick=""
+                                        data-original-title="remove admin access, compress database and restamps source code and database">
+                                        Kill admin
+                                    </button>
+                                </div>
+                            </div>
+                            <input id="lngEditOP" type="range" class="form-control" placeholder="Opacity (50-100)" min="50"
+                                max="100" value="100">
+                        </div>
+                        <button id="lck_close" type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <button id="lngDel" class="btn btn-danger" type="button" data-toggle="tooltip"
+                                data-placement="bottom" title="" data-original-title="Delete localization key"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                        <input id="lngAdd" type="text" class="form-control" placeholder="localization key">
+                        <div class="input-group-append">
+                            <button id="lngSave" class="btn btn-success" type="button" data-toggle="tooltip"
+                                data-placement="bottom" title="" data-original-title="Save localization key"><i class="far fa-save"></i></button>
+                            <button id="lngSearch" class="btn btn-info" type="button" data-toggle="tooltip"
+                                data-placement="bottom" title="" data-original-title="Open search localization tool"><i
+                                    class="fas fa-search"></i></button>
+
+                            <span id="btn_svgupimg" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom"
+                                title="" data-original-title="No file selected">
+                                <label style="margin:0px;font-weight:100;">
+                                    <input type="file" class="form-control input-sm" id="svgupimg" accept="image/*"
+                                        style="margin-bottom:0px;display:none;">
+                                    <i class="fas fa-image"></i>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="">
+                        <textarea id="lngContent" class="form-control" style="height:400px; width:650px; font-size: 12px;"></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br/><p style="font-size: 15px; margin-bottom: 0px;">by Project 1. Model Development and Crop Forecasting (Dr. Felino P. Lansigan et al.)</p>
-      </div>
-
-    </dialog>
-
-     <!-- DIALOG FOR CUMULATIVE RAINFALL GRAPH -->
-    <dialog id="cumulative-rainfall-dialog" class="mdl-dialog">
-      
-      <button type="button" class="mdl-button mdl-js-button mdl-button--icon back" style="float:left">
-        <i class="material-icons">arrow_back</i>
-      </button>
-
-      <button type="button" class="mdl-button mdl-js-button mdl-button--icon cancel" style="float:right">
-        <i class="material-icons md-10">close</i>
-      </button>
-      
-      <h6 id="cumulative-rainfall-dialog-title" class="mdl-dialog__title"></h6>
-
-      <div id="cumulative-rainfall-dialog-desc">
-      
-      </div>
-
-      <div class="mdl-dialog__content">
-          <div id="rainfall-chart-container">
-
-          </div>
-          <div id="rainfall-chart-text-container">
-
-          </div>
-          <br/><br/><p style="font-size: 15px; margin-bottom: 0px;">by Project 1. Model Development and Crop Forecasting (Dr. Felino P. Lansigan et al.)</p>
-      </div>
-
-    </dialog>
+    </div>
   </div>
+
+</div>
+</div>
 </template>

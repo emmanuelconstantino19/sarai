@@ -25,6 +25,12 @@ Package.onUse(function(api) {
   api.use(packages)
   api.imply(packages)
 
+  var lib = [
+    "lib/d3.min.js"
+  ]
+  
+  api.addFiles(lib, ["client", "server"])
+
   var client = [
     "client/components/route.js",
 
@@ -33,7 +39,7 @@ Package.onUse(function(api) {
     "client/components/rainfall-distribution.less",
 
     "lib/rainfall-distribution-helpers.js",
-    "lib/sample-data.js",
+    "lib/sample-data.js"
   ]
 
   api.addFiles(client, "client")
