@@ -132,9 +132,20 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/suitability-maps/suitability-maps.js",
     "client/components/sarai-home/includes/suitability-maps/suitability-maps.less",
 
+    "client/components/sarai-home/includes/planting-guide/planting-guide.html",
+    "client/components/sarai-home/includes/planting-guide/planting-guide.js",
+    "client/components/sarai-home/includes/planting-guide/planting-guide.less",
+
+    "client/components/sarai-home/includes/advisories/advisories.html",
+    "client/components/sarai-home/includes/advisories/advisories.js",
+    "client/components/sarai-home/includes/advisories/advisories.less",
+    "client/components/sarai-home/includes/advisories/route.js",
+
+
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",
-    "lib/drought-map-helpers.js"    
+    "lib/drought-map-helpers.js",
+    "lib/advisories-helpers.js"    
   ]
 
   api.addFiles(client, "client")
