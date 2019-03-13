@@ -176,12 +176,33 @@ Template.WeatherMonitoringV2.helpers({
     if (forecast) {
       return forecast.splice(5, 5)
     }
+  },
+
+  forecast2: () => {
+    return 1
   }
 })
 
 const displayWeatherData = (stationID, apiKey) => {
   const forecast = getForecast(stationID)
+  getOWMData(stationID);
   displayForecast(stationID, apiKey)
+}
+
+const getOWMData = (stationID) => {
+  console.log("Getting OWM Data")
+  console.log(stationID)
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    let forecast = []
+    for(var i = 0 ; i < 6; i++){
+      var date = results.sunriseTimeLocal[i].substring(0,10).split('-')
+      console.log(results.dayOfWeek[i].substring(0,3))
+      console.log(months[parseInt(date[1])])
+      console.log(date[2])
+    }
+  })
+  //Session.set('forecast'2, )
 }
 
 const getForecast = (stationID) => {

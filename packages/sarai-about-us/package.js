@@ -56,6 +56,10 @@ Package.onUse(function(api) {
       "client/components/sarai-about/includes/videos/videos.less",
     "client/components/sarai-about/includes/videos/videos.html",
     "client/components/sarai-about/includes/videos/videos.js",
+
+    "client/components/sarai-about/includes/suc-map/suc.less",
+    "client/components/sarai-about/includes/suc-map/suc.html",
+    "client/components/sarai-about/includes/suc-map/suc.js",
     /*"client/components/sarai-about/includes/videos/videos.js",
     "client/components/sarai-about/includes/videos/videos.html",*/
     "client/components/sarai-about/route.js",
