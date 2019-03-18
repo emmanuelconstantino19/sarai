@@ -102,7 +102,7 @@ Meteor.RainfallForecast = {
         type: 'column'
     },
     title: {
-        text: '10-Day Rainfall Forecast'
+        text: '6-Day Rainfall Forecast'
     },
     subtitle: {
         text: 'Click the name of the AWS to filter the display of the graph.'

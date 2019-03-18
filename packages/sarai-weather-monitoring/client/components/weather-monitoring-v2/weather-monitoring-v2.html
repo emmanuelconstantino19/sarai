@@ -7,14 +7,14 @@
           <i class="material-icons md-36">get_app</i>
       </button> -->
       <!-- <a href="/weather-monitoring" id="view-weather-monitoring">Click here to view more details</a> -->
-      <h6><strong>Be proactive! Know the expected amount of rainfall and temperature on your farm for today and for the next nine days.</strong><br/>
-          Maging handa! Alamin ang inaasahang dami ng ulan at tindi ng init at lamig sa iyong taniman ngayon at sa susunod na siyam na araw.<br/>
+      <h6><strong>Be proactive! Know the expected amount of rainfall and temperature on your farm for today and for the next five days.</strong><br/>
+          Maging handa! Alamin ang inaasahang dami ng ulan at tindi ng init at lamig sa iyong taniman ngayon at sa susunod na limang na araw.<br/>
           Source: SARAI AWS; WU</h6>
 
       <!-- <div id="download-container">
       </div> -->
 
-      <h4 id="main_title">10-Day Forecast: <b>IPB Los Baños</b></h4>
+      <h4 id="main_title">6-Day Forecast: <b>IPB Los Baños</b></h4>
       <h6 id="subtitle"></h6>
 
       </div>
@@ -30,17 +30,8 @@
     </div>
     <div class="mdl-cell mdl-cell--9-col-desktop">
       <div class="mdl-grid mdl-grid--no-spacing forecast-grid">
-        {{#with forecastToday}}
-          {{> PreviewColWM}}
-        {{/with}}
-
-        {{#each forecastFirst4}}
-          {{> PreviewColWM}}
-        {{/each}}
-
-
-        {{#each forecastNext5}}
-          {{> PreviewColWM}}
+        {{#each forecast2}}
+          {{> PreviewColWM2}}
         {{/each}}
       </div>
       <div id="meteogram-container"></div>
@@ -79,7 +70,7 @@
 </div>
 
 <div class="mdl-cell mdl-cell--12-col-desktop">
-<h4 style="text-align:center">10-Day Rainfall Forecast</h4>
+<h4 style="text-align:center">6-Day Rainfall Forecast</h4>
 <table id="rainfall-forecast-table" style="text-align:center" class="table table-bordered table-striped">
     <thead>
       <tr>      
@@ -105,6 +96,27 @@
     <div class="icon"><img src="{{icon}}"></div>
     <div class="qpf"><span class="value">{{formatQPF qpf}}</span> <span class="unit">mm</span></div>
     <div class="pop" style="margin-bottom:0px"><span class="value">{{pop}}</span><span class="unit">%</span> chance of rain</div>
+    <!-- {{#if today}}
+      <div class="cumulative">Past 30 days: <span class="value">{{cumulative}}</span><span class="unit"> mm</span></div>
+    {{/if}} -->
+  </div>
+</template>
+
+<template name="PreviewColWM2">
+  <div class="forecast-preview-col" style="width:16%;padding:5px;display:inline-table">
+    <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><br/><span class="date">{{date}}</span></div>
+    <hr style="margin-top:0px">
+    <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Day</span></div>
+    <div class="icon"><img src="{{icon}}" style="width:60px"></div>
+    <div class="description" style="text-align:center"><span style="font-weight:bold">{{desc}}</span></div>
+    <div class="pop" style="margin-bottom:0px"><span class="value">{{chance}}</span><span class="unit">%</span> chance of rain</div>
+    <hr/>
+    <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Night</span></div>
+    <div class="icon"><img src="{{iconNight}}" style="width:60px"></div>
+    <div class="description" style="text-align:center"><span style="font-weight:bold">{{descNight}}</span></div>
+    <div class="pop" style="margin-bottom:0px"><span class="value">{{chanceNight}}</span><span class="unit">%</span> chance of rain</div>
+    <hr>
+    <div class="qpf">Rainfall: <span class="value" style="font-size:1.2em;font-weight:bold"> {{formatQPF qpf}}</span> <span class="unit">mm</span></div>
     <!-- {{#if today}}
       <div class="cumulative">Past 30 days: <span class="value">{{cumulative}}</span><span class="unit"> mm</span></div>
     {{/if}} -->

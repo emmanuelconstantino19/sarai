@@ -7,8 +7,8 @@
           <i class="material-icons md-36">get_app</i>
       </button> -->
       <!-- <a href="/weather-monitoring" id="view-weather-monitoring">Click here to view more details</a> -->
-      <h6><strong>Be proactive! Know the expected amount of rainfall and temperature on your farm for today and for the next seven days.</strong><br/>
-          Maging handa! Alamin ang inaasahang dami ng ulan at tindi ng init at lamig sa iyong taniman ngayon at sa susunod na pitong araw.<br/>
+      <h6><strong>Be proactive! Know the expected amount of rainfall on your farm for today and for the next 5 days.</strong><br/>
+          Maging handa! Alamin ang inaasahang dami ng ulan at tindi ng init at lamig sa iyong taniman ngayon at sa susunod na limang araw.<br/>
           Source: SARAI AWS; WU</h6>
 
       <!-- <div id="download-container">
@@ -31,18 +31,9 @@
         </div>
       </div>
 
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-grid">
-        {{#with forecastToday}}
-          {{> PreviewCol}}
-        {{/with}}
-
-        {{#each forecastFirst3}}
-          {{> PreviewCol}}
-        {{/each}}
-      </div>
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-grid">
-        {{#each forecastNext4}}
-          {{> PreviewCol}}
+      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-grid">
+        {{#each forecast2}}
+          {{> PreviewCol2}}
         {{/each}}
       </div>
 

@@ -6,12 +6,13 @@ Template.ForecastView.onCreated(() => {
   Session.set('stationID', 'ICALABAR18')
   Meteor.subscribe('dss-settings', () => {
     getForecast('ICALABAR18')
+    getOWMData('ICALABAR18')    
   })
 })
 
 Template.ForecastView.onRendered(() => {
   const stationID = Session.get('stationID')
-  $('#preview-select-station').val(stationID)
+  $('#preview-select-station').val('ICALABAR18')
 })
 
 Template.ForecastView.events({
@@ -19,7 +20,7 @@ Template.ForecastView.events({
     const stationID = e.currentTarget.value
     Session.set('stationID', stationID)
 
-    const forecast = getForecast(stationID)
+    const forecast = getOWMData(stationID)
   },
 
   'click .forecast-grid': (e) => {
@@ -99,6 +100,11 @@ Template.ForecastView.helpers({
     }
   },
 
+  forecast2: () => {
+    const forecast = Session.get('forecast2')
+    return forecast
+  },
+
   weatherStations: () => {
     const stations = WeatherStations.find({}).fetch()
 
@@ -112,6 +118,76 @@ Template.ForecastView.helpers({
     $('#preview-select-station').val(stationID)
   }
 })
+
+const getOWMData = (stationID) => {
+  console.log("Getting OWM Data")
+  console.log(stationID)
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  var api = ''; 
+  if(stationID == "IPAOAY4"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "ICAGAYAN3"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "ICAGAYAN2"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=16.725611,121.698503&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "ICENTRAL91"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=15.738165,120.928400&units=e&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
+  }else if(stationID == "ICALABAR18"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=14.156233,121.262197&units=e&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
+  }else if(stationID == "ICALABAR25"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.944936,121.369765&units=e&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
+  }else if(stationID == "IMIMAROP7"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.149028,121.187139&units=e&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
+  }else if(stationID == "IMIMAROP8"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.130432,120.704186&units=e&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
+  }else if(stationID == "IMIMAROP6"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=9.443356,118.560378&units=e&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
+  }else if(stationID == "IBICOLGU2"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.192833,123.595327&units=e&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302';
+  }else if(stationID == "IWESTERN635"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=11.102263,122.414762&units=e&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302';
+  }else if(stationID == "IWESTERN596"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=10.404912,122.978921&units=e&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302';
+  }else if(stationID == "ICENTRAL94"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=10.132925,123.546750&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "IZAMBOAN4"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.996182,121.929624&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "INORTHER117"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.855571,125.057929&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "INORTHER86"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=8.610266,124.883303&units=e&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+  }else if(stationID == "IDAVAORE19"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.691228,125.188743&units=e&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
+  }else if(stationID == "IDAVAORE20"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.489740,125.545582&units=e&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
+  }else if(stationID == "IREGIONX6"){
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.110252,124.851728&units=e&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
+  }
+
+  $.getJSON(api,(results) => {
+    let forecast = []
+    for(var i = 0 ; i < 6; i++){
+      var date = results.sunriseTimeLocal[i].substring(0,10).split('-')
+      console.log(results.daypart[0].iconCode)
+      forecast.push({
+        head: results.dayOfWeek[i].substring(0,3),
+        date: months[parseInt(date[1])-1] + ' ' + date[2],
+        icon: '/weather-underground/' + results.daypart[0].iconCode[i*2] + '.png',
+        desc: results.daypart[0].wxPhraseLong[i*2],
+        iconNight: '/weather-underground/' + results.daypart[0].iconCode[(i*2) + 1] + '.png',
+        descNight: results.daypart[0].wxPhraseLong[(i*2) + 1],
+        qpf: results.qpf[i],
+        chance: results.daypart[0].precipChance[(i*2)],
+        chanceNight: results.daypart[0].precipChance[(i*2)+1]
+        //qpf: element.qpf_allday.mm,
+        //pop: element.pop 
+      })
+    }
+    console.log(forecast)
+    Session.set('forecast2', forecast)
+  })
+  //Session.set('forecast'2, )
+}
 
 const getForecast = (stationID) => {
 
@@ -275,7 +351,7 @@ const downloadForecast = () => {
 
 
 /********* PREVIEW COL ***********/
-Template.PreviewCol.helpers({
+Template.PreviewCol2.helpers({
   formatQPF: (qpf) => {
     if (qpf < 1) {
       return "< 1"
