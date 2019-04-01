@@ -1,36 +1,56 @@
 <template name="PlantingGuideView">
-  <div class="mdl-grid mdl-grid--no-spacing" style="margin-left:5%;margin-right:5%;margin-bottom:20px">
-    <div id="main-preview" class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+  <div class="mdl-grid mdl-grid--no-spacing" style="margin-bottom:20px">
+    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+      <div class="mdl-cell mdl-cell--12-col preview-title">
+        <h3 style="margin-bottom:0;margin-top:10px">SARAi Crop Advisories</h3>
+        <h6 style="margin-top:0;font-weight:bold">SARAI recommendations for the period of April to September</h6>
+      </div>
+    </div>
 
-          <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 15px; border-radius:5px">
-           <img src="/planting-guide/crop-advisories-title.png" style="width:100%" />
-           <p style="margin-top:10px; font-weight:bold">Consider the SARAI recommendations for planting and management practices for the period of April to September</p>
-           <p style="margin-bottom:0">*Advisories are as of March 2019</p><br/>
-           <label for="crop-list" style="margin-bottom:0">CROP</label><br/>
-           <div class="select-container" style="width:100%;margin:0">
-              <select class="mdl-select" id="crop-list">
-                  <option value="Rice">Rice</option>
-                  <option value="Corn">Corn</option>
-                  <option value="Cacao">Cacao</option>
-                  <option value="Banana">Banana</option>
-              </select>
-            </div>
+    <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
+      
+      <div class="mdl-cell mdl-cell--4-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+       <label for="crop-list" style="margin-bottom:0">CROP</label><br/>
+         <div class="select-container" style="width:100%;margin:0">
+            <select class="mdl-select" id="crop-list">
+                <option value="Rice">Rice</option>
+                <option value="Corn">Corn</option>
+                <option value="Cacao">Cacao</option>
+                <option value="Banana">Banana</option>
+            </select>
           </div>
-         <div class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone preview-title">
-         <h4 style="font-weight:bold;margin-bottom:0">PLANTING ADVISORY FOR <span id="crop-pg">RICE</span> <span id="location-pg">IN ECHAGUE, ISABELA</span></h4>
-         <h6 style="margin-top:0">BASED ON THE RAINFALL OUTLOOK FOR APRIL TO SEPTEMBER 2019 AS OF MARCH 2019</h6>
+      </div>
+
+      </div>
+
+
+    <div id="main-preview" class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+         <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone preview-title">
+         <h4 style="font-weight:bold;margin-bottom:0"> <span id="first-pg">PLANTING</span> ADVISORY FOR <span id="crop-pg">RICE</span> <span id="location-pg">IN ECHAGUE, ISABELA</span></h4>
+         <h6 id="date-pg" style="margin-top:0;margin-bottom:0">BASED ON THE RAINFALL OUTLOOK FROM APRIL TO SEPTEMBER 2019 AS OF MARCH 2019</h6>
+         <h6 id="project-pg" style="margin-top:0">Source: Sub-program 1.1</h6>
 
         <div id="graph-advisory" class="mdl-grid">
-        <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="accumulated_graph"></div>
-        <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; height:100%; text-align:left">
-            <span id="advisory">It is <b>not recommended to plant rainfed rice</b> on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</span>
-            <div style="margin-top:20px;text-align:right">
-            <a id ="see-more-pg" href="#" target="blank" class="link" style="font-size:15px">See More<i class="material-icons">navigate_next</i></a>
-            </div>
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="accumulated_graph"></div>
+        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; height:100%; text-align:left; font-size:medium">
+            <span id="advisory">
+
+            <ul>
+
+            <li>It is <b>not recommended to plant rainfed rice</b> on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</li>
+
+            <li>Alternative crops to plant during the usual planting windows (i.e., May/June to July/August) are legumes such as mungbean.</li>
+
+            <li>Heads up for possible planting if there will be improvement in the next rainfall outlook.</li>
+
+            <li>Prepare seeds for chances of isolated rainfall. Planting by direct seeding may be pushed through if isolated rainfall lasts for at least a week but watch out for infestation of weeds. On the other hand, planting by transplanting may be challenging because more rainfall is required especially during land preparation a week before transplanting.</li>
+            
+            </ul>
+            </span>
         </div>
         </div>
 
-        <div id="text-advisory-cacao" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left">
+        <div id="text-advisory-cacao" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left;">
           <span style="font-weight:bold;font-size:larger">May 2019</span><br/>
           <p><b>Fertilizer application</b>: Maaaring magsimula na mag-apply ng abono sa Mayo, upang sumakto sa simula ng tag-ulan</p><br/>
           <span style="font-weight:bold;font-size:larger">May-September 2019</span><br/>

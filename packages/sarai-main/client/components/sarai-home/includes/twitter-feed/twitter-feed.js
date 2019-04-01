@@ -1,5 +1,5 @@
 Template.TwitterFeed.onCreated(() => {
-  Session.set('twitter-is-visible', true)
+  Session.set('twitter-is-visible', false)
 })
 
 Template.TwitterFeed.onRendered(() => {

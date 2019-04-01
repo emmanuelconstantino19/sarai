@@ -141,6 +141,11 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/advisories/advisories.less",
     "client/components/sarai-home/includes/advisories/route.js",
 
+    "client/components/sarai-home/includes/contact-us/contact-us.html",
+    "client/components/sarai-home/includes/contact-us/contact-us.js",
+    "client/components/sarai-home/includes/contact-us/contact-us.less",
+    "client/components/sarai-home/includes/contact-us/route.js",
+
     "client/components/sarai-home/includes/satellite-landing/satellite-landing.html",
     "client/components/sarai-home/includes/satellite-landing/satellite-landing.js",
     "client/components/sarai-home/includes/satellite-landing/satellite-landing.less",

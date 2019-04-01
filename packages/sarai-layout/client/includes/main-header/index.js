@@ -6,11 +6,11 @@ Template.MainHeader.helpers({
 
     { "name" : "Crops", "href" : "", "links" : [ { "name" : "Rice", "href" : "/icm-rice"}, { "name" : "Corn", "href" : "/icm-corn"}, { "name" : "Banana", "href" : "/icm-banana"}, { "name" : "Coconut", "href" : "/icm-coconut"}, { "name" : "Coffee", "href" : "/icm-coffee"}, { "name" : "Cacao", "href" : "/icm-cacao"} ], "id" : "explore-link", "withsublinks" : true}, 
 
-    { "name" : "Maps", "href" : "", "links" : [ { "name" : "Suitability Maps", "href" : "http://139.59.125.198/suitability-maps"}, { "name" : "Normalized Difference Vegetation Index", "href" : "http://139.59.125.198/ndvi"}, { "name" : "Rainfall Map", "href" : "http://139.59.125.198/rainfall-maps"}, { "name" : "SVTR Map", "href" : "http://139.59.125.198/agri-drought"} ], "id" : "dss-link", "withsublinks" : true}, 
+    { "name" : "Maps", "href" : "", "links" : [ { "name" : "Suitability Maps", "href" : "http://139.59.125.198/suitability-maps"}, { "name" : "Normalized Difference Vegetation Index", "href" : "http://139.59.125.198/ndvi"}, { "name" : "Rainfall Map", "href" : "http://139.59.125.198/rainfall-maps"}, { "name" : "SVTR Map", "href" : "http://139.59.125.198/agri-drought"},, { "name" : "Enhanced Vegetation Index", "href" : "http://139.59.125.198/evi"} ], "id" : "dss-link", "withsublinks" : true}, 
 
-    { "name" : "Services", "href" : "", "links" : [ { "name" : "Rainfall Outlook", "href" : "/heat-map-rainfall-outlook"}, { "name" : "Suitability", "href" : "/suitability-gallery"},  { "name" : "Drought Forecast", "href" : "/drought"}], "id" : "get-involved-link", "withsublinks" : true}, 
+    { "name" : "Services", "href" : "", "links" : [ { "name" : "Rainfall Outlook", "href" : "/heat-map-rainfall-outlook"}, { "name" : "Suitability", "href" : "/suitability-gallery"},  { "name" : "Drought Forecast", "href" : "/drought"},  { "name" : "Weather Monitoring", "href" : "/weather-monitoring"}], "id" : "get-involved-link", "withsublinks" : true} 
       
-    { "name" : "Contact Us", "href" : "", "links" : [ { "name" : "Subscribe", "href" : "https://goo.gl/forms/i4jW7LshCSQpuyZ23"} ], "id" : "contact-us-link", "withsublinks" : true} 
+    //{ "name" : "Contact Us", "href" : "", "links" : [ { "name" : "Subscribe", "href" : "https://goo.gl/forms/i4jW7LshCSQpuyZ23"} ], "id" : "contact-us-link", "withsublinks" : true} 
 
     ]
   },
