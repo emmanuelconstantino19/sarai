@@ -14,7 +14,7 @@ Template.PlantingGuideView.events({
     	$('#advisories-list li').remove()
     	$('#crop-pg').text('CORN')
       $('#location-pg').text('IN ECHAGUE, ISABELA')
-    	$('#advisory').html('<b>Water is sufficient to plant corn from May 18 to June 3.</b> But since rainfall is expected to be above the threshold during the expected harvest window (September 15 to October 1), <b>planting can start as early as May 3</b> (expected harvest date is on August 31). Besides, land preparation can be carried out around April even when soil is not yet wet.<br><br>Watch out for infestation of weeds during the first 30 days from sowing.')
+    	$('#advisory').html('<b>Water is sufficient to plant corn from May 18 to June 3.</b> But since rainfall is expected to be above the threshold during the expected harvest window (September 15 to October 1), <b>planting can start as early as May 3</b> (expected harvest date is on August 31). Land preparation can be carried out around April even when soil is not yet wet.<br><br>Watch out for infestation of weeds during the first 30 days from sowing.')
     	$('#advisories-list').append("<li style='margin-bottom:20px'>Water is sufficient to plant corn from May 18 to June 3. But since rainfall is expected to be above the threshold during the expected harvest window (September 15 to October 1), planting can start as early as May 3 (expected harvest date is on August 31). Besides, land preparation can be carried out around April even when soil is not yet wet.</li>");
     	$('#advisories-list').append("<li style='margin-bottom:20px'>Watch out for infestation of weeds during the first 30 days from sowing.</li>");
     	$('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Corn'))
@@ -43,7 +43,7 @@ Template.PlantingGuideView.events({
     	$('#text-advisory-cacao').show()
   		$('#text-advisory-banana').hide()
   		$('#graph-advisory').hide()
-      $('#first-pg').text("PLANTING")
+      $('#first-pg').text("CROP")
       $('#date-pg').text("BASED ON THE RAINFALL OUTLOOK FROM FEBRUARY TO JULY 2019 AS OF MARCH 2019")
       $("#project-pg").text("Source: Project 1.3")
     }else if(crop=="Banana"){
@@ -52,7 +52,7 @@ Template.PlantingGuideView.events({
     	$('#text-advisory-cacao').hide()
   		$('#text-advisory-banana').show()
   		$('#graph-advisory').hide()
-      $('#first-pg').text("GENERAL")
+      $('#first-pg').text("CROP")
       $('#date-pg').text("")
       $("#project-pg").text("Source: Project 1.4")
     }
