@@ -9,12 +9,12 @@
 <template name="SliderContent">
   <div id="banner-slider-{{entry._id}}" class="mdl-grid banner-slide" style="background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('{{entry.image}}');">
 
-    <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--5-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone banner-slide-content">
+    <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--7-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone banner-slide-content">
       <div class="bannertextclass">
         <h2 class="title">{{entry.title}}</h2>
         <div class="subTitle">{{entry.subTitle}}</div>
         <div class="text">{{{entry.text}}}</div>
-        <div class="banner-slider-button-container" style = "margin-top: 80px;margin-left: 10px;"><a href="{{entry.buttonLink}}" class="banner-slider-button">{{entry.buttonText}}</a></div>
+        <div class="banner-slider-button-container"><a href="{{entry.buttonLink}}" class="banner-slider-button">{{entry.buttonText}}</a></div>
       </div>
     </div>
 

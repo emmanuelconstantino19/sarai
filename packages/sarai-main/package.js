@@ -141,6 +141,10 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/advisories/advisories.less",
     "client/components/sarai-home/includes/advisories/route.js",
 
+    "client/components/sarai-home/includes/satellite-landing/satellite-landing.html",
+    "client/components/sarai-home/includes/satellite-landing/satellite-landing.js",
+    "client/components/sarai-home/includes/satellite-landing/satellite-landing.less",
+
 
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",

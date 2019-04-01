@@ -166,7 +166,7 @@ const getOWMData = (stationID) => {
 
   $.getJSON(api,(results) => {
     let forecast = []
-    for(var i = 0 ; i < 6; i++){
+    for(var i = 1 ; i < 6; i++){
       var date = results.sunriseTimeLocal[i].substring(0,10).split('-')
       console.log(results.daypart[0].iconCode)
       forecast.push({

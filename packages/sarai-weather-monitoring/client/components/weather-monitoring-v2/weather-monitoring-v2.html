@@ -46,7 +46,8 @@
     </div>
 
 <div class="mdl-cell mdl-cell--12-col-desktop">
-<h4 style="text-align:center">Project SARAi Weather Data</h4>
+<h4 style="text-align:center;margin-bottom: 0px;">Project SARAi Weather Data</h4>
+<h6 style="text-align:center;margin-top: 0px;">Source: WeatherLink</h6>
 <table id = "current-weather-data" style="text-align:center" class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -70,7 +71,8 @@
 </div>
 
 <div class="mdl-cell mdl-cell--12-col-desktop">
-<h4 style="text-align:center">6-Day Rainfall Forecast</h4>
+<h4 style="text-align:center;margin-bottom: 0px;">6-Day Rainfall Forecast</h4>
+<h6 style="text-align:center;margin-top: 0px;">Source: Weather Underground</h6>
 <table id="rainfall-forecast-table" style="text-align:center" class="table table-bordered table-striped">
     <thead>
       <tr>      
@@ -104,13 +106,17 @@
 
 <template name="PreviewColWM2">
   <div class="forecast-preview-col" style="width:16%;padding:5px;display:inline-table">
-    <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><br/><span class="date">{{date}}</span></div>
+    <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><span class="date">{{date}}</span></div>
     <hr style="margin-top:0px">
-    <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Day</span></div>
-    <div class="icon"><img src="{{icon}}" style="width:60px"></div>
-    <div class="description" style="text-align:center"><span style="font-weight:bold">{{desc}}</span></div>
-    <div class="pop" style="margin-bottom:0px"><span class="value">{{chance}}</span><span class="unit">%</span> chance of rain</div>
-    <hr/>
+    
+    {{#if checkNull icon }}
+      <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Day</span></div>
+      <div class="icon"><img src="{{icon}}" style="width:60px"></div>
+      <div class="description" style="text-align:center"><span style="font-weight:bold">{{desc}}</span></div>
+      <div class="pop" style="margin-bottom:0px"><span class="value">{{chance}}</span><span class="unit">%</span> chance of rain</div>
+      <hr/>
+    {{/if}}
+
     <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Night</span></div>
     <div class="icon"><img src="{{iconNight}}" style="width:60px"></div>
     <div class="description" style="text-align:center"><span style="font-weight:bold">{{descNight}}</span></div>

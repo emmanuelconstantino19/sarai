@@ -1,25 +1,110 @@
 <template name="PlantingGuideView">
-  <div class="mdl-grid mdl-grid--no-spacing">
-    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title"><h3 style="margin-bottom:0">Crop Advisories for 2019</h3>
-      </div>
+  <div class="mdl-grid mdl-grid--no-spacing" style="margin-left:5%;margin-right:5%;margin-bottom:20px">
+    <div id="main-preview" class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
 
-          <div class="mdl-cell mdl-cell--12-col preview-title">
-          <h6><strong>Payo ng SARAI para sa palay para sa Echague, Isabela: </strong><br/><br/>
-            <p style="text-align: center;font-size:17px">
-            1) Payo ng SARAI, mas makabubuting anihin nang mas maaga ang mga pananim, dahil ayon sa forecast, ang dami ng ulan ay aabot ng 250-300mm sa mga unang bahagi ng Setyembre 2019. Mas makakabubuti ring tiyakin na merong drying areas o facilities sa panahon ng pag-aani.<br/><br/>
-            2) Payo ng SARAI, mas makabubuting gumamit ng short-duration varieties kagaya ng Rc14, Rc68, Rc9, o Rc222.
-            </p>
-            <br/>
-            <u>Recommended planting date</u>: 2nd week of June to 2nd week of July
-          </h6>
+          <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 15px; border-radius:5px">
+           <img src="/planting-guide/crop-advisories-title.png" style="width:100%" />
+           <p style="margin-top:10px; font-weight:bold">Consider the SARAI recommendations for planting and management practices for the period of April to September</p>
+           <p style="margin-bottom:0">*Advisories are as of March 2019</p><br/>
+           <label for="crop-list" style="margin-bottom:0">CROP</label><br/>
+           <div class="select-container" style="width:100%;margin:0">
+              <select class="mdl-select" id="crop-list">
+                  <option value="Rice">Rice</option>
+                  <option value="Corn">Corn</option>
+                  <option value="Cacao">Cacao</option>
+                  <option value="Banana">Banana</option>
+              </select>
+            </div>
           </div>
+         <div class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone preview-title">
+         <h4 style="font-weight:bold;margin-bottom:0">PLANTING ADVISORY FOR <span id="crop-pg">RICE</span> <span id="location-pg">IN ECHAGUE, ISABELA</span></h4>
+         <h6 style="margin-top:0">BASED ON THE RAINFALL OUTLOOK FOR APRIL TO SEPTEMBER 2019 AS OF MARCH 2019</h6>
 
-          <div class="mdl-cell mdl-cell--12-col advisory-more">
-            <button class="mdl-button mdl-js-button mdl-button--raised">
-              More
-            </button>
+        <div id="graph-advisory" class="mdl-grid">
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="accumulated_graph"></div>
+        <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; height:100%; text-align:left">
+            <span id="advisory">It is <b>not recommended to plant rainfed rice</b> on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</span>
+            <div style="margin-top:20px;text-align:right">
+            <a id ="see-more-pg" href="#" target="blank" class="link" style="font-size:15px">See More<i class="material-icons">navigate_next</i></a>
+            </div>
+        </div>
+        </div>
+
+        <div id="text-advisory-cacao" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left">
+          <span style="font-weight:bold;font-size:larger">May 2019</span><br/>
+          <p><b>Fertilizer application</b>: Maaaring magsimula na mag-apply ng abono sa Mayo, upang sumakto sa simula ng tag-ulan</p><br/>
+          <span style="font-weight:bold;font-size:larger">May-September 2019</span><br/>
+          <p><b>Pest Monitoring</b>: Obserbahan ang mga bunga ng cacao dahil malamang na dumami
+ang pagkabulok o pod rot. Alisin at ibaon sa lupa ang mga apektadong bunga upang
+hindi ito kumalat. Sa panahong ito, maaaring magputol ng mga sanga upang
+mabawasan ang alinsangan.</p><br/>
+          <span><b>Mulching</b>: Kung may mga puno ng saging sa paligid, maaaring ilagay sa ilalim ng
+puno ng cacao ang mga putol na saha o katawan ng puno ng saging upang
+mapanatiling basa ang lupa. Maaari din itong maging tirahan ng mga insektong
+makabubuti sa polinasyon ng mga bulaklak.</span><br/>
+        </div>
+
+        <div id="text-advisory-banana" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left">
+          <span style="font-weight:bold;font-size:larger">Mulching</span><br/>
+          <ul>
+            <li>Mulching is useful in conserving soil moisture and suppressing weed growth. It also increases the number of feeder roots which improves the nutrient and water use efficiency and thereby increasing banana yield by 30-40%.</li>
+          </ul>
+          <span style="font-weight:bold;font-size:larger">Irrigation Management</span><br/>
+          <ul>
+            <li>Monitoring of soil moisture can help in determining the irrigation requirement to replenish water supply in the root zone.</li>
+
+            <li>About 80% of banana roots are located in the upper 50cm of soil, therefore maintaining soil moisture in this layer is essential.</li>
+          </ul>
+          <span style="font-weight:bold;font-size:larger">Deleafing</span><br/>
+          <ul>
+            <li>Removal of diseased and dry leaves should be done using a sanitized and disinfected tool.</li>
+          </ul>
+          <span style="font-weight:bold;font-size:larger">Fertilization</span><br/>
+          <ul>
+            <li>Apply fertilizer when soil is moist: monthly for Lakatan and bi-monthly for</li>
+          </ul>
+        </div>
+
         </div>
     </div>
   </div>
+
+  <div id="myModal-pg" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:80%;margin-top:-100px">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="font-weight:bold">Advisories</h4>
+        </div>
+        <div class="modal-body">
+          <ul id="advisories-list" style="font-size:17px;padding:20px">
+            <li style="margin-bottom:20px">It is not recommended to plant rainfed rice on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</li>
+
+            <li style="margin-bottom:20px">Alternative crops to plant during the usual planting windows (i.e., May/June to July/August) are legumes such as mungbean.</li>
+
+            <li style="margin-bottom:20px">Heads up for possible planting if there will be improvement in the next rainfall outlook. </li>
+
+            <li style="margin-bottom:20px">Prepare seeds for chances of isolated rainfall. Planting by direct seeding may be pushed through if isolated rainfall lasts for at least a week but watch out for infestation of weeds. On the other hand, planting by transplanting may be challenging because more rainfall is required especially during land preparation a week before transplanting.</li>
+        </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#see-more-pg").on("click", function(e){
+        e.preventDefault();
+        //$(".modal-title").text('Mariano Marcos State University');
+        //$("#body-image").attr("src","/about/SUC/SUC_MMSU.jpg");
+        $("#myModal-pg").modal();
+      });
+    });
+  </script>
 </template>
