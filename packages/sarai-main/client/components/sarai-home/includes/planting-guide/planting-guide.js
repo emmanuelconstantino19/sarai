@@ -23,7 +23,7 @@ Template.PlantingGuideView.events({
   		$('#graph-advisory').show() 	
       $('#first-pg').text("PLANTING")
       $('#date-pg').text("BASED ON THE RAINFALL OUTLOOK FROM APRIL TO SEPTEMBER 2019 AS OF MARCH 2019")
-      $("#project-pg").text("Source: Project 1.1")
+      $("#project-pg").html("Source: <a href='/about-us/1.1' target='_blank' style='color:black'>Project 1.1</a>")
     }else if(crop == "Rice"){
     	$('#accumulated_graph .meteogram').remove()
     	$('#advisories-list li').remove()
@@ -36,7 +36,7 @@ Template.PlantingGuideView.events({
   		$('#graph-advisory').show()
       $('#first-pg').text("PLANTING")
       $('#date-pg').text("BASED ON THE RAINFALL OUTLOOK FROM APRIL TO SEPTEMBER 2019 AS OF MARCH 2019")
-      $("#project-pg").text("Source: Project 1.1")
+      $("#project-pg").html("Source: <a href='/about-us/1.1' target='_blank' style='color:black'>Project 1.1</a>")
     }else if(crop=="Cacao"){
     	$('#crop-pg').text('CACAO')
       $('#location-pg').text('IN ISABELA')
@@ -45,7 +45,7 @@ Template.PlantingGuideView.events({
   		$('#graph-advisory').hide()
       $('#first-pg').text("CROP")
       $('#date-pg').text("BASED ON THE RAINFALL OUTLOOK FROM FEBRUARY TO JULY 2019 AS OF MARCH 2019")
-      $("#project-pg").text("Source: Project 1.3")
+      $("#project-pg").html("Source: <a href='/about-us/1.3' target='_blank' style='color:black'>Project 1.3</a>")
     }else if(crop=="Banana"){
     	$('#crop-pg').text('BANANA')
       $('#location-pg').text('')
@@ -54,7 +54,7 @@ Template.PlantingGuideView.events({
   		$('#graph-advisory').hide()
       $('#first-pg').text("CROP")
       $('#date-pg').text("")
-      $("#project-pg").text("Source: Project 1.4")
+      $("#project-pg").html("Source: <a href='/about-us/1.4' target='_blank' style='color:black'>Project 1.4</a>")
     }
   }
 })

@@ -3,3 +3,10 @@ FlowRouter.route("/about-us", {
     BlazeLayout.render("MainLayout", {main: "SaraiAbout"})
   }
 })
+
+FlowRouter.route("/about-us/:_id", {
+	action: (params, queryParams) => {
+		BlazeLayout.reset();
+		BlazeLayout.render("MainLayout", {main: "SaraiAbout"})
+	}
+});

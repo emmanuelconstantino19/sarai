@@ -1,0 +1,1 @@
+WundergroundData = new Mongo.Collection('wunderground-data');

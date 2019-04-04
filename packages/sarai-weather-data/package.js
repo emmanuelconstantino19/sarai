@@ -24,7 +24,8 @@ Package.onUse(function(api) {
     "lib/collections/sarai-dss-settings.js",
     "lib/collections/sarai-heat-map-data.js",
     "lib/collections/sarai-weather-data.js",
-    "lib/collections/sarai-weather-stations.js"
+    "lib/collections/sarai-weather-stations.js",
+    "lib/collections/sarai-wunderground-data.js"
   ]
 
   api.addFiles(lib, ["client", "server"])
@@ -46,7 +47,8 @@ Package.onUse(function(api) {
     "HeatMapData",
     "WeatherData",
     "WeatherStations",
-    "DSSSettings"
+    "DSSSettings",
+    "WundergroundData"
   ])
 });
 

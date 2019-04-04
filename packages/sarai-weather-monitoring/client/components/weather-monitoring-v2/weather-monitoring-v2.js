@@ -3,6 +3,9 @@ Template.WeatherMonitoringV2.onCreated(() => {
 
   Meteor.subscribe('sarai-weather-stations')
   Meteor.subscribe('weather-data-30')
+  /*Meteor.subscribe('wunderground-data', () => {
+    console.log(WundergroundData.find({}).fetch())
+  })*/
 
   Meteor.subscribe('dss-settings', () => {
     const record = DSSSettings.findOne({name: 'wunderground-api-key'})
@@ -343,14 +346,14 @@ const getCurrentWeather = (apiKey) => {
 		$.getJSON(`http://202.92.144.43/WL/JSON/${weather_stations2[i]}.json`,(result) => {
 			//rainfall = (result.hasOwnProperty('')) ? '--' : result.davis_current_observation.rain_day_in;
 			temp = (result.hasOwnProperty('temp_c')) ? result.temp_c : '--';
-			hum = (result.hasOwnProperty('relative_humidity')) ? result.relative_humidity : '--';
-			pres = (result.hasOwnProperty('pressure_mb')) ? result.pressure_mb : '--';
+			hum = (result.hasOwnProperty('relative_humidity') && parseFloat(result.relative_humidity) > 0 ) ? result.relative_humidity : '--';
+			pres = (result.hasOwnProperty('pressure_mb')  && parseFloat(result.pressure_mb) > 0) ? result.pressure_mb : '--';
 			ws = (result.hasOwnProperty('wind_mph')) ? result.wind_mph : '--';
 			sr = (result.davis_current_observation.hasOwnProperty('solar_radiation')) ? result.davis_current_observation.solar_radiation : '--';
 			$('#current-weather-data').DataTable().row.add([
         result.davis_current_observation.station_name,
 				result.observation_time_rfc822.replace('+0800',''),
-				parseFloat(result.davis_current_observation.rain_day_in) * 25.4,
+				Math.round((parseFloat(result.davis_current_observation.rain_day_in) * 25.4) * 10)/10,
 				temp,
 				hum,
 				pres,
@@ -368,130 +371,130 @@ const displayRainfallGraph = (tenday) => {
   $.when(
     //BUCAF
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.192833,123.595327&units=m&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302`,(results) => {
-        $('#rainfall-forecast-table').DataTable().row.add(['BUCAF-Albay', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['BUCAF-Albay', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'BUCAF-Albay', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=15.738165,120.928400&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833`,(results) => {
     
-        $('#rainfall-forecast-table').DataTable().row.add(['CLSU-Munoz', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['CLSU-Munoz', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'CLSU-Munoz', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.855571,125.057929&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
-        $('#rainfall-forecast-table').DataTable().row.add(['CMU-Maramag', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['CMU-Maramag', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'CMU-Maramag', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=10.132925,123.546750&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['CTU-Barili', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['CTU-Barili', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'CTU-Barili', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.944936,121.369765&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['DAQAES-Tiaong', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['DAQAES-Tiaong', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'DAQAES-Tiaong', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=14.156233,121.262197&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['IPB-UPLB', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['IPB-UPLB', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'IPB-UPLB', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Cabagan', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Cabagan', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'ISU-Cabagan', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=16.725611,121.698503&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Echague', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['ISU-Echague', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'ISU-Echague', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.149028,121.187139&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['MINSCAT-Mindoro', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['MINSCAT-Mindoro', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'MINSCAT-Mindoro', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['MMSU-Batac', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['MMSU-Batac', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'MMSU-Batac', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.996182,121.929624&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['PCA-Zamboanga', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['PCA-Zamboanga', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'PCA-Zamboanga', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.130432,120.704186&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['PHILRICE-Mindoro', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['PHILRICE-Mindoro', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'PHILRICE-Mindoro', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.489740,125.545582&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Malita', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Malita', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'SPAMAST-Malita', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.691228,125.188743&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Matanao', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['SPAMAST-Matanao', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'SPAMAST-Matanao', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=10.404912,122.978921&units=m&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['UPLBCA-LaGranja', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['UPLBCA-LaGranja', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'UPLBCA-LaGranja', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.110252,124.851728&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['USM-Kabacan', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['USM-Kabacan', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'USM-Kabacan', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=8.610266,124.883303&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['USTP-Claveria', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['USTP-Claveria', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'USTP-Claveria', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=9.443356,118.560378&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['WPU-Aborlan', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['WPU-Aborlan', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'WPU-Aborlan', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
     $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=11.102263,122.414762&units=m&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302`,(results) => {
       
         
-        $('#rainfall-forecast-table').DataTable().row.add(['WVSU-Iloilo', results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]).draw();
+        $('#rainfall-forecast-table').DataTable().row.add(['WVSU-Iloilo', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'WVSU-Iloilo', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     })

@@ -1,32 +1,80 @@
 <template name="Serviceslist">
-	<div class="mdl-grid" id="servicescontainer">
-		{{#if servicesMain.enabled}}
-			<div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-desktop" style="text-align: center;">
-				<h5 class="maintitle">{{servicesMain.title}}</h5>
-				<h6>{{servicesMain.description}}</h6>
-				<p>{{servicesMain.subtext}}</p>
+	<div class="mdl-grid" id="servicescontainer">		
+		<div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-desktop" style="text-align: center;">
+			<h5 class="maintitle">Our Services</h5>
+			<h6>Project SARAi uses precision agriculture and advances in technology to determine what, when, and where to plant.</h6>
+		</div>
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/seams"><img src="/services/sarai-seams.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/seams" id="titleservices">Sarai-Enhanced Agricultural Monitoring System</a>
 			</div>
-		{{/if}}
-		{{#each service in services}}
-			<div class="servicessection mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-				{{#if hasAppLink service.media.subtitleLink}}
-					<div class="titlediv">
-			  		<a href="{{service.media.subtitleLink}}"><img src="{{service.thumbnail}}" class="services-image"/></a><br /><br />
-			  		<a href="{{service.media.subtitleLink}}" id="titleservices">{{service.title}}</a><br /><br />
-			  	</div>
-					{{else}}
-					<div class="titlediv">
-			  		<a href="{{pathFor '/services/:_id' _id=service._id}}"><img src="{{service.thumbnail}}" class="services-image"/></a><br /><br />
-			  		<a href="{{pathFor '/services/:_id' _id=service._id}}" id="titleservices">{{service.title}}</a><br /><br />
-			  	</div>
-				{{/if}}
-			  	<div class="servicesdesc">
-			  		<br />
-					{{service.text}}
-					<br />
-				</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/aws"><img src="/services/sarai-aws.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/aws" id="titleservices">Automatic Weather Station</a>
 			</div>
-		{{/each}}
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/waiss"><img src="/services/sarai-waiss.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/waiss" id="titleservices">Water balance-Assisted Irrigation Decision Support System</a>
+			</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/soil"><img src="/services/sarai-soil.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/soil" id="titleservices">Soil Profiling and Characterization</a>
+			</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/dcaf"><img src="/services/sarai-dcaf.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/dcaf" id="titleservices">Drought and Crop Assessment Forecast</a>
+			</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/pest"><img src="/services/sarai-pest.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/pest" id="titleservices">Integrated Pest and Disease Management System</a>
+			</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/eskwela"><img src="/services/sarai-eskwela.jpg" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/eskwela" id="titleservices">SARAI Eskwela</a>
+			</div>
+		</div>
+
+		<div class="servicessection mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="titlediv">
+		  		<a href="/services/kp"><img src="/services/sarai-kp.png" class="services-image"/></a>
+		  	</div>
+		  	<div class="servicesdesc">
+		  		<a href="/services/kp" id="titleservices">Knowledge Portal</a>
+			</div>
+		</div>
 		<!-- {{#if servicesMain.buttonEnabled}}
 			<div class="mdl-cell mdl-cell-12-col"><button type="button" class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect" id="moreprojectsbutton">MORE PROJECTS</button></div>
 		{{/if}} -->

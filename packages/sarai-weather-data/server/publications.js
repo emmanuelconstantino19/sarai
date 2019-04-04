@@ -3,6 +3,10 @@ Meteor.publish('weather-data', () => {
   return WeatherData.find();
 });
 
+Meteor.publish('wunderground-data', () => {
+  return WundergroundData.find();
+});
+
 Meteor.publish('weather-data-30', () => {
   const oneMonthAgo = new Date()
 
