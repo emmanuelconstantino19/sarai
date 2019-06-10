@@ -2,20 +2,38 @@
   <div class="mdl-grid mdl-grid--no-spacing" style="margin-bottom:20px">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
       <div class="mdl-cell mdl-cell--12-col preview-title">
-        <h3 style="margin-bottom:0;margin-top:10px">SARAi Crop Advisories</h3>
+        <h3 style="margin-top:10px;margin-bottom:0">SARAi Cropping Advisories</h3>
+        <h6 style="margin-top:0;font-weight:bold">We craft site-specific recommendations for the representative sites of the different climate types.<br/>Recommendations may or may not be the same with other sites with the same climate type.</h6>
       </div>
     </div>
 
     <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
-      
-      <div class="mdl-cell mdl-cell--5-offset-desktop mdl-cell--2-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+      <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
        <label for="crop-list" style="margin-bottom:0">CROP</label><br/>
          <div class="select-container" style="width:100%;margin:0">
             <select class="mdl-select" id="crop-list">
-                <option value="Rice">Rice</option>
-                <option value="Corn">Corn</option>
-                <option value="Cacao">Cacao</option>
-                <option value="Banana">Banana</option>
+                <option value="RICE">Rainfed Rice</option>
+                <option value="CORN">Corn</option>
+                <option value="CACAO">Cacao</option>
+                <option value="BANANA">Banana</option>
+                <option value="RICE AND CORN">Rice & Corn</option>
+            </select>
+          </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+       <label for="sites-list" style="margin-bottom:0">SITE</label><br/>
+         <div class="select-container" style="width:100%;margin:0">
+            <select class="mdl-select" id="sites-list">
+                <option value="batac">Batac, Ilocos Norte (Climate Type I)</option>
+                <option value="mindoro">Calapan, Oriental Mindoro (Climate Type III)</option>
+                <option value="davao">Davao City, Davao del Sur (Climate Type IV)</option>
+                <option value="echague">Echague, Isabela (Climate Type III)</option>
+                <option value="guinobatan">Guinobatan, Albay (Climate Type II)</option>
+                <option value="iloilo">Iloilo City, Iloilo (Climate Type I)</option>
+                <option value="legazpi">Legazpi City, Albay (Climate Type II)</option>
+                <option value="bukidnon">Malaybalay, Bukidnon (Climate Type III)</option>
             </select>
           </div>
       </div>
@@ -25,27 +43,354 @@
 
     <div id="main-preview" class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
          <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone preview-title">
-         <h4 style="font-weight:bold;margin-bottom:0"> <span id="first-pg">PLANTING</span> ADVISORY FOR <span id="crop-pg">RICE</span> <span id="location-pg">IN ECHAGUE, ISABELA</span></h4>
-         <h6 id="date-pg" style="margin-top:0;margin-bottom:0">BASED ON THE RAINFALL OUTLOOK FROM APRIL TO SEPTEMBER 2019 AS OF MARCH 2019</h6>
+         <h4 style="font-weight:bold;margin-bottom:0"> <span id = "first-pg">CROPPING</span> ADVISORY FOR <span id = "crop-pg">RAINFED RICE</span> IN <span id = "location-pg">BATAC, ILOCOS NORTE</span></h4>
+         <h6 id="date-pg" style="margin-top:0;margin-bottom:0">BASED ON THE RAINFALL OUTLOOK FROM MAY TO OCTOBER 2019 AS OF MAY 2019</h6>
          <h6 id="project-pg" style="margin-top:0">Source: <a href="/about-us/1.1" target="_blank" style="color:black">Project 1.1</a></h6>
 
         <div id="graph-advisory" class="mdl-grid">
         <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="accumulated_graph"></div>
+
         <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; height:100%; text-align:left; font-size:medium">
-            <span id="advisory">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1" style="padding-right:20px">
+              <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+              <span class="mdl-radio__label">English</span>
+            </label>
+           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+            <span class="mdl-radio__label">Tagalog</span>
+          </label>
+            <div id="tagalog-text">
+              <span class="batac-rice-advisory">
+                <br/><br/>
+                Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Batac, Ilocos Norte</u> sa <u>ika-31 ng Mayo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 5 hanggang Hulyo 25</u> at maaari nang anihin mula <u>Setyembre 8 hanggang Setyempre 28</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Hulyo 25 hanggang Agosto 14</u> at maaari nang mag-ani mula <u>Setyembre 28 hanggang Oktubre 18</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 14 hanggang Setyembre 3</u> at  inaasahan ang pag-ani mula <u>Oktubre 18 hanggang Nobyembre 7</u>.<br/><br/>
 
-            <ul>
+                Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
 
-            <li>It is <b>not recommended to plant rainfed rice</b> on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</li>
+                * Maaari na magtanim sa kalagitnaan pa lamang ng Mayo
 
-            <li>Alternative crops to plant during the usual planting windows (i.e., May/June to July/August) are legumes such as mungbean.</li>
+              </span>
 
-            <li>Heads up for possible planting if there will be improvement in the next rainfall outlook.</li>
+              <span class="mindoro-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Calapan, Oriental Mindoro</u> sa <u>ika-4 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 9 hanggang Hulyo 29</u> at maaari nang anihin mula <u>Setyembre 12 hanggang Oktubre 2</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Hulyo 29 hanggang Agosto 18</u> at maaari nang mag-ani mula <u>Oktubre 2 hanggang Oktubre 22</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 18 hanggang Setyembre 7</u> at  inaasahan ang pag-ani mula <u>Oktubre 22 hanggang Nobyembre 11</u>.<br/><br/>
 
-            <li>Prepare seeds for chances of isolated rainfall. Planting by direct seeding may be pushed through if isolated rainfall lasts for at least a week but watch out for infestation of weeds. On the other hand, planting by transplanting may be challenging because more rainfall is required especially during land preparation a week before transplanting.</li>
-            
-            </ul>
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa katapusan pa lamang ng Mayo
+
             </span>
+
+            <span class="davao-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Davao City, Davao del Sur</u> sa <u>ika-27 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Agosto 1 hanggang Agosto 21</u> at maaari nang anihin mula <u>Oktubre 5 hanggang Oktubre 25</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Agosto 21 hanggang Setyembre 10</u> at maaari nang mag-ani mula <u>Oktubre 25 hanggang Nobyembre 14</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Setyembre 10 hanggang Setyembre 30</u> at  inaasahan ang pag-ani mula <u>Nobyembre 14 hanggang Disyembre 4</u>.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa kalagitnaan pa lamang ng Hunyo.
+
+            </span>
+
+            <span class="iloilo-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Iloilo City, Iloilo</u> sa <u>ika-7 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 12 hanggang Agosto 1</u> at maaari nang anihin mula <u>Setyembre 15 hanggang Oktubre 5</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Agosto 1 hanggang Agosto 21</u> at maaari nang mag-ani mula <u>Oktubre 5 hanggang Oktubre 25</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 21 hanggang Setyembre 10</u> at  inaasahan ang pag-ani mula <u>Oktubre 25 hanggang Nobyembre 14</u>.
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.
+
+* Maaari na magtanim sa katapusan ng Mayo
+
+            </span>
+
+            <span class="guinobatan-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Guinobatan, Albay</u> sa <u>ika-30 ng Mayo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 4 haggang Hulyo 24</u> at maaari nang anihin mula <u>Setyembre 7 hanggang Setyembre 27</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Hulyo 24 hanggang Agosto 13</u> at maaari nang mag-ani mula <u>Setyembre 27 hanggang Oktubre 17</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 13 hanggang Setyembre 2</u> at  inaasahan ang pag-ani mula <u>Oktubre 17 hanggang Nobyembre 6</u>.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa kalagitnaan pa lamang ng Mayo
+
+            </span>
+
+            <span class="legazpi-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Legazpi City, Albay</u> sa <u>ika-5 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo to hanggang Hulyo 30</u> at maaari nang anihin mula <u>Setyembre 13 hanggang Oktubre 3</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Hulyo 30 hanggang Agosto 19</u> at maaari nang mag-ani mula <u>Oktubre 3 hanggang Oktubre 23</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 19 hanggang Setyembre 8</u> at  inaasahan ang pag-ani mula <u>Oktubre 23 hanggang Nobyembre 12</u>.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa pagpasok ng Mayo
+
+            </span>
+
+            <span class="echague-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Echague, Isabela</u> sa <u>ika-14 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 19 hanggang Agosto 8</u> at maaari nang anihin mula <u>Setyembre 22 hanggang Oktubre 12</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Agosto 8 hanggang Agosto 28</u> at maaari nang mag-ani mula <u>Oktubre 12 hanggang Nobyembre 1</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 28 hanggang Setyembre 17</u> at  inaasahan ang pag-ani mula <u>Nobyembre 1 hanggang Nobyembre 21</u>.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa pagpasok pa lamang ng Hunyo
+
+          </span>
+
+            <span class="bukidnon-rice-advisory">
+              <br/><br/>
+            Inirerekomendang magtanim ng sahod-ulan na palay sa <u>Malaybalay, Bukidnon</u> sa <u>ika-17 ng Hunyo*</u>. Sa ganitong petsa ng pagtatanim, ang mga bulaklak ng short-duration varieties ay magsisimulang magsipaglabasan sa <u>Hulyo 22 hanggang Agosto 11</u> at maaari nang anihin mula <u>Setyembre 25 hanggang Oktubre 15</u>. Kapag naman medium-duration varieties, ang pamumulaklak ay masisimula mula <u>Agosto 11 hanggang Agosto 31</u> at maaari nang mag-ani mula <u>Oktubre 15 hanggang Nobyembre 4</u>. Ang pamumulaklak ng long-duration varieties ay magsisimula sa <u>Agosto 31 hanggang Setyembre 20</u> at  inaasahan ang pag-ani mula <u>Nobyembre 4 hanggang Nobyembre 24</u>.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari na magtanim sa pagpasok pa lamang ng Mayo
+
+            </span>
+
+            <!-- START OF CORN ADVISORIES -->
+
+
+            <span class="batac-corn-advisory">
+              <br/><br/>
+              Nirerekomendang magtanim ng mais sa <u>Batac, Ilocos Norte</u> sa <u>ika-19 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 13</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 11</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa pagpasok pa lamang ng buwan ng Mayo
+            </span>
+
+            <span class="mindoro-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Calapan, Oriental Mindoro</u> sa <u>ika-16 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 10</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 8</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa pagtatapos pa lamang ng Abril
+            </span>
+
+            <span class="davao-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Davao City, Davao del Sur</u> sa <u>ika-4 ng Hunyo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 29</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 27</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa Mayo
+            </span>
+
+            <span class="iloilo-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Iloilo City, Iloilo</u> sa <u>ika-19 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 13</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 11</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa pagpasok pa lamang ng Mayo
+            </span>
+
+            <span class="guinobatan-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Guinobatan, Albay</u> sa <u>ika-30 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 24</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 22</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa kalagitnaan pa lamang ng Mayo
+            </span>
+
+            <span class="legazpi-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Legazpi City, Albay</u> sa <u>ika-3 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hunyo 27</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Agosto 26</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari pang magtanim hanggang pagpasok ng Hunyo
+            </span>
+
+            <span class="bukidnon-corn-advisory">
+              <br/><br/>
+            Nirerekomendang magtanim ng mais sa <u>Malaybalay, Bukidnon</u> sa <u>ika-24 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 18</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 16</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa kalagitnaan pa lamang ng Abril
+            </span>
+
+
+            <span class="echague-corn-advisory">
+              <br/><br/>
+              Nirerekomendang magtanim ng mais sa <u>Echague, Isabela</u> sa <u>ika-24 ng Mayo*</u>. Ang mga dahon ng mais ay inaasahang makumpleto na sa <u>Hulyo 18</u>, at ang pamumulaklak hanggang pagbunga ay inaasahang matapos sa <u>Setyembre 16</u> kung kailan ito ay maaari nang anihin. Ihanda ang mga kagamitan na kinakailangan sa pagpapatuyo ng mga naaning/inaning mais.<br/><br/>
+
+Paalala: Ang mga petsang ito ay maaaring magbago depende sa taas o baba ng temperatura ng hangin at sa aktwal na dami at dalas ng pagulan sa panahon ng pagtatanim.<br/><br/>
+
+* Maaari nang magtanim sa kalagitnaan pa lamang ng Mayo
+            </span>
+
+            <!-- END OF CORN ADVISORIES -->
+
+            </div>
+
+            <!-- START OF ENGLISH -->
+
+        <div id="english-text">
+            <span class="batac-rice-advisory">
+              <br/><br/>
+              The recommended planting date of rainfed rice in <u>Batac, Ilocos Norte</u> is on <u>May 31*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 5 to July 25</u>; medium-duration varieties sometime between <u>July 25 to August 14</u>; and long-duration varieties sometime between <u>August 14 to September 3</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 8 to September 28</u>, <u>September 28 to October 18</u>, and <u>October 18 to November 7</u>, respectively.<br/><br/>
+
+              Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+              *Planting may start mid-May
+
+            </span>
+
+            <span class="mindoro-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Calapan, Oriental Mindoro</u> is on <u>June 4*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 9 to July 29</u>; medium-duration varieties sometime between <u>July 29 to August 18</u>; and long-duration varieties sometime between <u>August 18 to September 7</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 12 to October 2</u>, <u>October 2 to October 22</u>, and <u>October 22 to November 11</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start as early as end of May
+
+            </span>
+
+            <span class="davao-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Davao City, Davao del Sur</u> is on <u>June 27*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>August 1 to August 21</u>; medium-duration varieties sometime between <u>August 21 to September 10</u>; and long-duration varieties sometime between <u>September 10 to September 30</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>October 5 to October 25</u>, <u>October 25 to November 14</u>, and <u>November 14 to December 4</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by mid-June
+
+            </span>
+
+            <span class="iloilo-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Iloilo City, Iloilo</u> is on <u>June 7*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 12 to August 1</u>; medium-duration varieties sometime between <u>August 1 to August 21</u>; and long-duration varieties sometime between <u>August 21 to September 10</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 15 to October 5</u>, <u>October 5 to October 25</u>, and <u>October 25 to November 14</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by end of May
+
+            </span>
+
+            <span class="guinobatan-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Guinobatan, Albay</u> is on <u>May 30*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 4 to July 24</u>; medium-duration varieties sometime between <u>July 24 to August 13</u>; and long-duration varieties sometime between <u>August 13 to September 2</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 7 to September 27</u>, <u>September 27 to October 17</u>, and <u>October 17 to November 6</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by mid-May
+
+            </span>
+
+            <span class="legazpi-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Legazpi City, Albay</u> is on <u>June 5*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 10 to July 30</u>; medium-duration varieties sometime between <u>July 30 to August 19</u>; and long-duration varieties sometime between <u>August 19 to September 8</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 13 to October 3</u>, <u>October 3 to October 23</u>, and <u>October 23 to November 12</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start at the outset of May
+
+            </span>
+
+            <span class="echague-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Echague, Isabela</u> is on <u>June 14*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 19 to August 8</u>; medium-duration varieties sometime between <u>August 8 to August 28</u>; and long-duration varieties sometime between <u>August 28 to September 17</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 22 to October 12</u>, <u>October 12 to November 1</u>, and <u>November 1 to November 21</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start at the outset of June
+
+          </span>
+
+            <span class="bukidnon-rice-advisory">
+              <br/><br/>
+            The recommended planting date of rainfed rice in <u>Malaybalay, Bukidnon</u> is on <u>June 17*</u>. Flowering stage of short-duration varieties are expected to begin sometime between <u>July 22 to August 11</u>; medium-duration varieties sometime between <u>August 11 to August 31</u>; and long-duration varieties sometime between <u>August 31 to September 20</u>. Expected harvest dates of short-, medium-, and long-duration varieties are <u>September 25 to October 15</u>, <u>October 15 to November 4</u>, and <u>November 4 to November 24</u>, respectively.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start at the outset of May
+
+            </span>
+
+
+            <!-- START OF CORN ADVISORIES -->
+
+
+            <span class="batac-corn-advisory">
+              <br/><br/>
+              The recommended planting date of corn in <u>Batac, Ilocos Norte</u> is on <u>May 19*</u>.  Vegetative growth phase is expected to end by <u>July 13</u> and reproductive growth stages by <u>September 11</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start at the beginning of May
+
+            </span>
+
+            <span class="mindoro-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Calapan, Oriental Mindoro</u> is on <u>May 16*</u>.  Vegetative growth phase is expected to end by <u>July 10</u> and reproductive growth stages by <u>September 8</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by the end of April
+
+            </span>
+
+            <span class="davao-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Davao City, Davao del Sur</u> is on <u>June 4*</u>.  Vegetative growth phase is expected to end by <u>July 29</u> and reproductive growth stages by <u>September 27</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by May
+
+            </span>
+
+            <span class="iloilo-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Iloilo City, Iloilo</u> is on <u>May 19*</u>. Vegetative growth phase is expected to end by <u>July 13</u> and reproductive growth stages by <u>September 11</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start at the outset of May
+
+            </span>
+
+            <span class="guinobatan-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Guinobatan, Albay</u> is on <u>May 30*</u>. Vegetative growth phase is expected to end by <u>July 24</u> and reproductive growth stages by <u>September 22</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by mid-May
+
+            </span>
+
+            <span class="legazpi-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Legazpi City, Albay</u> is on <u>May 3*</u>. Vegetative growth phase is expected to end by <u>June 27</u> and reproductive growth stages by <u>August 26</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may be administered until outset of June
+
+            </span>
+
+            <span class="bukidnon-corn-advisory">
+              <br/><br/>
+            The recommended planting date of corn in <u>Malaybalay, Bukidnon</u> is on <u>May 24*</u>. Vegetative growth phase is expected to end by <u>July 18</u> and reproductive growth stages by <u>September 16</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by mid-April
+
+            </span>
+
+
+            <span class="echague-corn-advisory">
+              <br/><br/>
+              The recommended planting date of corn in <u>Echague, Isabela</u> is on <u>May 24*</u>. Vegetative growth phase is expected to end by <u>July 18</u> and reproductive growth stages by <u>September 16</u>. By this time, sowed plants are ready for harvest. Prepare drying facilities.<br/><br/>
+
+Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.<br/><br/>
+
+*Planting may start by mid-May
+
+            </span>
+
+            <!-- END OF CORN ADVISORIES -->
+
+        </div> <!--end of  english text-->
         </div>
         </div>
 
@@ -63,7 +408,7 @@ mapanatiling basa ang lupa. Maaari din itong maging tirahan ng mga insektong
 makabubuti sa polinasyon ng mga bulaklak.</span><br/>
         </div>
 
-        <div id="text-advisory-banana" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left">
+        <div id="text-advisory-banana" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left;">
           <span style="font-weight:bold;font-size:larger">Mulching</span><br/>
           <ul>
             <li>Mulching is useful in conserving soil moisture and suppressing weed growth. It also increases the number of feeder roots which improves the nutrient and water use efficiency and thereby increasing banana yield by 30-40%.</li>
@@ -80,39 +425,52 @@ makabubuti sa polinasyon ng mga bulaklak.</span><br/>
           </ul>
           <span style="font-weight:bold;font-size:larger">Fertilization</span><br/>
           <ul>
-            <li>Apply fertilizer when soil is moist: monthly for Lakatan and bi-monthly for Cardaba/Saba.</li>
+            <li>Apply fertilizer when soil is moist: monthly for Lakatan and bi-monthly for</li>
           </ul>
         </div>
 
+        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="text-advisory-rice-corn" style="border: solid 1px #ccc; padding: 20px; border-radius:5px; text-align:left">
+
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <ul>
+            <li>The current wet season covered in the May-September 2019 SEAMS rainfall
+prediction looks agronomically favorable to our crop production, especially for rainfed
+crop like corn. Planting in almost all regions commenced in May and expected to
+continue till June. Rainfall steadily increased up to August and declining a little bit in
+September. With adequate rainfall and longer daylength during this time of the year
+(summer in Northern Hemisphere), good harvest is expected this wet season.</li>
+            <li>
+              Total amount of predicted rainfall for the May-September (1.38m) is almost half of the
+average annual rainfall and that should be adequate enough for corn. Drying though
+the grains harvest might be crucial for this wet season. We need rain when growing
+the crop but not during harvest time. If harvest would be in the so called “Indian
+summer” in August then that would be favorable to the farmers. Beyond that,
+mechanical dryers are a must.
+            </li>
+          </ul>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+          <div style="padding-left:40px">  
+          <span>
+            Conditioning those mechanical dryers this time would
+be in order. Post harvest is indeed an important issue in Philippine corn industry
+because harvest of the major production falls in rainy period.
+          </span></div>
+          <ul>
+            <li>
+              In June, all Regions have rainfall in excess of 200 cm. This means that rice planting
+could start in June and extends and probably even to August. Expected harvest
+would be in Sept/October. As the “ber” months are notorious for stronger typhoons,
+late planted crop might be affected as it might come during flowering or early grain
+formation stage. The advise is to plant as early as possible.
+            </li>
+          </ul>
+          </div>
+          
         </div>
-    </div>
-  </div>
 
-  <div id="myModal-pg" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width:80%;margin-top:-100px">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="font-weight:bold">Advisories</h4>
         </div>
-        <div class="modal-body">
-          <ul id="advisories-list" style="font-size:17px;padding:20px">
-            <li style="margin-bottom:20px">It is not recommended to plant rainfed rice on the supposed onset of rainy season (May to June) because rainfall is not sufficient during these months. Probable planting is on September 22.</li>
-
-            <li style="margin-bottom:20px">Alternative crops to plant during the usual planting windows (i.e., May/June to July/August) are legumes such as mungbean.</li>
-
-            <li style="margin-bottom:20px">Heads up for possible planting if there will be improvement in the next rainfall outlook. </li>
-
-            <li style="margin-bottom:20px">Prepare seeds for chances of isolated rainfall. Planting by direct seeding may be pushed through if isolated rainfall lasts for at least a week but watch out for infestation of weeds. On the other hand, planting by transplanting may be challenging because more rainfall is required especially during land preparation a week before transplanting.</li>
-        </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
     </div>
   </div>
 
