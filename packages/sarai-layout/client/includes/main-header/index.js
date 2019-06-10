@@ -3,8 +3,10 @@ Template.MainHeader.helpers({
     return [ 
 
     { "name" : "About Us", "href" : "/about-us", "links" : [ ], "id" : "about-us-link", "withsublinks" : false}, 
+    
+    { "name" : "Sarai Community", "href" : "https://sarai-community.net/", "links" : [ ], "id" : "sarai-community", "withsublinks" : false },
 
-    { "name" : "Crops", "href" : "", "links" : [ { "name" : "Rice", "href" : "/icm-rice"}, { "name" : "Corn", "href" : "/icm-corn"}, { "name" : "Banana", "href" : "/icm-banana"}, { "name" : "Coconut", "href" : "/icm-coconut"}, { "name" : "Coffee", "href" : "/icm-coffee"}, { "name" : "Cacao", "href" : "/icm-cacao"} ], "id" : "explore-link", "withsublinks" : true}, 
+    { "name" : "Crops", "href" : "", "links" : [ { "name" : "Rice", "href" : "https://sarai-community.net/?fbclid=IwAR1CKtkO0bjDSeoX_cYHCEd4OElRshxjpCdgCKWGuVnBtDvjnUWnIA4tyh0#1542162911043-4a046c63-2794"}, { "name" : "Corn", "href" : "https://sarai-community.net/?fbclid=IwAR1CKtkO0bjDSeoX_cYHCEd4OElRshxjpCdgCKWGuVnBtDvjnUWnIA4tyh0#1542177442034-6cd28c37-26af"}, { "name" : "Banana", "href" : "/icm-banana"}, { "name" : "Coconut", "href" : "/icm-coconut"}, { "name" : "Coffee", "href" : "/icm-coffee"}, { "name" : "Cacao", "href" : "/icm-cacao"} ], "id" : "explore-link", "withsublinks" : true}, 
 
     { "name" : "Maps", "href" : "", "links" : [ { "name" : "Suitability Maps", "href" : "http://139.59.125.198/suitability-maps"}, { "name" : "Normalized Difference Vegetation Index", "href" : "http://139.59.125.198/ndvi"}, { "name" : "Rainfall Map", "href" : "http://139.59.125.198/rainfall-maps"}, { "name" : "SVTR Map", "href" : "http://139.59.125.198/agri-drought"},, { "name" : "Enhanced Vegetation Index", "href" : "http://139.59.125.198/evi"} ], "id" : "dss-link", "withsublinks" : true}, 
 

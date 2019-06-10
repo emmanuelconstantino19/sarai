@@ -1,14 +1,27 @@
 <template name="SuitabilityMap">
 	<div class="mdl-grid" style="margin-left: 5%; margin-right:5%;">
-			<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-				<h3 id="suitabilitytitle">View our suitability maps gallery to know where to plant rice, corn, coconut, banana, coffee, and cacao</h3>
-				<a href="/suitability-gallery" target="blank" class="link" style="font-size:20px">View Now<i class="material-icons">navigate_next</i></a>
-			</div>
-				<div class="reportsection mdl-cell--8-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="text-align: center;">
-				  	<img src="/suitability-map/suitability.png" class="reports-image" style="width:80%"/>
-				</div>
-				<!--<div class="reportsection mdl-cell- -4-col-desktop mdl-cell- -8-col-tablet mdl-cell- -4-col-phone" style="text-align: center;">
-				  	<img src="/suitability-map/suitability-map-wet.jpg" class="reports-image"/>
-				</div>-->
-		</div>
+		<div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	      <div class="mdl-cell mdl-cell--12-col preview-title">
+	        <h3 style="margin-bottom:0;margin-top:10px">Suitability Maps</h3>
+	        <h6 style="margin-top:0;font-weight:bold">View our suitability maps gallery to know where to plant rice, corn, coconut, banana, coffee, and cacao</h6>
+	      </div>
+
+	  	</div>
+
+	  	<div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
+	      	<img src="/suitability-map/suitability_landing.png" class="reports-image" style="width:100%">
+	    </div>
+
+	    <div class="mdl-cell mdl-cell--12-col suitability-maps-more" style="margin-top:0;padding-top:0;text-align:center">
+	        <button id="gallery-button" class="mdl-button mdl-js-button mdl-button--raised" data-upgraded=",MaterialButton">
+	          View Gallery
+	        </button>
+	        <button id="interactive-button" class="mdl-button mdl-js-button mdl-button--raised" style="margin-left:1%" data-upgraded=",MaterialButton">
+	          View Interactive Maps
+	        </button>
+	      </div>
+			<!--<div class="reportsection mdl-cell- -4-col-desktop mdl-cell- -8-col-tablet mdl-cell- -4-col-phone" style="text-align: center;">
+			  	<img src="/suitability-map/suitability-map-wet.jpg" class="reports-image"/>
+			</div>-->
+	</div>
 </template>

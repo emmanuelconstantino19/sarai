@@ -65,7 +65,10 @@ Package.onUse(function(api) {
 
     "client/layout/icm-layout/index.html",
 
-    "client/layout/monitoring-layout/index.html"
+    "client/layout/monitoring-layout/index.html",
+
+//    "client/layout/wunderground-layout/wu-layout.html",
+//    "client/layout/wunderground-layout/wu-layout.less"
   ]
 
   api.addFiles(client, "client")

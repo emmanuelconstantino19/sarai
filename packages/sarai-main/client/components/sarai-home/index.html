@@ -1,5 +1,7 @@
-	<template name="SaraiHome">
+<template name="SaraiHome">
 {{> Slider}}
+{{> PlantingGuideView}}
+<hr/>
 {{> SatelliteLanding}}
 <hr/>
 {{> Preview}}
@@ -12,11 +14,38 @@
 {{> SuitabilityMap}}
 <hr />
 {{> Serviceslist}}
-<hr />
 <!--{{> Testimonials}}
 <hr />-->
-{{> PlantingGuideView}}
-<iframe src="https://sarai.publicalerts.info/embed.html" height="470"></iframe>
+<style>
+    iframe#sarai-alerts-section {
+        height: 470px;
+    }
+
+    @media (max-width: 1200px) {
+        iframe#sarai-alerts-section{
+            height: 500px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        iframe#sarai-alerts-section{
+            height: 550px;
+        }
+    }
+
+    @media (max-width: 769px) {
+        iframe#sarai-alerts-section{
+            height: 1100px;
+        }
+    }
+    @media (max-width: 580px) {
+        iframe#sarai-alerts-section{
+            height: 1200px;
+        }
+    }
+</style>
+<iframe id="sarai-alerts-section" src="https://sarai.publicalerts.info/embed.html" scrolling="no"></iframe>
+
 {{> PartnerInstitutions}}
 {{> TwitterFeed}}
 </template>
