@@ -9,7 +9,7 @@ Meteor.AccumulatedRainfall = {
 
     for (let a = 0; a < 30; a++) {
       let d = new Date()
-      d.setDate(d.getDate() - (30 - a))
+      d.setDate(d.getDate() - (30 - a) + 1)
       d.setHours(0,0,0,0)
       const entry = {
         data: {
@@ -24,13 +24,31 @@ Meteor.AccumulatedRainfall = {
 
     let b = 0 //counter for existing data in weatherData array
 
-    for (let a = 0; a < 30; a++) {
+    //console.log(fixedData)
+    //console.log(weatherData)
+
+    /*for (let a = 0; a < 30; a++) {
       if (weatherData[b] && fixedData[a].dateUTC.getTime() == weatherData[b].dateUTC.getTime()) {
         //found date match in retrieved weather data
 
         fixedData[a].data.rainfall = weatherData[b].data.rainfall
 
         b+=1
+      }
+    }*/
+
+    for(let a = 0 ; a < 30; a++){
+      var month = ("0" + (fixedData[a].dateUTC .getMonth() + 1)).slice(-2);
+      var day = ("0" + (fixedData[a].dateUTC .getDate() - 1)).slice(-2);
+      var year = fixedData[a].dateUTC .getFullYear();
+      var new_format = month + '-' + day + '-' + year;
+      if(weatherData[new_format]==undefined){
+        //console.log(new_format + ' : ' + weatherData[5][new_format])
+        fixedData[a].data.rainfall = 0;
+      }
+      else{
+        //console.log(new_format + ' : ' + weatherData[5][new_format])
+        fixedData[a].data.rainfall = Math.round(weatherData[new_format] * 10) / 10
       }
     }
 
@@ -55,12 +73,55 @@ Meteor.AccumulatedRainfall = {
     }
   },
 
-  getForecast: (forecast, runningTotal) => {
-    const dailyRecords = forecast.forecast.simpleforecast.forecastday
-
+  getForecast: (forecast, runningTotal, pastRainfall) => {
+    //console.log(forecast)
+    //console.log(pastRainfall['pastRainfall'])
     let forecastRainfall = []
     let forecastAccumulated = []
-    let total = runningTotal
+    //let total = runningTotal
+    let total = 0
+
+    const dailyRecords = forecast.qpf
+
+
+    var plotBandStart, plotBandEnd;
+
+    for(let a = 0 ; a < 6; a++){
+      total = 0;
+      //dailyRecords[a]
+      let d = new Date()
+      d.setDate(d.getDate() + a + 1)
+      d.setHours(0,0,0,0)
+
+      for(let c = a+1 ; c < 30; c++){
+        //total += dailyRecords[a];
+        total+=pastRainfall['pastRainfall'][c].y
+      }
+
+      for(let b = 0; b <= a; b++){
+        total+=dailyRecords[b] 
+      }
+
+
+      forecastRainfall.push({ x: d, y: Math.round(dailyRecords[a] * 10) / 10})
+      forecastAccumulated.push({ x: d, y: Math.round(total * 10) / 10})
+      
+
+      if(a == 0){
+        plotBandStart = d;
+      }else if(a == 5){
+        plotBandEnd = d;
+      }
+    }  
+
+    return {
+      forecastRainfall,
+      forecastAccumulated,
+      plotBandStart,
+      plotBandEnd
+    }
+
+    /*const dailyRecords = forecast.forecast.simpleforecast.forecastday
 
     for (let entry of dailyRecords) {
       const utcDate = Date.UTC(entry.date.year, entry.date.month - 1, entry.date.day);
@@ -80,7 +141,7 @@ Meteor.AccumulatedRainfall = {
       forecastAccumulated,
       plotBandStart,
       plotBandEnd
-    }
+    }*/
   },
 
   assembleRainfallData: (pastRain, pastAcc, forecastRain, forecastAcc) => {
@@ -94,10 +155,10 @@ Meteor.AccumulatedRainfall = {
     }
   },
 
-  constructChart: (completeRainfall, completeAccumulatedRainfall, plotBandStart, plotBandEnd) => {
+  constructChart: (completeRainfall, completeAccumulatedRainfall, plotBandStart, plotBandEnd, stationID) => {
     return {
         title: {
-            text: '30-day rainfall + 10-day forecast'
+            text: '30-day moving cumulative total rainfall in ' + stationID 
         },
         plotOptions: {
           line: {
@@ -110,7 +171,7 @@ Meteor.AccumulatedRainfall = {
             point: {
               events: {
                 select: function(e) {
-                  console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
+                  //console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }
@@ -148,7 +209,7 @@ Meteor.AccumulatedRainfall = {
               from: plotBandStart,
               to: plotBandEnd,
               label: {
-                text: '10-Day Forecast',
+                text: '6-Day Forecast',
                 align: 'center',
                 style: {
                   fontWeight: 'bold',

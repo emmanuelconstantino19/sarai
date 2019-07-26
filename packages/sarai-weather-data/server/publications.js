@@ -7,6 +7,10 @@ Meteor.publish('wunderground-data', () => {
   return WundergroundData.find();
 });
 
+Meteor.publish('rainfall-historical', () => {
+  return RainfallHistorical.find();
+});
+
 Meteor.publish('weather-data-30', () => {
   const oneMonthAgo = new Date()
 

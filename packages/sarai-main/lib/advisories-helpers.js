@@ -1,6 +1,6 @@
 Meteor.PlantingGuideGraph = {
 
-  constructChart: (crop,new_data) => {
+  constructChart: (crop,new_data,place) => {
     console.log('Construct Rainfall Graph chart');
     var new_data, color, thresh, title, main_title;
 
@@ -12,7 +12,7 @@ thresh = 200;
 
 title = "30-day Cumulative Rainfall";
 
-main_title = "30-day moving cumulative total rainfall in Echague, Isabela"
+main_title = "30-day moving cumulative total rainfall in " + place
 
 } else if(crop == "Corn"){
 color = "orange";
@@ -21,7 +21,7 @@ thresh = 100;
 
 title = "20-day Cumulative Rainfall";
 
-main_title = "20-day moving cumulative total rainfall in Echague, Isabela"
+main_title = "20-day moving cumulative total rainfall in " + place
 
 }
 

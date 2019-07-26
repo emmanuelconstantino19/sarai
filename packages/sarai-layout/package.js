@@ -67,6 +67,8 @@ Package.onUse(function(api) {
 
     "client/layout/monitoring-layout/index.html",
 
+    "client/layout/forecast-display-layout/index.html",
+
 //    "client/layout/wunderground-layout/wu-layout.html",
 //    "client/layout/wunderground-layout/wu-layout.less"
   ]
