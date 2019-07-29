@@ -13,7 +13,7 @@ Meteor.RainfallGraph = {
                   text: place
               },
               xAxis: {
-                  categories: ['May', 'June', 'July', 'August', 'September','October'],
+                  categories: ['August', 'September','October', 'November', 'December'],
                   title: {
                       text: null
                   },

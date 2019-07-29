@@ -1,0 +1,204 @@
+<template name="ForecastDisplay">
+	<div class="mdl-grid" style="margin-left:2%;margin-right:2%">
+	  	<div class="mdl-grid mdl-cell--9-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	      <img src="header_green.png" style="width:100%;align-self: center">
+	    </div>
+	    <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	      <img src="/layout/dost-pcaarrd-uplb.png" style="width:100%;align-self: center">
+	    </div>
+	</div>
+	<div id="main-carousel" class="main-carousel add-remove">
+	    {{#each entry in slides}}
+	      {{> ForecastContent entry=entry index=@index}}
+	    {{/each}}
+  	</div>
+</template>
+
+<template name="ForecastContent">
+	{{#if isSlideOne entry.type}}
+		<div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display:flex">
+		    <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+		      <img src="sarai-lady.png" style="width:100%;align-self: center;margin:auto">
+		    </div>
+		    <div class="mdl-grid mdl-grid--no-spacing mdl-cell--9-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+		        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+		        <div class="mdl-grid mdl-cell--4-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 1px #ccc;; background:#37AD39; color:white">
+
+		          <div class="head" style="margin-bottom:10px width:100%; margin-top:10px;"><span class="weekday" style="font-size:3vw">{{forecast1.date}}, {{forecast1.dayOfWeek}}</span></div>
+		          <div class="head" style="margin-bottom:0px; width:100%"><span style="font-weight:bold; font-size:4vw">{{forecast1.time}}</span></div>
+		          <div class="icon" style="width:100%"><img src="weather-underground/{{forecast1.icon}}.png" style="width:70%"></div>
+		          <div style="width:100%; text-align:center; margin-top:auto; margin-bottom:auto"><span style="font-weight:bold; font-size:5vw">{{forecast1.temp}}°C</span></div>
+		          <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:2vw"><span class="value">{{forecast1.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+		          <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:1.5vw"><span class="value">Rainfall: {{forecast1.rainfall}} mm</span></div>
+
+		        </div>
+		        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--8-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+
+		          <div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+		            <div style="margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+		            <h3 style="margin-top:0;font-size:3.5vw;margin-bottom:0;text-align:center;font-family:'Impact';">Weather Forecast for UPLB</h3>
+		            </div>
+		          </div>
+
+		        <div class="mdl-grid mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+		          
+		            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:3vw">{{forecast2.date}}, {{forecast2.dayOfWeek}}</span></div>
+		            <div class="head" style="margin-bottom:0px; width:100%"><span style="font-weight:bold; font-size:3vw">{{forecast2.time}}</span></div>
+		            <div class="icon" style="width:100%"><img src="weather-underground/{{forecast2.icon}}.png" style="width:50%"></div>
+		            <div style="width:100%; text-align:center; margin-top:auto; margin-bottom:auto;"><span style="font-weight:bold; font-size:4vw;">{{forecast2.temp}}°C</span></div>
+		            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:2vw"><span class="value">{{forecast2.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+		            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:1.5vw"><span class="value">Rainfall: {{forecast2.rainfall}} mm</span></div>
+		          
+		          </div>
+		          <div class="mdl-grid mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+		          
+		            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:3vw">{{forecast3.date}}, {{forecast3.dayOfWeek}}</span></div>
+		            <div class="head" style="margin-bottom:0px; width:100%"><span style="font-weight:bold; font-size:3vw">{{forecast3.time}}</span></div>
+		            <div class="icon" style="width:100%"><img src="weather-underground/{{forecast3.icon}}.png" style="width:50%"></div>
+		            <div style="width:100%; text-align:center; margin-top:auto; margin-bottom:auto;"><span style="font-weight:bold; font-size:4vw;">{{forecast3.temp}}°C</span></div>
+		            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:2vw"><span class="value">{{forecast3.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+		            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-weight:bold; font-size:1.5vw"><span class="value">Rainfall: {{forecast3.rainfall}} mm</span></div>
+
+		        </div>
+		        </div>
+
+		        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+		          <div style="margin:auto"> 
+		            <h3 style="margin-top:0;font-size:4vw;font-family:'Impact';line-height:100%">Visit us at www.sarai.ph for more info</h3>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+	{{else}}
+		{{#if isSlideTwo entry.type}}
+		<div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display:flex">
+			<div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	        <div style="margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+	        <h3 style="margin-top:0;font-size:3.5vw;margin-bottom:0;text-align:center;font-family:'Impact';">Morning Weather Forecast for UPLB</h3>
+	        </div>
+	    </div>
+
+	    <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+
+	          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; background:white">
+	          
+	            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast1Daily.date}}, {{forecast1Daily.dayOfWeek}}</span></div>
+	            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast1Daily.time}}</span></div>
+	            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast1Daily.icon}}.png" style="width:40%">
+	              <span style="font-weight:bold; font-size:4.5vw;">{{forecast1Daily.temp}}°C</span>
+	            </div>
+	            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast1Daily.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+	          
+	          </div>
+
+	          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+	          
+	            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast2Daily.date}}, {{forecast2Daily.dayOfWeek}}</span></div>
+	            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast2Daily.time}}</span></div>
+	            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast2Daily.icon}}.png" style="width:40%">
+	              <span style="font-weight:bold; font-size:4.5vw;">{{forecast2Daily.temp}}°C</span>
+	            </div>
+	            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast2Daily.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+	          
+	          </div>
+
+	          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+	          
+	            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast3Daily.date}}, {{forecast3Daily.dayOfWeek}}</span></div>
+	            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast3Daily.time}}</span></div>
+	            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast3Daily.icon}}.png" style="width:40%">
+	              <span style="font-weight:bold; font-size:4.5vw;">{{forecast3Daily.temp}}°C</span>
+	            </div>
+	            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast3Daily.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+	          
+	          </div>
+
+	          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+	          
+	            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast4Daily.date}}, {{forecast4Daily.dayOfWeek}}</span></div>
+	            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast4Daily.time}}</span></div>
+	            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast4Daily.icon}}.png" style="width:40%">
+	              <span style="font-weight:bold; font-size:4.5vw;">{{forecast4Daily.temp}}°C</span>
+	            </div>
+	            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast4Daily.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+	          
+	          </div>
+
+	          </div>
+
+	        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	          <div style="margin:auto;margin-top:10px"> 
+	            <h3 style="margin-top:0;font-size:4vw;font-family:'Impact'">Visit us at www.sarai.ph for more info</h3>
+	          </div>
+	        </div>
+	    </div>
+
+	    <!-- 3rd SLIDE-->
+	    {{else}}
+
+	    <div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display:flex">
+    <div class="mdl-grid mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <div style="margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+        <h3 style="margin-top:0;font-size:3.5vw;margin-bottom:0;text-align:center;font-family:'Impact';">Evening Weather Forecast for UPLB</h3>
+        </div>
+    </div>
+
+    <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+
+          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; background:white">
+          
+            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast1Night.date}}, {{forecast1Night.dayOfWeek}}</span></div>
+            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast1Night.time}}</span></div>
+            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast1Night.icon}}.png" style="width:40%">
+              <span style="font-weight:bold; font-size:4.5vw;">{{forecast1Night.temp}}°C</span>
+            </div>
+            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast1Night.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+          
+          </div>
+
+          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+          
+            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast2Night.date}}, {{forecast2Night.dayOfWeek}}</span></div>
+            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast2Night.time}}</span></div>
+            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast2Night.icon}}.png" style="width:40%">
+              <span style="font-weight:bold; font-size:4.5vw;">{{forecast2Night.temp}}°C</span>
+            </div>
+            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast2Night.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+          
+          </div>
+
+          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+          
+            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast3Night.date}}, {{forecast3Night.dayOfWeek}}</span></div>
+            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast3Night.time}}</span></div>
+            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast3Night.icon}}.png" style="width:40%">
+              <span style="font-weight:bold; font-size:4.5vw;">{{forecast3Night.temp}}°C</span>
+            </div>
+            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast3Night.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+          
+          </div>
+
+          <div class="mdl-grid mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone forecast-preview-col" style="border:solid 3px #37AD39; border-left:0; background:white">
+          
+            <div class="head" style="margin-bottom:10px; width:100%; margin-top:10px"><span class="weekday" style="font-size:4vw; line-height:100%">{{forecast4Night.date}}, {{forecast4Night.dayOfWeek}}</span></div>
+            <div class="head" style="margin-bottom:20px; width:100%"><span style="font-size:3vw">{{forecast4Night.time}}</span></div>
+            <div class="icon" style="width:100%; margin-bottom:20px"><img src="weather-underground/{{forecast4Night.icon}}.png" style="width:40%">
+              <span style="font-weight:bold; font-size:4.5vw;">{{forecast4Night.temp}}°C</span>
+            </div>
+            <div class="pop" style="margin-bottom:auto; margin-top:auto; width:100%; font-size:3.5vw; line-height:100%"><span class="value">{{forecast4Night.precipChance}}</span><span class="unit">%</span> chance of rain</div>
+          
+          </div>
+
+          </div>
+
+        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <div style="margin:auto;margin-top:10px"> 
+            <h3 style="margin-top:0;font-size:4vw;font-family:'Impact'">Visit us at www.sarai.ph for more info</h3>
+          </div>
+        </div>
+    </div>
+	    {{/if}}
+	{{/if}}
+</template>

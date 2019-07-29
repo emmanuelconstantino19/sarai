@@ -78,7 +78,7 @@ Template.HeatMapRainfallOutlook.helpers({
       if (weatherOutlook){
         let outlook = []
 
-        for(var i = 0 ; i < 6; i++){
+        for(var i = 0 ; i < 5; i++){
           val = (weatherOutlook.data.month[six_months[i]]==null) ? "--" : Math.round(weatherOutlook.data.month[six_months[i]])
           if(val <= 50){
             color = color_1;
@@ -170,30 +170,30 @@ function createRainfallTable(rain){
 		entry = [
 		rain[i].province, 
 		'All', 
-		rain[i].data.month[months[0]], 
-		rain[i].data.month[months[1]],
-		rain[i].data.month[months[2]],
-		rain[i].data.month[months[3]],
-		rain[i].data.month[months[4]],
-		rain[i].data.month[months[5]]
+		Math.round(rain[i].data.month[months[0]]), 
+		Math.round(rain[i].data.month[months[1]]),
+		Math.round(rain[i].data.month[months[2]]),
+		Math.round(rain[i].data.month[months[3]]),
+		Math.round(rain[i].data.month[months[4]]),
+		//rain[i].data.month[months[5]]
 		]
-		monthDataSet1.push([rain[i].province,rain[i].data.month[months[0]]])
-		monthDataSet2.push([rain[i].province,rain[i].data.month[months[1]]])
-		monthDataSet3.push([rain[i].province,rain[i].data.month[months[2]]])
-		monthDataSet4.push([rain[i].province,rain[i].data.month[months[3]]])
-		monthDataSet5.push([rain[i].province,rain[i].data.month[months[4]]])
-		monthDataSet6.push([rain[i].province,rain[i].data.month[months[5]]])
+		monthDataSet1.push([rain[i].province,Math.round(rain[i].data.month[months[0]]) ])
+		monthDataSet2.push([rain[i].province,Math.round(rain[i].data.month[months[1]]) ])
+		monthDataSet3.push([rain[i].province,Math.round(rain[i].data.month[months[2]]) ])
+		monthDataSet4.push([rain[i].province,Math.round(rain[i].data.month[months[3]]) ])
+		monthDataSet5.push([rain[i].province,Math.round(rain[i].data.month[months[4]]) ])
+		//monthDataSet6.push([rain[i].province,rain[i].data.month[months[5]]])
 		dataset.push(entry);
 		for(var j = 0 ; j < rain[i].municipalities.length; j++){
 			entry = [
 			rain[i].municipalities[j].province,
 			rain[i].municipalities[j].municipality,
-			rain[i].municipalities[j].data.month[months[0]],
-			rain[i].municipalities[j].data.month[months[1]],
-			rain[i].municipalities[j].data.month[months[2]],
-			rain[i].municipalities[j].data.month[months[3]],
-			rain[i].municipalities[j].data.month[months[4]],
-			rain[i].municipalities[j].data.month[months[5]]
+			Math.round(rain[i].municipalities[j].data.month[months[0]]),
+			Math.round(rain[i].municipalities[j].data.month[months[1]]),
+			Math.round(rain[i].municipalities[j].data.month[months[2]]),
+			Math.round(rain[i].municipalities[j].data.month[months[3]]),
+			Math.round(rain[i].municipalities[j].data.month[months[4]]),
+			Math.round(rain[i].municipalities[j].data.month[months[5]])
 			]
 			dataset.push(entry);
 		}
@@ -204,12 +204,11 @@ function createRainfallTable(rain){
           columns: [
               { title: "Province" },
               { title: "Municipality" },
-              { title: "May" },
-              { title: "June" },
-              { title: "July" },
               { title: "August" },
               { title: "September" },
-              { title: "October" }
+              { title: "October" },
+              { title: "November" },
+              { title: "December" },
           ],
           lengthChange: true,
           lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
@@ -220,7 +219,7 @@ function createRainfallTable(rain){
         $('<div class="meteogram">').appendTo('#rainfall-map3').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet3, months[2] + ' 2019'));
         $('<div class="meteogram">').appendTo('#rainfall-map4').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet4, months[3] + ' 2019'));
         $('<div class="meteogram">').appendTo('#rainfall-map5').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet5, months[4] + ' 2019'));
-        $('<div class="meteogram">').appendTo('#rainfall-map6').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet6, months[5] + ' 2019'));
+        //$('<div class="meteogram">').appendTo('#rainfall-map6').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet6, months[5] + ' 2019'));
 }
 
 function displayRainfallGraph(values){
@@ -230,7 +229,7 @@ function displayRainfallGraph(values){
 
 	console.log(values);
 
-    for(var i = 0 ; i < 6; i++){
+    for(var i = 0 ; i < 5; i++){
       	val = (values.data.month[six_months[i]]==null) ? "--" : Math.round(values.data.month[six_months[i]])
  	 	outlook.push(val)
  	}
@@ -249,9 +248,9 @@ function displayRainfallGraph(values){
 function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = 4;
+    var current_month = 7;
     var six_months = [];
-    for(var i = 0 ; i < 6 ; i++){
+    for(var i = 0 ; i < 5 ; i++){
       six_months[i] = months[(i + current_month)%months.length];
     }
     return six_months;

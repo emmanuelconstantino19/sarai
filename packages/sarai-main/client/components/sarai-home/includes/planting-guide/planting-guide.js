@@ -366,7 +366,7 @@ Template.PlantingGuideView.onRendered(() => {
       [1577664000000,7.860],
       [1577750400000,7.526]
     ]
-  $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Rice',crop_data))
+  $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Rice',crop_data,'Echague, Isabela'))
 //  $('#graph-advisory').show()
   $('#text-advisory-cacao').hide()
   $('#text-advisory-banana').hide()
@@ -520,6 +520,16 @@ function changeAdvisory(){
     const crop = $('#crop-list').val().toLowerCase();
     const location = $('#sites-list').val();
     var locations = ['batac','mindoro','davao','iloilo','guinobatan','legazpi','echague','bukidnon']
+    var places = {
+      "batac":"Batac, Ilocos Norte",
+      "mindoro":"Calapan, Oriental Mindoro",
+      "davao":"Davao City, Davao del Sur",
+      "echague":"Echague, Isabela",
+      "guinobatan":"Guinobatan, Albay",
+      "iloilo":"Iloilo City, Iloilo",
+      "legazpi":"Legazpi City, Albay",
+      "bukidnon":"Malaybalay, Bukidnon"
+    }
     var crops = ['corn','rice']
 
     for(var i = 0; i < 8; i++){
@@ -3486,7 +3496,7 @@ function changeAdvisory(){
         ]
       }
       $('#accumulated_graph .meteogram').remove()
-      $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Rice',crop_data))
+      $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Rice',crop_data,places[location]))
     }
     //END OF RICE DATA
 
@@ -6452,7 +6462,7 @@ function changeAdvisory(){
         ]
       }
       $('#accumulated_graph .meteogram').remove()
-      $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Corn',crop_data))
+      $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('Corn',crop_data,places[location]))
     }
     //END OF CORN DATA
 }
