@@ -103,6 +103,43 @@
     <div class="mdl-snackbar__text"></div>
     <button class="mdl-snackbar__action" type="button"></button>
   </div>
+
+  <div id="fullscreenModal" class="modal fade" role="dialog" style="z-index:1000">
+	  <div class="modal-dialog" style="width:80%;margin-top:-100px">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Rainfall Forecast</h4>
+	      </div>
+	      <div class="modal-body">
+          <!--<img id="body-image" src="" style="width:100%"/>-->
+          <div class="mdl-cell mdl-cell--6-col-desktop" style="margin:auto">
+            <div id="weather-map-fullscreen"></div>
+            <div class="mdl-card mdl-shadow--2dp" style="width:100%;min-height:0">
+            <div class = "mdl-card__title" style="margin-top:5px;margin-bottom:5px;padding:5px"><span style="font-size:medium"><b>Expected Rainfall for the day:</b></span></div>
+            <div class = "mdl-card__actions mdl-card--border" style="display:flex;">
+              <div style="width:50%">
+                <div><img src="blue-marker.png" style="height:20px"/> <span>&lt; 7.5mm</span></div>
+                <div><img src="yellow-marker.png" style="height:20px"/> <span>7.5mm-15mm</span></div>
+              </div>
+              <div style="width:50%">
+                <div><img src="orange-marker.png" style="height:20px"/> <span>15mm-30mm</span></div>
+                <div><img src="red-marker.png" style="height:20px"/> <span>&gt; 30mm</span></div>
+              </div>
+      
+            </div>
+            </div>
+          </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+  </div>
 </template>
 
 <template name="PreviewColWM">
@@ -146,4 +183,16 @@
       <div class="cumulative">Past 30 days: <span class="value">{{cumulative}}</span><span class="unit"> mm</span></div>
     {{/if}} -->
   </div>
+  
+  <!--<script>
+		$(document).ready(function(){
+		$("#weather-map-v2").on("click", function(e){
+		  e.preventDefault();
+		  //$(".modal-title").text('Mariano Marcos State University');
+		  //$("#body-image").attr("src","/about/SUC/SUC_MMSU.jpg");
+		  $("#fullscreenModal").modal();
+    });
+    
+  })
+  </script>-->
 </template>

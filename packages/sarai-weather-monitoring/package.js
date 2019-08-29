@@ -42,8 +42,14 @@ Package.onUse(function(api) {
     "client/components/weather-monitoring-v2/weather-stations.html",
     "client/components/weather-monitoring-v2/weather-stations.js",
 
+    //weather fullscreen
+    "client/components/weather-fullscreen/weather-fullscreen.html",
+    "client/components/weather-fullscreen/weather-fullscreen.js",
+    "client/components/weather-fullscreen/weather-fullscreen.less",
+
     // route
     "client/components/weather-monitoring-v2/route.js",
+    "client/components/weather-fullscreen/route.js",
 
     // helpers
     "lib/chart-helpers.js",

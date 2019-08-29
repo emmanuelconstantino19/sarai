@@ -1,4 +1,4 @@
-Template.WeatherMonitoringV2.onCreated(() => {
+Template.WeatherFullscreen.onCreated(() => {
   //By default the visible chart is the forecast chart
 
   Meteor.subscribe('sarai-weather-stations')
@@ -26,7 +26,7 @@ Template.WeatherMonitoringV2.onCreated(() => {
   });
 })
 
-Template.WeatherMonitoringV2.onRendered(() => {
+Template.WeatherFullscreen.onRendered(() => {
   var tenday = [];
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -58,67 +58,67 @@ Template.WeatherMonitoringV2.onRendered(() => {
 
 })
 
-Template.WeatherMonitoringV2.events({
+Template.WeatherFullscreen.events({
   'change #monitoring-station-select': () => {
     //const stations = WeatherStations.find().fetch()
     const markerID = $('#monitoring-station-select').val()
     var stationid;
     switch(markerID){
-      case '0': 
+      case '37': 
         stationid = 'IMIMAROP7'
         break;
-      case '1':
+      case '38':
         stationid = 'IDAVAORE20'
         break;
-      case '2':
+      case '39':
         stationid = 'ICAGAYAN2'
         break;
-      case '3':
+      case '40':
         stationid = 'ICENTRAL91'
         break;
-      case '4':
+      case '41':
         stationid = 'IBICOLGU2'
         break;
-      case '5':
+      case '42':
         stationid = 'IMIMAROP6'
         break;
-      case '6':
+      case '43':
         stationid = 'IMIMAROP8'
         break;
-      case '7':
+      case '44':
         stationid = 'IDAVAORE19'
         break;
-      case '8':
+      case '45':
         stationid = 'IZAMBOAN4'
         break;
-      case '9':
+      case '46':
         stationid = 'ICENTRAL94'
         break;
-      case '10':
+      case '47':
         stationid = 'IWESTERN596'
         break;
-      case '11':
+      case '48':
         stationid = 'IWESTERN635'
         break;
-      case '12':
+      case '49':
         stationid = 'ICALABAR18'
         break;
-      case '13':
+      case '50':
         stationid = 'ICALABAR25'
         break;
-      case '14':
+      case '51':
         stationid = 'ICAGAYAN3'
         break;
-      case '15':
+      case '52':
         stationid = 'INORTHER117'
         break;
-      case '16':
+      case '53':
         stationid = 'IREGIONX6'
         break;
-      case '17':
+      case '54':
         stationid = 'INORTHER86'
         break;
-      case '18':
+      case '55':
         stationid = 'IPAOAY4'
         break;
     }
@@ -137,7 +137,7 @@ Template.WeatherMonitoringV2.events({
   }
 })
 
-Template.WeatherMonitoringV2.helpers({
+Template.WeatherFullscreen.helpers({
   forecastToday: () => {
       const stationID = Session.get('stationID')
       const forecast = Session.get('forecast')
@@ -180,7 +180,6 @@ Template.WeatherMonitoringV2.helpers({
 })
 
 const displayWeatherData = (stationID, apiKey) => {
-  console.log(stationID)
   //const forecast = getForecast(stationID)
   getOWMData(stationID);
   //displayForecast(stationID, apiKey)
@@ -284,11 +283,6 @@ const getOWMData = (stationID) => {
       })
     }
     Session.set('forecast2', forecast)
-  })
-  .success(function() { 
-    if($('#monitoring-station-select option:selected').text()!="Select Weather Station"){
-      $('#main_title').html('6-Day Forecast: <b>' + $('#monitoring-station-select option:selected').text() + '</b>')
-    }
   })
   //Session.set('forecast'2, )
 }
@@ -543,26 +537,13 @@ const displayRainfallGraph = (tenday) => {
       minZoom: 1
   });
 
-  const weatherMapFS = L.map('weather-map-fullscreen', {
-    maxBounds: bounds,
-    center: [14.154604, 121.247505],
-    zoom: 5,
-    minZoom: 1
-});
-
   weatherMap.zoomControl.setPosition('bottomleft');
-  weatherMapFS.zoomControl.setPosition('bottomleft');
 
   L.tileLayer('https://api.mapbox.com/styles/v1/mcarandang/cj1jd9bo2000a2speyi8o7cle/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg',{
     maxZoom: 20,
     id: 'mapbox://styles/mcarandang/cj1jd9bo2000a2speyi8o7cle',
     accessToken: 'pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg'
   }).addTo(weatherMap);
-  L.tileLayer('https://api.mapbox.com/styles/v1/mcarandang/cj1jd9bo2000a2speyi8o7cle/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg',{
-    maxZoom: 20,
-    id: 'mapbox://styles/mcarandang/cj1jd9bo2000a2speyi8o7cle',
-    accessToken: 'pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg'
-  }).addTo(weatherMapFS);
 
     const showWeatherData = (stationID, label, event) => {
 	    Session.set('stationID', stationID)
@@ -617,33 +598,56 @@ const displayRainfallGraph = (tenday) => {
 	        	rainfall = (rainfall < 1) ? '< 1' : rainfall
 		        marker = new L.marker([x, y], {icon: blueIcon})
 		        .bindPopup(`<h5>${label}</h5><span style="font-size:15px">Total rainfall: ${rainfall} mm</span>`)
-		        .on('click', L.bind(showWeatherData, null, stationID, label))
+		        .on('mouseover', function(e){
+              this.openPopup();
+              //L.bind(showWeatherData, null, stationID, label)
+            })
+            .on('mouseout', function (e) {
+              this.closePopup();
+            });
 	    	}
 	    	else if(rainfall >= 7.5 && rainfall < 15){
 	    		marker = new L.marker([x, y], {icon: yellowIcon})
 		        .bindPopup(`<h5>${label}</h5><span style="font-size:15px">Total rainfall: ${rainfall} mm</span>`)
-		        .on('click', L.bind(showWeatherData, null, stationID, label))	
+		        .on('mouseover', function(e){
+              this.openPopup();
+              //L.bind(showWeatherData, null, stationID, label)
+            })
+            .on('mouseout', function (e) {
+              this.closePopup();
+            });	
 	    	}
 	    	else if(rainfall >= 15 && rainfall < 30){
 	    		marker = new L.marker([x, y], {icon: orangeIcon})
 		        .bindPopup(`<h5>${label}</h5><span style="font-size:15px">Total rainfall: ${rainfall} mm</span>`)
-		        .on('click', L.bind(showWeatherData, null, stationID, label))	
+		        .on('mouseover', function(e){
+              this.openPopup();
+              //L.bind(showWeatherData, null, stationID, label)
+            })
+            .on('mouseout', function (e) {
+              this.closePopup();
+            });	
 	    	}	
 	    	else if(rainfall >= 30){
 	    		marker = new L.marker([x, y], {icon: redIcon})
 		        .bindPopup(`<h5>${label}</h5><span style="font-size:15px">Total rainfall: ${rainfall} mm</span>`)
-		        .on('click', L.bind(showWeatherData, null, stationID, label))	
+		        .on('mouseover', function(e){
+              this.openPopup();
+              //L.bind(showWeatherData, null, stationID, label)
+            })
+            .on('mouseout', function (e) {
+              this.closePopup();
+            });
 	    	}	
 
 	        group.addLayer(marker)
 
-	        stations[a]['markerID'] = a
+	        stations[a]['markerID'] = group.getLayerId(marker)
 
 	        //save option value, pan to marker, and open popup
 	        if (stationID == 'ICALABAR18') {
 	          defaultStation = group.getLayerId(marker)
-            weatherMap.setView(marker.getLatLng(), 5)
-            weatherMapFS.setView(marker.getLatLng(), 5)
+	          weatherMap.setView(marker.getLatLng(), 5)
 	          marker.openPopup()
 	        }
 	      }
@@ -746,7 +750,7 @@ const stripTitle = (title) => {
 }
 
 /********* PREVIEW COL ***********/
-Template.PreviewColWM2.helpers({
+Template.PreviewColWM3.helpers({
   formatQPF: (qpf) => {
     if (qpf < 1) {
       return "< 1"

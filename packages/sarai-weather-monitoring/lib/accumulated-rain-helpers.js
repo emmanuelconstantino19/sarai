@@ -191,7 +191,36 @@ Meteor.AccumulatedRainfall = {
                 color: '#0066cc',
                 fontWeight: 'bold'
               }
+            },
+            plotLines: [{
+              color: 'green',
+              width: 2,
+              value: 200,
+              label: {
+                  align: 'right',
+                  style: {
+                      fontStyle: 'italic'
+                  },
+                  text: 'Rice Threshold',
+                  x: -10
+              },
+              zIndex: 4
+            },
+            {
+              color: 'orange',
+              width: 2,
+              value: 100,
+              label: {
+                  align: 'right',
+                  style: {
+                      fontStyle: 'italic'
+                  },
+                  text: 'Corn Threshold',
+                  x: -10
+              },
+              zIndex: 4
             }
+            ]
           }
         ],
         xAxis: [

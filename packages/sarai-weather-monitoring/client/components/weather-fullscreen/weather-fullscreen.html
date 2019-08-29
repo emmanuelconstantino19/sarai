@@ -1,0 +1,63 @@
+<template name="WeatherFullscreen">
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col preview-title">
+      <h4 id="main_title" style="font-weight:bold;margin:0">Rainfall Forecast for August 16, 2019</h4>
+      </div>
+
+    <div class="mdl-cell mdl-cell--6-col-desktop" style="margin:auto">
+      <div id="weather-map-v2"></div>
+      <div class="mdl-card mdl-shadow--2dp" style="width:100%;min-height:0">
+      <div class = "mdl-card__title" style="margin-top:5px;margin-bottom:5px;padding:5px"><span style="font-size:medium"><b>Expected Rainfall for the day:</b></span></div>
+      <div class = "mdl-card__actions mdl-card--border" style="display:flex;">
+        <div style="width:50%">
+          <div><img src="blue-marker.png" style="height:20px"/> <span>&lt; 7.5mm</span></div>
+          <div><img src="yellow-marker.png" style="height:20px"/> <span>7.5mm-15mm</span></div>
+        </div>
+        <div style="width:50%">
+          <div><img src="orange-marker.png" style="height:20px"/> <span>15mm-30mm</span></div>
+          <div><img src="red-marker.png" style="height:20px"/> <span>&gt; 30mm</span></div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+</template>
+
+<template name="PreviewColWM3">
+  <div class="forecast-preview-col" style="width:16%;padding:5px;display:inline-table">
+    <div class="head" style="margin-bottom:0px"><span class="weekday">{{head}}</span><span class="date">{{date}}</span></div>
+    <hr style="margin-top:0px">
+    
+    {{#if checkNull icon }}
+      <div style="min-height:185px">
+        <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Day</span></div>
+        <div class="icon"><img src="{{icon}}" style="width:60px"></div>
+        <div class="description" style="text-align:center"><span style="font-weight:bold">{{desc}}</span></div>
+        <div class="pop" style="margin-bottom:0px"><span class="value">{{chance}}</span><span class="unit">%</span> chance of rain</div>
+        <div class="qpf">Rainfall: <span class="value" style="font-size:1.0em;font-weight:bold"> {{formatQPF qpfDay}}</span> <span class="unit">mm</span></div>
+      </div>
+      <hr/>
+    {{/if}}
+    <div style="min-height:185px">
+      <div class="head" style="margin-bottom:0px"><span style="font-weight:bold">Night</span></div>
+      <div class="icon"><img src="{{iconNight}}" style="width:60px"></div>
+      <div class="description" style="text-align:center"><span style="font-weight:bold">{{descNight}}</span></div>
+      <div class="pop" style="margin-bottom:0px"><span class="value">{{chanceNight}}</span><span class="unit">%</span> chance of rain</div>
+      <div class="qpf">Rainfall: <span class="value" style="font-size:1.0em;font-weight:bold"> {{formatQPF qpfNight}}</span> <span class="unit">mm</span></div>
+      </div>
+      <hr>
+      <div class="qpf">Total Rainfall: <span class="value" style="font-size:1.2em;font-weight:bold"> {{formatQPF qpf}}</span> <span class="unit">mm</span></div>
+    
+    <!-- {{#if today}}
+      <div class="cumulative">Past 30 days: <span class="value">{{cumulative}}</span><span class="unit"> mm</span></div>
+    {{/if}} -->
+  </div>
+</template>
