@@ -16,7 +16,6 @@ Template.BannerOptions.onRendered(() => {
 
     const textPosition = $('input:radio[name=banner-text-position]:checked').val()
 
-    console.log(`Text position: ${textPosition}`)
 
     const image = this.uploadedFile
     // const textPosition = $('#cms-banner-slide-text-position-input').val()
@@ -82,8 +81,6 @@ Template.BannerOptions.events({
 
       this.uploadedFile = slide.image
 
-      console.log('Setting: ')
-      console.log(slide)
       setBannerDialogContents('Edit Slide', slide.image, slide.textPosition, slide.title, slide.subTitle, slide.text, slide.buttonText, slide.buttonLink, slide.rank)
     }
   },
@@ -105,10 +102,8 @@ Template.BannerOptions.events({
 
     if (this.bannerOrder == 'ascending') {
       this.bannerOrder = 'descending'
-      console.log('changed to desc')
     } else {
       this.bannerOrder = 'ascending'
-      console.log('changed to asc')
     }
   }
 
@@ -125,7 +120,6 @@ Template.BannerOptions.helpers({
   },
 
   dialogHeader: () => {
-    console.log(`This.action: ${this.action}`)
     if (this.action == 'add') {
       return 'Add Slide'
     } else if (this.action == 'edit') {
@@ -194,7 +188,6 @@ Template.BannerOptions.helpers({
       finished: (index, fileInfo, context) => {
         this.uploadedFile = `${uploadDirPrefix()}${fileInfo.path}`
 
-        //console.log(`saved to ${this.uploadedFile}`)
         $('#cms-banner-slide-img').attr('src', `${uploadDirPrefix()}${fileInfo.path}`)
 
       }

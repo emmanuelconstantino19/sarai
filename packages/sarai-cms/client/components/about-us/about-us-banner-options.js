@@ -48,7 +48,6 @@ Template.AboutUsBannerOptions.events({
    
     if (record) {
       const banner = record.banners[0];
-      console.log(banner);
       if(typeof banner != 'undefined'){
         setBannerDialogContents(banner.subtext, banner.subtext1)
       }
@@ -62,7 +61,6 @@ Template.AboutUsBannerOptions.events({
       let toast = 'Deleted banner'
       if (error) {
         toast = 'Unable to delete banner'
-        console.log(error)
       }
       showToast(toast)
     })

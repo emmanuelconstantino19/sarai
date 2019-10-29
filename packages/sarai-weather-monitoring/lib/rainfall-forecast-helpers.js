@@ -95,8 +95,6 @@ Meteor.RainfallForecast = {
   },
 
   constructChart: (graphData,tenday) => {
-//  console.log("Construct chart")
-//  console.log(graphData)
   return{
    chart: {
         type: 'column'

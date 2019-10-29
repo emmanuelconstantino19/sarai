@@ -110,7 +110,6 @@ Meteor.Rainfall = {
             point: {
               events: {
                 select: function(e) {
-                  console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }

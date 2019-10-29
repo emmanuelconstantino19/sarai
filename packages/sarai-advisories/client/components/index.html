@@ -1,77 +1,55 @@
 <template name="Advisories">
-  <div class="mdl-grid mdl-grid--no-spacing">
-    <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title"><h3>Advisories</h3>
-        <!-- <h4><strong></strong></h4> -->
-      </div>
 
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <h4>Crop-Weather Advisories for Typhoon Rosita</h4>
-        Typhoon "Rosita (Yutu)"<br/>
-        Tropical Cyclone: WARNING<br/>
-        Issued at 05:00 pm, 29 October 2018<br/>
-        At 4:00 PM today, the eye of Typhoon "ROSITA" was located based on all available data at 310 km East Northeast of Casiguran, Aurora (16.8 °N, 125.0 °E )<br/>
-        Movement: Moving West at 15 kph<br/>
-        Strength: Maximum sustained winds of 150 kph near the center and gustiness of up to 185 kph<br/>
-        Validity: Valid for broadcast until the next bulletin to be issued at 8:00 pm today<br/><br/>
+    <style>
+        h6{
+            margin-top:0;
+        }
+    </style>
+    
+    <div class="mdl-grid mdl-grid--no-spacing" style="padding-left:0">
+        <div class="mdl-grid mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop  mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card" style="padding-left:0">
+            <button id="sub1" style="font-weight:bold" class="accordion">iCMF Bulletin for September 2019 - January 2020
+</button>
+            <div class="panel2">
+            <h6>Dr. Artemio Salazar, September 9, 2019</h6>
+            <ul>
+                <li>The current wet season corn crop as predicted will be bountiful because the rains
+                    fell at max daylength. This is more pronounced in parts of the country in the
+                    northern latitude like Isabela. The problem is the still high amount of rainfall at
+                    harvest time this month i.e. June planted. Availability of dryers is essential in the
+                    current crop.</li>
 
-        <div class="mdl-cell mdl-cell--12-col">
-        <strong>Tropical Cyclone Warning Signal No. 3</strong><br/>
-        Affected Areas:<br/>
-        <strong>Isabela, Quirino, Northern Aurora, Nueva Vizcaya and Ifugao</strong>
-        </div>
-        <br/>
-        <div class="mdl-cell mdl-cell--12-col">
-        Impact of the Wind on Crops:
-        <ul>
-        <li>Many coconut trees may be broken or destroyed.</li>
-        <li>Almost all banana plants may be downed and a large number of trees may be uprooted.</li>
-        <li>Rice and corn crops may suffer heavy losses.</li>
-        <li>In general, moderate to heavy damage may be experienced, particularly in the agricultural sectors.</li>
-        </ul>
-        </div>
-        <br/>
-        
-        <div class="mdl-cell mdl-cell--12-col"><strong>Tropical Cyclone Warning Signal No. 2</strong><br/>
-        Affected Areas:<br/>
-        <strong>Cagayan, Ilocos Norte, Apayao, Abra, Kalinga, Ilocos Sur, Mountain Province, La Union, Benguet, Pangasinan, Tarlac, Nueva Ecija, Northern Quezon including Polillo Island, Southern Aurora, Zambales, Pampanga and Bulacan</strong></div><br/>
-        <div class="mdl-cell mdl-cell--12-col">
-        Impact of the Wind on Crops:
-        <ul>
-        <li>Some coconut trees may be tilted with few others broken.</li>
-        <li>Few big trees may be uprooted.</li>
-        <li>Many banana plants may be downed.</li>
-        <li>Rice and corn may be adversely affected.</li>
-        </ul></div>
-        <br/>
-        <div class="mdl-cell mdl-cell--12-col">
-        <strong>Tropical Cyclone Warning Signal No. 1</strong><br/>
-        Affected Areas:<br/>
-        <strong>Southern Quezon, Batanes and Babuyan group of Islands, Rizal, Metro Manila, Laguna, Batangas, Bataan, Cavite, and Camarines Norte</strong></div><br/>
-        <div class="mdl-cell mdl-cell--12-col">
-        Impact of the Wind on Crops:
-        <ul>
-        <li>Twigs and branches of small trees may be broken.</li>
-        <li>Some banana plants may be tilted or downed.</li>
-        <li>Rice crop, however, may suffer significant damage when it is in its flowering stage.</li>
-        </ul>
-        </div>
-        <br/>
-        Farming Advisories:<br/>
-        In areas with affected by the typhoon and thunderstorms, harvest matured crops and grains, sell as soon as possible. Be alert inspect farm houses, barns and light built structures and make repairs if necessary. Extra care to those living in low lying areas due to possible flash flooding and near mountainous or sloping areas due to possible landslides. Store harvested produce in safe, elevated and covered dry places; use covered vans when transporting goods to the market.<br/><br/>
-        Daily farm activities for wet and moist areas: clean creeks, canals and ditches from impediments to provide natural flow of water specially during thunderstorms and heavy rainfall to avoid possible flooding. Land preparation, planting and transplanting of rainfed and irrigated rice and other crops, removal of weeds<br/><br/>
+                <li>The dry season crop will be a challenge because of still high amount rainfall in October but farmers in Luzon have to plant soonest in order to avoid the dry spell come January. If they plant late i.e. November, flowering might ensue come the dry episode in January. As advised earlier, farmers in Isabela might just wait for the typhoons to subside and plant soonest when conditions are more favorable. Early maturing varieties would be handy this season. Cloud seeding might be needed to help the late dry season planted crop. It would be sad if they lose it because of the usually good quality of harvest because it is harvested during the dry months (Feb-April). Very late planting i.e. January would be too risky because of expected water stress.</li>
 
-        Source: <a href="http://bagong.pagasa.dost.gov.ph/">bagong.pagasa.dost.gov.ph</a>
-      </div>
-
-      <hr style="width: 100%;"/>
-
-
-        <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-            <h4>iCMF Bulletin # 1 For 2017 Wet Season Crop and Preliminary to the Dry Season Crop</h4>
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top: -3em;">
-                <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, June 21, 2017</h6>
+                <li>The very low amount of rainfall in January in Ilocos, Central Luzon (including Bulacan which has the Angat Dam providing water for Metro Manila which will also be dry by January) and Mindoro provinces is a big concern. The farmers might have to think of planting other less water requiring crops like legumes, vegetable and even corn that is early maturing. But if adequate irrigation moisture could be made available, then it will be alright to plant in December. January planted crop might be expensive to sustain because of expected big expense on irrigation</li>
+                <li>Bicol is much better off; its rainfall pattern even looks like Mindanao!</li>
+                <li>The rainfall pattern in Visayas and Mindanao could provide a wider planting window for corn. CARAGA will be exceptionally wet.</li>
+                <li>For the purpose of crop insurance for Luzon, November planted rainfed corn crop might be too risky. But if irrigation could be made available especially in after-rice fields, December planting might be the latest. In Visayas and Mindanao (and even Bicol in Luzon), even November planted rainfed corn crop is less risky.</li>
+                <li>To repeat, we expect good crop production this cropping year i.e. 2019 wet season and 2019-2020 dry season given the proper logistical preparation. Below is the summary per province per region and further summarized by island group. The prediction per municipality is in the Sarai website.</li>
+            </ul>
             </div>
+            <a class="accordion" style="font-weight:bold" href="cropping-advisory-pdf/SARAICropAdvisories_May2019.pdf" target="_blank">SARAi Cropping Advisories as of May 2019
+            </a>
+            <!-- <div class="panel2" style="padding:20px">
+                <a href="cropping-advisory-pdf/SARAICropAdvisories_May2019.pdf" target="_blank" style="color:green">Download PDF</a>
+            </div> -->
+
+            <button id="sub2" style="font-weight:bold" class="accordion">iCMF Bulletin for January - June 2019
+</button>
+            <div class="panel2">
+            <h6>Dr. Artemio Salazar, June 3, 2019</h6>
+            <ul>
+                <li>The current wet season covered in the May-September 2019 SEAMS rainfall prediction looks agronomically favorable to our crop production, especially for rainfed crop like corn. Planting in almost all regions commenced in May and expected to continue till June. Rainfall steadily increased up to August and declining a little bit in September. With adequate rainfall and longer daylength during this time of the year (summer in Northern Hemisphere), good harvest is expected this wet season.</li>
+
+                <li>Total amount of predicted rainfall for the May-September (1.38m) is almost half of the average annual rainfall and that should be adequate enough for corn. Drying though the grains harvest might be crucial for this wet season. We need rain when growing the crop but not during harvest time. If harvest would be in the so called “Indian summer” in August then that would be favorable to the farmers. Beyond that, mechanical dryers are a must. Conditioning those mechanical dryers this time would be in order. Post harvest is indeed an important issue in Philippine corn industry because harvest of the major production falls in rainy period.</li>
+
+                <li>In June, all Regions have rainfall in excess of 200 cm. This means that rice planting could start in June and extends and probably even to August. Expected harvest would be in Sept/October. As the “ber” months are notorious for stronger typhoons, late planted crop might be affected as it might come during flowering or early grain formation stage. The advise is to plant as early as possible.</li>
+            </ul>
+            </div>
+            <button id="sub3" style="font-weight:bold" class="accordion">iCMF Bulletin # 2 For 2017 Wet Season Crop and Preliminary to the Dry Season Crop
+</button>
+            <div class="panel2">
+            <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, June 21, 2017</h6>
             <ul>
                 <li>Summer solstice is on June 21. Expect longer days than night up to September. Coupled with more rains, this is the reason why crop yields are higher these months. Short day plants i.e. plants requiring shorter day length to flower like sorghum, soybeans, some forages and vegetables will tend to be vegetative i.e. with more biomass formation. This will indeed be very advantageous for the northern part of the country like CAR and Cagayan Valley. But again the problem with typhoons. Hence the importance of planting time (early) in those areas to avoid the wraths of typhoon especially at harvest time and sometimes even flowering time (if planted late). This is the reason why you notice the tractors in Isabela are almost in a race at planting time during the wet season viz, to make best use of the weather. The late planters will wail. They might not know these equinoxes and solstices, but they know what they are doing!</li>
 
@@ -81,13 +59,11 @@
 
                 <li>Reminder again for the conditioning of mechanical dryers. Also for crops harvestable during dry months of March and April, like cassava. Planting fruit trees and other perennials now would also be ideal. Diversifying the crops in our farms would be good for the environment and farmers’ livelihood</li>
             </ul>
-
-            <hr style="width: 100%;"/>
-
-            <h4>iCMF Bulletin # 1 For 2017 Wet Season Crop and Preliminary to the Dry Season Crop</h4>
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top: -3em;">
-                <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, June 5, 2017</h6>
             </div>
+            <button id="sub4" style="font-weight:bold" class="accordion">iCMF Bulletin # 1 For 2017 Wet Season Crop and Preliminary to the Dry Season Crop
+</button>
+            <div class="panel2">
+            <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, June 5, 2017</h6>
             <ul>
                 <li>Rainfall prediction augurs well for corn, and rice production. Rain will probably continue on till November in most of our farms.</li>
                 <li>For corn, it is expected that there will not be much window between the wet season and dry season planting. A third season (palusot) crop, corn, and other upland crops might even be possible. It looks like the marshes in Mindanao cannot be planted.</li>
@@ -97,13 +73,10 @@
                 <li>It might be a good idea to plan for the usual dry months of March and April e.g. by planting cassava (10-month crop) this June harvestable by March.</li>
                 <li>It looks like we’ll have a good crop harvest this year and let us make most use of the expected favorable weather.</li>
             </ul>
-
-            <hr style="width: 100%;"/>
-
-            <h4>General Advisory based on Weather Forecast</h4>
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top: -3em;">
-                <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, April 16, 2017</h6>
             </div>
+            <button id="sub5" style="font-weight:bold" class="accordion">General Advisory based on Weather Forecast</button>
+            <div class="panel2">
+            <h6>Dr. Artemio Salazar, SARAI Project Leader - Environmental Characterization and Development of Integrated Crop Management, April 16, 2017</h6>
             <ul>
             <li>Mindanao and Eastern Visayas, rainfall beyond 100mm is already expected in later part of April or early May and it will mostly happen in CARAGA, Davao and Eastern Visayas.</li>
 
@@ -115,18 +88,21 @@
 
             <li>For lowland rice, irrigated and rainfed, soil saturation is expected to happen in July-August. Generally, there is heavier rainfall during these months for Luzon and Visayas. Mindanao has more even rainfall Expect wet season rice harvest to come in earliest by October mostly coming from Mindanao.</li>
             </ul>
+            </div>
+        </div>
+      </div>
 
-            <hr style="width: 100%;"/>
 
-            <h4>Situation and Outlook</h4>
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top: -3em;">
+
+      <!--<h4>Situation and Outlook</h4>
+            <div class="mdl-cell mdl-cell- -12-col-desktop mdl-cell- -12-col-tablet mdl-cell- -12-col-phone" style="margin-top: -3em;">
                 <h6>Philippine Statistics Authority Rice and Corn Situation and Outlook Report, January 2017<br/>
                 Philippine Statistics Authority Performance of Philippine Agriculture, October-December 2016</h6>
             </div>
 
             <p>Palay and corn production for January-December 2016 were lower than their 2015 levels. The first two quarters decrements in outputs were attributed to dry spell and drought and effects of typhoons Lando and Nona which hit the Philippines in the last quarter of 2015. The last two quarters decrements, on the other hand, were due to the movement of harvest of harvest to the third quarter 2016 and first quarter 2017 and effects of typhoons Karen and Lawin in Luzon regions.</p>
 
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-cell mdl-cell- -12-col-desktop mdl-cell- -12-col-tablet mdl-cell- -12-col-phone">
             <h5>Advisory</h5>
 
                 <p style="font-size: 1.29em; margin-top: -0.5em;">Rice</p>
@@ -138,7 +114,7 @@
                 <p style="font-size: 1.29em; margin-top: -0.5em;">Other crops</p>
                 <p style=" margin-top: -1em;">In October-December 2016, production gains were noted in banana which grew by 1.57%. Output losses, on the other hand, were recorded in coconut and coffee. Coconut output decreased by 5.22% while coffee production dropped by 3.25%</p>
             </div>
-            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-cell mdl-cell- -12-col-desktop mdl-cell- -12-col-tablet mdl-cell- -12-col-phone">
             <h5>Outlook</h5>
 
                 <p style="font-size: 1.29em; margin-top: -0.5em;">Rice</p>
@@ -146,8 +122,17 @@
 
                 <p style="font-size: 1.29em; margin-top: -0.5em;">Corn</p>
                 <p style=" margin-top: -1em;">Probable production of corn crops for January-June may surpass its 2016 level by 29.92%.</p>
-            </div>
-        </div>
-  </div>
-  </div>
+            </div>-->
+
+
+  <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+            acc[i].onclick = function(){
+                this.classList.toggle("active");
+                this.nextElementSibling.classList.toggle("show");
+          }
+        }
+    </script>
 </template>

@@ -76,8 +76,6 @@ Template.WeatherMonitoring.onRendered(() => {
         const chart = Highcharts.charts[i];
         const event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
 
-        // console.log(event.chartX, + ' ' + event.chartY)
-
         const point = chart.series[0].searchPoint(event, true); // Get the hovered point
 
         if (point) {
@@ -111,8 +109,6 @@ const displayWeatherData = (stationID, label) => {
   const dataFeatures = [ 'conditions', 'hourly10day', 'forecast10day']
 
   $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}${Meteor.chartHelpers.featureURI(dataFeatures)}/q/pws:${stationID}.json`, (result) => {
-
-    console.log(result)
 
     const dailySeries = Meteor.chartHelpers.getDailySeries(result)
     const hourlySeries = Meteor.chartHelpers.getHourlySeries(result)

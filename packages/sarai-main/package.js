@@ -29,10 +29,11 @@ Package.onUse(function(api) {
   api.imply(packages)
 
   var lib = [
-    "lib/d3.min.js"
+    "lib/d3.min.js",
+    //"lib/leaflet.js",
   ]
 
-  api.addFiles(lib, ["client", "server"])
+  api.addFiles(lib, ["client"])
 
   var client = [
     "client/components/sarai-home/index.html",
@@ -113,6 +114,11 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/drought-outlook/drought-outlook.less",
     "client/components/sarai-home/includes/drought-outlook/route.js",
 
+    "client/components/sarai-home/includes/seams-images/seams-images.html",
+    "client/components/sarai-home/includes/seams-images/seams-images.js",
+    "client/components/sarai-home/includes/seams-images/seams-images.less",
+    "client/components/sarai-home/includes/seams-images/route.js",
+
     "client/components/sarai-home/includes/drought-landing/drought-landing-view.html",
     "client/components/sarai-home/includes/drought-landing/drought-landing-view.js",
     "client/components/sarai-home/includes/drought-landing/drought-landing-view.less",
@@ -159,7 +165,24 @@ Package.onUse(function(api) {
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",
     "lib/drought-map-helpers.js",
-    "lib/advisories-helpers.js"    
+    "lib/advisories-helpers.js",
+
+
+    "lib/cropping-advisories/batac-helpers.js",
+    "lib/cropping-advisories/butuan-helpers.js",
+    "lib/cropping-advisories/calapan-helpers.js",
+    "lib/cropping-advisories/cdo-helpers.js",
+    "lib/cropping-advisories/echague-helpers.js",
+    "lib/cropping-advisories/guinobatan-helpers.js",
+    "lib/cropping-advisories/iloilo-helpers.js",
+    "lib/cropping-advisories/lacarlota-helpers.js",
+    "lib/cropping-advisories/legazpi-helpers.js",
+    "lib/cropping-advisories/losbanos-helpers.js",
+    "lib/cropping-advisories/malaybalay-helpers.js",
+    "lib/cropping-advisories/munoz-helpers.js",
+
+
+    //"lib/leaflet.css",
   ]
 
   api.addFiles(client, "client")

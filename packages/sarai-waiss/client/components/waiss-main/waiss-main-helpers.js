@@ -28,8 +28,6 @@ Template.WAISSMain.helpers({
             _id: Session.get('farmId')
         });
 
-        console.log(farm);
-
         var mad = CropData.findOne({
             'name': farm.crop.toLowerCase()
         }).mad;
@@ -141,7 +139,6 @@ Template.WAISSMain.events({
     },
     'click #deleteFarm': function(e) {
         var currentFarm = Session.get('farmId');
-        console.log(currentFarm);
         // var farmInfo = Farm.remove({
         //     _id: currentFarm
         // });

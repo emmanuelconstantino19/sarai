@@ -3,9 +3,6 @@ Template.WeatherMonitoringV2.onCreated(() => {
 
   Meteor.subscribe('sarai-weather-stations')
   Meteor.subscribe('weather-data-30')
-  /*Meteor.subscribe('wunderground-data', () => {
-    console.log(WundergroundData.find({}).fetch())
-  })*/
 
   Meteor.subscribe('dss-settings', () => {
     const record = DSSSettings.findOne({name: 'wunderground-api-key'})
@@ -180,7 +177,6 @@ Template.WeatherMonitoringV2.helpers({
 })
 
 const displayWeatherData = (stationID, apiKey) => {
-  console.log(stationID)
   //const forecast = getForecast(stationID)
   getOWMData(stationID);
   //displayForecast(stationID, apiKey)
@@ -254,7 +250,6 @@ const getOWMData = (stationID) => {
       historical = RainfallHistorical.find({code:code}).fetch()
       const fixedData = Meteor.AccumulatedRainfall.fillMissingEntries(historical[0])
       const pastRainfall = Meteor.AccumulatedRainfall.getPastRainfall(fixedData)
-      //console.log(pastRainfall)
       
       $('#accumulative-container .meteogram').remove()
       const runningTotal = pastRainfall.pastAccRainfall[29].y
@@ -337,7 +332,7 @@ const getForecast = (stationID) => {
     };
   snackbarContainer.MaterialSnackbar.showSnackbar(data);
 })
-.complete(function() { console.log('Complete') });
+.complete(function() {});
 
 }
 
@@ -524,7 +519,6 @@ const displayRainfallGraph = (tenday) => {
       
     })
   ).then(function() {
-    //console.log(graphData)
     $('<div class="meteogram">').appendTo('#rainfall-container').highcharts(Meteor.RainfallForecast.constructChart(graphData,tenday))
 
     /****MAP****/
@@ -543,26 +537,14 @@ const displayRainfallGraph = (tenday) => {
       minZoom: 1
   });
 
-  const weatherMapFS = L.map('weather-map-fullscreen', {
-    maxBounds: bounds,
-    center: [14.154604, 121.247505],
-    zoom: 5,
-    minZoom: 1
-});
-
   weatherMap.zoomControl.setPosition('bottomleft');
-  weatherMapFS.zoomControl.setPosition('bottomleft');
 
-  L.tileLayer('https://api.mapbox.com/styles/v1/mcarandang/cj1jd9bo2000a2speyi8o7cle/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg',{
+  /*L.tileLayer('https://api.mapbox.com/styles/v1/mcarandang/cj1jd9bo2000a2speyi8o7cle/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg',{
     maxZoom: 20,
     id: 'mapbox://styles/mcarandang/cj1jd9bo2000a2speyi8o7cle',
     accessToken: 'pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg'
-  }).addTo(weatherMap);
-  L.tileLayer('https://api.mapbox.com/styles/v1/mcarandang/cj1jd9bo2000a2speyi8o7cle/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg',{
-    maxZoom: 20,
-    id: 'mapbox://styles/mcarandang/cj1jd9bo2000a2speyi8o7cle',
-    accessToken: 'pk.eyJ1IjoibWNhcmFuZGFuZyIsImEiOiJjaWtxaHgzYTkwMDA4ZHZtM3E3aXMyYnlzIn0.x63VGx2C-BP_ttuEsn2fVg'
-  }).addTo(weatherMapFS);
+  }).addTo(weatherMap);*/
+  L.tileLayer('https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png', {}).addTo(weatherMap);
 
     const showWeatherData = (stationID, label, event) => {
 	    Session.set('stationID', stationID)
@@ -602,12 +584,9 @@ const displayRainfallGraph = (tenday) => {
 	        const label = stripTitle(station.label)
 	        const stationID = station.id
 
-	        //console.log(station.id + ' : ' + station.label)
-
 	        for(let b = 0 ; b < graphData.length ; b++){
 	        	if(graphData[b].code == station.id){
 	        		rainfall = graphData[b].data[0]
-	        		//console.log(station.id + '(' + station.label + ')' + ' : ' +rainfall)
 	        	}
 	        }
 
@@ -643,7 +622,6 @@ const displayRainfallGraph = (tenday) => {
 	        if (stationID == 'ICALABAR18') {
 	          defaultStation = group.getLayerId(marker)
             weatherMap.setView(marker.getLatLng(), 5)
-            weatherMapFS.setView(marker.getLatLng(), 5)
 	          marker.openPopup()
 	        }
 	      }

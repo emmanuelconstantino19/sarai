@@ -75,7 +75,6 @@ Template.RainfallDistribution.events({
 });
 
 Template.RainfallDistribution.onRendered(() => {
-  console.log("rendered")
   //ONRENDERED START
 
   $('<div class="meteogram">').appendTo('#new_chart').highcharts(Meteor.PlantingGuideGraph.constructChart())
@@ -94,7 +93,6 @@ Template.RainfallDistribution.onRendered(() => {
     var currenVSL = {};
 
     $('[name=options]').change(function () {
-        console.log('options lel dongs ' + $('[name=options]:checked').val());
         if ($('[name=options]:checked').val() === 'dsh') {
             $('#dash_1,#dash_2').show();
             $(window).trigger('resize');
@@ -231,7 +229,6 @@ Template.RainfallDistribution.onRendered(() => {
         var diff = (dt - start) + ((start.getTimezoneOffset() - dt.getTimezoneOffset()) * 60 * 1000);
         var oneDay = 1000 * 60 * 60 * 24;
         var day = Math.floor(diff / oneDay);
-        console.log('Day of year: ' + day);
         return day;
     }
 
@@ -240,13 +237,7 @@ Template.RainfallDistribution.onRendered(() => {
         var dt = dateInpt[0].valueAsDate;
         var start = new Date(dt.getFullYear(), 0, 0);
         var oneDay = 1000 * 60 * 60 * 24;
-        var diff = dt_int * oneDay;
-        //console.log("get"+(dt));        
-        //console.log(dt.getFullYear());
-        //console.log(start);
-        //start += diff;
-        //var dd = new Date(start + diff);
-        //console.log(start+diff);   
+        var diff = dt_int * oneDay;   
         return start;
     }
 
@@ -261,8 +252,6 @@ Template.RainfallDistribution.onRendered(() => {
         .defer(d3.text, "/planting-guide/test_yld.csv")
 
         .await(function (error, file1, file2, file3, documentFragment, provinces, file4, file5, revData) {
-            console.log("Revised Data");
-            console.log(revData);
 
             if (error) {
                 console.error('Oh dear, something went wrong: ' + error);
@@ -280,7 +269,6 @@ Template.RainfallDistribution.onRendered(() => {
 
                 var rainfalldaily_all = d3.csvParseRows(file4);
                 convfNumbers(rainfalldaily_all);
-                console.log(rainfalldaily_all);
 
                 var dateStr = rainfall_all[0].slice(1);
 
@@ -342,7 +330,6 @@ Template.RainfallDistribution.onRendered(() => {
                     return [cx,cy];
                 }
 
-                //console.log(rainfall_all);
                 var svgNode = documentFragment.getElementsByTagName("svg")[0];
                 //document.getElementsByTagName("body").appendChild(svgNode);            
                 $('#svg_rainmap,#svg_rainmap_1').append(svgNode);
@@ -358,17 +345,13 @@ Template.RainfallDistribution.onRendered(() => {
 
                   var loc = slct_loc.val();
                     $('.spn_location_').html(loc);
-                    console.log(loc);
                     var rainfall = getData(rainfall_all, loc);
-                    //console.log(rainfall);
 
                     var prnt = d3.select('#svg_rainpain');
                     prnt.html('');
 
                     var width = $('#svg_rainpain').width();
                     var data = rainfall.slice(1);//data.sort(function(a,b){return d3.ascending(a.key,b.key);});
-                    //console.log('sroted');
-                    console.log(data);
 
                     var dmn = [];
                     for (var i = 0; i < 52; i++) {
@@ -561,9 +544,7 @@ Template.RainfallDistribution.onRendered(() => {
 
                   var loc = slct_loc.val();
                   dayInt = getDayin366(dateInpt[0].valueAsDate);
-                  get366inDay(dayInt);
-
-                  console.log("day in shait" + dayInt);                   
+                  get366inDay(dayInt);                   
 
                   var prnt_dailyrain = d3.select('#svg_rainpain_gg');
                   prnt_dailyrain.html('');
@@ -571,7 +552,6 @@ Template.RainfallDistribution.onRendered(() => {
                   var lowerBnd = dayInt > 30 ? 30: dayInt - 1;                    
                   var rainfall_daily_one = getData(rainfalldaily_all, loc).slice(1).slice(dayInt - lowerBnd, dayInt + 10);
 
-                  console.log(rainfall_daily_one);
                   var dmn_dailyrain = [];
                   for (var i = 0; i < rainfall_daily_one.length; i++) {
                       dmn_dailyrain[i] = i;
@@ -667,9 +647,6 @@ Template.RainfallDistribution.onRendered(() => {
                 $(window).on('resize', function () {
                     slct_loc.change();
                 });
-
-
-                console.log(crop_all);
                
                 function renderVariety(){
                     var prnt = d3.select('#slct_variety');
@@ -731,14 +708,9 @@ Template.RainfallDistribution.onRendered(() => {
 
                   var data = crop_allRev.filter(function(d){   
                       return d[2] == $('#slct_brgy').val() && d[0] == $('#slct_prov').val() && d[1] == $('#slct_muni').val();                        
-                      //console.log($('#slct_brgy').val()+$('#slct_prov').val()+$('#slct_muni').val());
                   });
 
-                  console.log("data found");
-                  console.log(data);
-
-                  var weekNo = Math.floor(dayInt / 7);
-                    //console.log("week no is:"+weekNo);                    
+                  var weekNo = Math.floor(dayInt / 7);                    
 
                   var allWeeks = data[0].slice(7,7+52);    
                   var landAvg = d3.mean(allWeeks, function(d) { return d; });
@@ -747,10 +719,6 @@ Template.RainfallDistribution.onRendered(() => {
                       var yieldDiff = ((cur - ave) / ave) * 100;
                       return Math.round( yieldDiff * 10) / 10;
                   }
-
-                  console.log(allWeeks)
-                  console.log(weekNo)
-                  console.log(allWeeks[weekNo])
 
                   var yield_value = allWeeks[weekNo];
 
@@ -845,8 +813,6 @@ Template.RainfallDistribution.onRendered(() => {
                         return d[2] == $('#slct_brgy').val();    
                     });
 
-                    console.log('day changed:'+ Math.round(dayInt/7));
-
                     var svg_map_1 = d3.select("#svgPHfullmap_1");
                     svg_map_1.selectAll("circle").remove();
 
@@ -925,14 +891,6 @@ const displayRainData = (stationID, label, crop, variety, raw_date, digit_select
   let digit_current_date = new Date()
   digit_current_date = digit_current_date.getDate()
 
-  // if (raw_date < date_today){
-  //   console.log('PAST')
-  // }else if (raw_date > date_today){
-  //   console.log('FUTURE')
-  // }else{
-  //   console.log('PRESENT')
-  // }
-
   let forecastDates = []
   let forecastIndex
   for(i=0; i<10; i++){
@@ -979,8 +937,6 @@ const displayRainData = (stationID, label, crop, variety, raw_date, digit_select
 
   //have to reconcile missing entries
   if (cumulativeData) {
-    // console.log('date_for_query: '+date_for_query)
-    // console.log('raw_date: '+raw_date)
 
     const fixedData = Meteor.RainfallDistribution.fillMissingEntries(cumulativeData.reverse(), date_for_query)  // creation of array of dates with rainfall
     const fixedDataForTwenty = Meteor.RainfallDistribution.fillMissingEntriesForTwenty(cumulativeDataForTwenty.reverse(), date_for_query)  // creation of array of dates with rainfall
@@ -1045,11 +1001,8 @@ const displayRainData = (stationID, label, crop, variety, raw_date, digit_select
         const runningForecastTotal = forecast.forecastAccumulated[9].y     // 30-day rainfall from last day of forecast
         const runningForecastTotalWithTwenty = forecast.forecastAccumulatedWithTwenty[9].y     // 20-day rainfall from last day of forecast
 
-        // console.log('date_first_historical: '+date_first_historical)
-        // console.log('date_last_historical: '+date_last_historical)
         const historical = Meteor.RainfallDistribution.getHistoricalRainfall(date_first_historical, date_last_historical, historicalDailyRainData, runningForecastTotal, runningForecastTotalWithTwenty)
         const completeData = Meteor.RainfallDistribution.assembleHistoricalRainfallData(pastRainfall.pastRainfall, pastRainfall.pastAccRainfall, pastRainfallForTwenty.pastAccRainfall, forecast.forecastRainfall, forecast.forecastAccumulated, forecast.forecastAccumulatedWithTwenty, historical.pastHistoricalRain, historical.pastHistoricalAccRain, historical.pastHistoricalAccRainWithTwenty)   // completeRainfall and completeAccumulatedRainfall
-        // console.log('historical.plot_first_historical: '+historical.plot_first_historical+' historical.plot_last_historical: '+historical.plot_last_historical)
         $('<div class="rainfall-chart">').appendTo('#rainfall-chart-container').highcharts(Meteor.RainfallDistribution.constructHistoricalChart(completeData.completeRainfall, completeData.completeAccumulatedRainfall, completeData.completeAccumulatedRainfallWithTwenty, forecast.plotBandStart, forecast.plotBandEnd, historical.plot_first_historical, historical.plot_last_historical))
 
         const percentMeanData = PercentMeanData.find({id: stationID, crop: crop, variety: variety}).fetch()

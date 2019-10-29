@@ -18,7 +18,6 @@ Meteor.startup(function () {
       }
 ,	    getFileName: function(fileInfo, formData) {
         //check fileInfo.type (image/jpeg)
-        console.log(formData.filename)
 
         //get extension
         const fileParts = fileInfo.name.split('.')

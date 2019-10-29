@@ -1,7 +1,6 @@
 Meteor.RainfallGraph = {
 
   constructChart: (place,values) => {
-    console.log('Construct Rainfall Graph chart');
     return {
               chart: {
                   type: 'column'
@@ -13,7 +12,7 @@ Meteor.RainfallGraph = {
                   text: place
               },
               xAxis: {
-                  categories: ['September','October', 'November', 'December','January'],
+                  categories: ['October', 'November', 'December','January','February'],
                   title: {
                       text: null
                   },

@@ -26,7 +26,6 @@ Template.Slider.helpers({
   },
 
   setSliderIndex: (index, image) => {
-    console.log(`index: ${index}, image: ${image}`)
   }
 })
 

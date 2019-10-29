@@ -36,7 +36,6 @@ Template.WAISSExploreMap.onRendered(function() {
     });
 
     function markerClick(e) {
-        console.log(this.options.weatherStationId);
         Session.set('weatherStationId', this.options.weatherStationId);
     }
 });

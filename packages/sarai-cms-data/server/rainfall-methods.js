@@ -12,7 +12,7 @@ Meteor.methods({
 		}else{
 			Meteor.call('cms-rainfall-outlook-content-parser',rainfall_data,1);	
 		}
-		console.log('sample-end');
+		console.log('END OF UPDATE');
 	},
 
 	'cms-rainfall-outlook-content-parser' : (rainfall_data, type) => {

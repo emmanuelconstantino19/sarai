@@ -198,7 +198,6 @@ Meteor.methods({
       slides[index].buttonLink = buttonLink
       slides[index].rank = rank
 
-      // console.log(slides)
       Main.update(
         { name: 'banner'},
         {

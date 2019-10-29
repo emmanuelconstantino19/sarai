@@ -34,7 +34,6 @@ Template.registerHelper("makeString", function(date) {
 
 Template.registerHelper("count", function(comments) {
     if(typeof comments != 'undefined'){
-      //console.log(comments);
       return comments.length;
     }
 });

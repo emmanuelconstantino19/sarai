@@ -6,7 +6,6 @@ FlowRouter.route("/accumulated-rainfall", {
 
 FlowRouter.route("/accumulated-rainfall/:stationID", {
   action: (params) => {
-    // console.log(params)
     BlazeLayout.render("MapLayout", {main: "AccumulatedRainfall"})
   }
 })

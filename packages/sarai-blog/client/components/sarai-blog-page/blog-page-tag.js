@@ -12,11 +12,8 @@ Template.BlogPageTag.helpers({
 		return FlowRouter.current().params.tag;
 	},
 	blogsbasetag: function(){
-		//console.log(FlowRouter.current().params._id);
 		var tag = FlowRouter.current().params.tag;
-		//console.log(tag);
 		var blogsbasetag = Blog.find({category: tag}, {sort: {date: -1}}).fetch();
-		//console.log(blogsbasetag);
 		return blogsbasetag;
 	},
 	recentblogs: function(){

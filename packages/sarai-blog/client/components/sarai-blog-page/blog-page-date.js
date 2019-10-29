@@ -15,13 +15,11 @@ Template.BlogPageDate.helpers({
 		return FlowRouter.current().params.year;
 	},
 	blogsbasedate: function(){
-		//console.log(FlowRouter.current().params._id);
 		var month = FlowRouter.current().params.month;
 		var year = FlowRouter.current().params.year;
 		var start = new Date(month + ' ' + 1 + ', ' + year);
 		var end = new Date(month + ' ' + 31 + ', ' + year);
 		var blogsbasedate = Blog.find({date: {$gt: start}, date: {$lt: end}}, {sort: {date: -1}}).fetch();
-		//console.log(blogsbasedate);
 		return blogsbasedate;
 	},
 	recentblogs: function(){

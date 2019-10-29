@@ -6,7 +6,6 @@ FlowRouter.route("/rainfall-distribution", {
 
 FlowRouter.route("/rainfall-distribution/:stationID", {
   action: (params) => {
-    // console.log(params)
     BlazeLayout.render("MapLayout", {main: "RainfallDistribution"})
   }
 })

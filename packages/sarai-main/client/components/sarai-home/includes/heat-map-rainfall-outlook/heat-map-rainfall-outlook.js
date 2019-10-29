@@ -68,8 +68,6 @@ Template.HeatMapRainfallOutlook.helpers({
       const color_7 = '#000000'
 
       const weatherOutlook = WeatherOutlook.findOne({province: province, municipality: municipality})
-      var d = new Date()
-      var current_month = 7; 
       var val;
       var six_months = getSixConsecMonths();
       var color, fontcolor;
@@ -108,12 +106,23 @@ Template.HeatMapRainfallOutlook.helpers({
           
           monthHeader = '2019';
 
-          outlook.push({
-            head: six_months[i] + ' ' + monthHeader,
-            value: val,
-            color: color,
-            fontcolor: fontcolor
-          })
+          if(six_months[i] == 'Jan' || six_months[i] == 'Feb'){
+            outlook.push({
+              head: six_months[i] + ' 2020',
+              value: val,
+              color: color,
+              fontcolor: fontcolor
+            })
+          }else{
+            outlook.push({
+              head: six_months[i] + ' ' + monthHeader,
+              value: val,
+              color: color,
+              fontcolor: fontcolor
+            })
+          }
+
+          
         }
         return outlook
       }
@@ -153,7 +162,6 @@ function createRainfallTable(rain){
 	var monthDataSet6 = [];
 	var entry;
 	var months = getSixConsecMonths();
-	console.log('create rainfall table');
 	
   for(var i = 0 ; i < rain.length; i++){
     
@@ -198,17 +206,16 @@ function createRainfallTable(rain){
 			dataset.push(entry);
 		}
 	}
-		console.log(monthDataSet1);
         $('#rainfall-datatable').DataTable( {
           data: dataset,
           columns: [
               { title: "Province" },
               { title: "Municipality" },
-              { title: "September" },
               { title: "October" },
               { title: "November" },
               { title: "December" },
               { title: "January" },
+              { title: "February" },
           ],
           lengthChange: true,
           lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
@@ -217,8 +224,8 @@ function createRainfallTable(rain){
         $('<div class="meteogram">').appendTo('#rainfall-map1').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet1, months[0] + ' 2019'));
         $('<div class="meteogram">').appendTo('#rainfall-map2').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet2, months[1] + ' 2019'));
         $('<div class="meteogram">').appendTo('#rainfall-map3').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet3, months[2] + ' 2019'));
-        $('<div class="meteogram">').appendTo('#rainfall-map4').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet4, months[3] + ' 2019'));
-        $('<div class="meteogram">').appendTo('#rainfall-map5').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet5, months[4] + ' 2019'));
+        $('<div class="meteogram">').appendTo('#rainfall-map4').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet4, months[3] + ' 2020'));
+        $('<div class="meteogram">').appendTo('#rainfall-map5').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet5, months[4] + ' 2020'));
         //$('<div class="meteogram">').appendTo('#rainfall-map6').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet6, months[5] + ' 2019'));
 }
 
@@ -227,14 +234,11 @@ function displayRainfallGraph(values){
 	var place;
 	let outlook = []
 
-	console.log(values);
-
     for(var i = 0 ; i < 5; i++){
       	val = (values.data.month[six_months[i]]==null) ? "--" : Math.round(values.data.month[six_months[i]])
  	 	outlook.push(val)
  	}
 
-	console.log('displayRainfallGraph');
 	$('#rainfall_graph .meteogram').remove()
 	if(values.municipality == 'All'){
 		place = values.province;
@@ -248,7 +252,7 @@ function displayRainfallGraph(values){
 function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = 8;
+    var current_month = 9;
     var six_months = [];
     for(var i = 0 ; i < 5 ; i++){
       six_months[i] = months[(i + current_month)%months.length];

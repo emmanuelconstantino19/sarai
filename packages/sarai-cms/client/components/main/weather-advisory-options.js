@@ -37,7 +37,6 @@ Template.TopHeaderOptions.events({
       if (error) {
         toast = `Unable to ${title} Weather Advisory`
       }
-      console.log('Unable to ${title} Weather Advisory')
       showToast(toast)
 
     })

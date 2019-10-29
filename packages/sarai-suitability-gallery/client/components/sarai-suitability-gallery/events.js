@@ -1,10 +1,6 @@
 Template.SaraiSuitabilityGallery.events({
     'click .filter-button' : function (e){
         var value = e.target.attributes[1].nodeValue;
-        // console.log(e);
-        // console.log(e.target.attributes[1].nodeValue);
-        // console.log(e.target.attributes[1]);
-        // console.log("VALUE: "+value);
         Session.set('crop', value)
         if(value == "All")
         {
@@ -28,7 +24,6 @@ Template.SaraiSuitabilityGallery.events({
      'click .pop' : function (e){
         const src = e.target.src
         const dialog = document.querySelector('#suitability-dialog')
-        // console.log(src)
         if(src == null){
             alert("Please click the image.")
         }else{
@@ -45,7 +40,6 @@ Template.SaraiSuitabilityGallery.events({
      },
 
      'click .download-button' : function (e){
-        // console.log(e.target.href)
         e.target.href = Session.get("src")
         
      },

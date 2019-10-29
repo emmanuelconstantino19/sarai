@@ -7,7 +7,6 @@ Template.BlogPage.events({
 		var currentblog = Blog.findOne({_id: FlowRouter.current().params._id});
 		if(typeof currentblog!='undefined'){
 			var obj = Blog.find({date: {$gt: new Date(currentblog.date)}}, {sort: {date: 1}}).fetch();
-			//console.log(obj);
 			var nextblog = obj[0];
 			FlowRouter.go('/Blog/'+nextblog._id);
 			BlazeLayout.reset();
@@ -19,7 +18,6 @@ Template.BlogPage.events({
 		var currentblog = Blog.findOne({_id: FlowRouter.current().params._id});
 		if(typeof currentblog!='undefined'){
 			var obj = Blog.find({date: {$lt: new Date(currentblog.date)}, _id: {$ne: currentblog._id}}, {sort: {date: -1}}).fetch();
-			//console.log(obj);
 			var prevblog = obj[0];
 			FlowRouter.go('/blog/'+prevblog._id);
 			BlazeLayout.reset();
@@ -33,15 +31,12 @@ Template.BlogPage.events({
 /*****************************************************************************/
 Template.BlogPage.helpers({
 	blog: function(){
-		//console.log(FlowRouter.current().params._id);
 		return Blog.findOne({_id: FlowRouter.current().params._id});
 	},
 	nextblog: function(){
 		var currentblog = Blog.findOne({_id: FlowRouter.current().params._id});
 		if(typeof currentblog != 'undefined'){
-			console.log(currentblog._id);
 			var obj = Blog.find({date: {$gt: new Date(currentblog.date)}}, {sort: {date: 1}}).fetch();
-			//console.log(obj);
 			return obj[0];
 		}
 	},
@@ -49,7 +44,6 @@ Template.BlogPage.helpers({
 		var currentblog = Blog.findOne({_id: FlowRouter.current().params._id});
 		if(typeof currentblog != 'undefined'){
 			var obj = Blog.find({date: {$lt: new Date(currentblog.date)}, _id: {$ne: currentblog._id}}, {sort: {date: -1}}).fetch();
-			//console.log(obj);
 			return obj[0];
 		}
 	},

@@ -1,7 +1,6 @@
 Meteor.RainfallMapChart = {
 
 	constructChart: (data, title) => {
-    console.log('Construct Rainfall Map Chart');
     return {
               chart: {
                   map: 'countries/ph/ph-all',
