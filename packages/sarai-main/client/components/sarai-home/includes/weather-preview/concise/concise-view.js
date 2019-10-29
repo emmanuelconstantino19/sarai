@@ -31,7 +31,6 @@ Template.ConciseView.helpers({
     const first4 = WeatherStations.find({}, {skip: stationSkip, limit: 4}).fetch()
 
     const cleaned = Meteor.previewHelpers.sortStations(first4)
-    console.log(cleaned)
     return cleaned
   },
 

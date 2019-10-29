@@ -59,7 +59,6 @@ Meteor.RainfallDistribution = {
 
     for (let entry of cumulativeData) {
       if (counter<7){
-        // console.log('entry.dateUTC: '+entry.dateUTC+' entry.data.rainfall: '+entry.data.rainfall)
         totalWeeklyRainfall += entry.data.rainfall
         counter++
       }else{
@@ -146,7 +145,6 @@ Meteor.RainfallDistribution = {
             point: {
               events: {
                 select: function(e) {
-                  console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }
@@ -518,7 +516,6 @@ Meteor.RainfallDistribution = {
             point: {
               events: {
                 select: function(e) {
-                  console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }
@@ -637,7 +634,6 @@ Meteor.RainfallDistribution = {
             point: {
               events: {
                 select: function(e) {
-                  console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }

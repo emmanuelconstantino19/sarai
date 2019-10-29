@@ -1,6 +1,5 @@
 Meteor.methods({
   'cms-aboutbanner-slider-edit': (_id,title, subTitle) => {
-    console.log(title + " " + subTitle);
 
     let banners = About.findOne({name: 'banner'}).banners
 
@@ -9,7 +8,6 @@ Meteor.methods({
       banners[0].subtext = title//banner array only contains 1 object because it is not a carousel in the about page
       banners[0].subtext1 = subTitle
 
-      console.log(banners)
        About.update(
          { name: 'banner'},
          {

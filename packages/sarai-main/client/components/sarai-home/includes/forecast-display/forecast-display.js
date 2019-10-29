@@ -2,7 +2,6 @@ Template.ForecastDisplay.onCreated(() => {
   Meteor.subscribe('wunderground-data', ()=>{
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     const uplb_data = WundergroundData.findOne({code:'ICALABAR18'})
-    console.log(uplb_data)
     //TIME FORECAST
 
     if(uplb_data.icons[0]!=null){ // MORNING

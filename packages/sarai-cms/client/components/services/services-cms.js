@@ -28,8 +28,6 @@ Template.ServicesCMS.helpers({
 
   showToastIfAny: () => {
     if (Session.get('toast') != undefined) {
-      console.log(Session.get('toast'))
-
       Session.set('toast', undefined)
     }
   }

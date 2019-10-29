@@ -4,7 +4,6 @@ Meteor.publish('rainfall-distribution-data', () => {
 
 Meteor.publish('cumulative-data-30', (date_subscribe) => {
   let oneMonthAgo = new Date(date_subscribe)
-  console.log(date_subscribe)
   // oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 31)
 
@@ -13,7 +12,6 @@ Meteor.publish('cumulative-data-30', (date_subscribe) => {
 
 Meteor.publish('cumulative-data-20', (date_subscribe) => {
   let twentyDaysAgo = new Date(date_subscribe)
-  console.log(date_subscribe)
   // twentyDaysAgo.setMonth(twentyDaysAgo.getMonth() - 1)
   twentyDaysAgo.setDate(twentyDaysAgo.getDate() - 20)
 

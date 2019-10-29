@@ -3,9 +3,6 @@ Template.WeatherFullscreen.onCreated(() => {
 
   Meteor.subscribe('sarai-weather-stations')
   Meteor.subscribe('weather-data-30')
-  /*Meteor.subscribe('wunderground-data', () => {
-    console.log(WundergroundData.find({}).fetch())
-  })*/
 
   Meteor.subscribe('dss-settings', () => {
     const record = DSSSettings.findOne({name: 'wunderground-api-key'})
@@ -253,7 +250,6 @@ const getOWMData = (stationID) => {
       historical = RainfallHistorical.find({code:code}).fetch()
       const fixedData = Meteor.AccumulatedRainfall.fillMissingEntries(historical[0])
       const pastRainfall = Meteor.AccumulatedRainfall.getPastRainfall(fixedData)
-      //console.log(pastRainfall)
       
       $('#accumulative-container .meteogram').remove()
       const runningTotal = pastRainfall.pastAccRainfall[29].y
@@ -331,7 +327,7 @@ const getForecast = (stationID) => {
     };
   snackbarContainer.MaterialSnackbar.showSnackbar(data);
 })
-.complete(function() { console.log('Complete') });
+.complete(function() {});
 
 }
 
@@ -518,7 +514,6 @@ const displayRainfallGraph = (tenday) => {
       
     })
   ).then(function() {
-    //console.log(graphData)
     $('<div class="meteogram">').appendTo('#rainfall-container').highcharts(Meteor.RainfallForecast.constructChart(graphData,tenday))
 
     /****MAP****/
@@ -583,12 +578,9 @@ const displayRainfallGraph = (tenday) => {
 	        const label = stripTitle(station.label)
 	        const stationID = station.id
 
-	        //console.log(station.id + ' : ' + station.label)
-
 	        for(let b = 0 ; b < graphData.length ; b++){
 	        	if(graphData[b].code == station.id){
 	        		rainfall = graphData[b].data[0]
-	        		//console.log(station.id + '(' + station.label + ')' + ' : ' +rainfall)
 	        	}
 	        }
 

@@ -120,8 +120,6 @@ Template.ForecastView.helpers({
 })
 
 const getOWMData = (stationID) => {
-  console.log("Getting OWM Data")
-  console.log(stationID)
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
   var api = ''; 
   if(stationID == "IPAOAY4"){
@@ -168,7 +166,6 @@ const getOWMData = (stationID) => {
     let forecast = []
     for(var i = 1 ; i < 6; i++){
       var date = results.sunriseTimeLocal[i].substring(0,10).split('-')
-      console.log(results.daypart[0].iconCode)
       forecast.push({
         head: results.dayOfWeek[i].substring(0,3),
         date: months[parseInt(date[1])-1] + ' ' + date[2],
@@ -183,7 +180,6 @@ const getOWMData = (stationID) => {
         //pop: element.pop 
       })
     }
-    console.log(forecast)
     Session.set('forecast2', forecast)
   })
   //Session.set('forecast'2, )
@@ -258,8 +254,6 @@ const downloadForecast = () => {
     
     
     $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (result) => {
-      console.log('Fetching real-time data....')
-      // console.log('location: '+location+' stationID: '+stationID+' past30Days: '+past30Days)
       const completeTxtForecast = result.forecast.txt_forecast.forecastday
 
       const simpleForecast = result.forecast.simpleforecast.forecastday
@@ -301,7 +295,6 @@ const downloadForecast = () => {
               rainfallToday_insert = rainfallToday
             }
           }
-          console.log('location: '+location+' date: '+date+' high temp: '+element.high.celsius+' % chance: '+element.pop+' rainfall: '+element.qpf_allday.mm+' nextSevenDays: '+nextSevenDays+' past30Days: '+past30Days+' date stamp: '+new Date())
       })
 
       if(nextSevenDays == 0 || nextSevenDays == null){
@@ -320,12 +313,6 @@ const downloadForecast = () => {
         past30Days: past30Days,
         dateGenerated: new Date()
       })
-
-      console.log('location: '+location+' date: '+dateToday+' high temp: '+highTemp+' % chance: '+chanceRain+' rainfall: '+rainfallToday+' nextSevenDays: '+nextSevenDays+' past30Days: '+past30Days+' date stamp: '+new Date())
-
-      console.log('weatherforecast: '+weatherforecast)
-
-      console.log('index: '+index)
       // if(index == (stations.length - 1)){
       if(--numStations == 0){
         const csvContent = CSV.unparse(weatherforecast)
@@ -342,9 +329,7 @@ const downloadForecast = () => {
 
         $('div.download-div').remove()
       }
-      console.log('Sleeping for 6 seconds....')
       sleep(6000)
-      console.log('Resuming activity....')
     })
   })  // end of stations for each
 } 

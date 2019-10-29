@@ -4,7 +4,6 @@ Template.RiceArticle.onCreated(() => {
 
 
 Template.RiceArticle.onRendered(() => {
-  console.log("onRendered")
   $('#intro').hide();
   $('#preface').hide();
 });
@@ -29,7 +28,6 @@ Template.RiceArticle.helpers({
 
 Template.RiceArticle.events({
    'click #module1-1' : function (){
-      console.log('Pinindot')
       // something
      }
 

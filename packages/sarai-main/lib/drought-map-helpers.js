@@ -1,7 +1,6 @@
 Meteor.DroughtMapChart = {
 
 	constructChart: (data, title) => {
-    console.log('Construct Drought Map Chart');
     return {
               chart: {
                   map: 'countries/ph/ph-all',

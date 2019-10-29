@@ -118,9 +118,8 @@ Meteor.methods({
                     'day': currentDate.getDate()
                 }
             });
-            // console.log(weather);
+            
             if(typeof weather == 'undefined') {
-                console.log(currentDate.toDateString() + ': weather data unavailable, using average ETo from last 3 days')
                 var data = 0;
                 if(etoArray.length > 3) {
                     for(var i = etoArray.length-1; i > (etoArray.length-1)-3; i--) {

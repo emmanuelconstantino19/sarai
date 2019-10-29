@@ -11,7 +11,6 @@ Template.AppsPage.helpers({
 	app: function(){
 		var app = Apps.findOne({_id: FlowRouter.current().params._id});
 		if(typeof app!='undefined'){
-			console.log(app.frame);
 			return app;
 		}
 	}

@@ -8,7 +8,6 @@ Template.ServicesCMSForm.onCreated(() => {
 Template.ServicesCMSForm.onRendered(() => {
 
   if (this.action == 'edit') {
-    console.log('Editing...')
     setFormDirty()
 
   } else if (this.action == 'add') {

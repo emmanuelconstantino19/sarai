@@ -13,8 +13,6 @@ Template.RainfallOutlookCMS.helpers({
       },
       finished: (index, fileInfo, context) => {
         this.uploadedFile = `${uploadDirPrefix()}${fileInfo.path}`
-        console.log(`${fileInfo}`)
-        console.log(`saved to ${this.uploadedFile}`)
 
         var rawFile = new XMLHttpRequest();
         var allText;

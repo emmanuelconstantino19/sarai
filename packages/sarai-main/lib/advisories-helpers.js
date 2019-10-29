@@ -1,10 +1,9 @@
 Meteor.PlantingGuideGraph = {
 
   constructChart: (crop,new_data,place) => {
-    console.log('Construct Rainfall Graph chart');
     var new_data, color, thresh, title, main_title;
 
-if(crop == "Rice"){
+if(crop == "rice"){
 
 color = "green";
 
@@ -14,7 +13,7 @@ title = "30-day Cumulative Rainfall";
 
 main_title = "30-day moving cumulative total rainfall in " + place
 
-} else if(crop == "Corn"){
+} else if(crop == "corn"){
 color = "orange";
 
 thresh = 100;
@@ -27,10 +26,14 @@ main_title = "20-day moving cumulative total rainfall in " + place
 
     return {
             chart: {
-                height: (9 / 16 * 100) + '%'
+                //height: (9 / 16 * 100) + '%'
+                height: '50%'
             },
             title: {
             text: ''
+        },
+        tooltip: {
+            xDateFormat: '%b %d'
         },
         subtitle: {
             text: main_title
@@ -39,7 +42,10 @@ main_title = "20-day moving cumulative total rainfall in " + place
                 title: {
                 text: 'Month'
             },
-            type: 'datetime' 
+            type: 'datetime',
+            labels: {
+                format: '{value:%b}'
+            },
         },
         yAxis: {
             title: {
@@ -73,17 +79,17 @@ main_title = "20-day moving cumulative total rainfall in " + place
                 data: new_data,
                 zoneAxis: 'x',
                 zones: [{
-                value: 1554076800000, 
-                dashStyle: 'dot',
-                color: 'black'
-                },{
-                value: 1569888000000, 
+                value: 1551398400000, 
                 dashStyle: 'solid',
                 color: color
                 },{
-                value: 1585612800000, 
+                value: 1569888000000, 
                 dashStyle: 'dot',
                 color: 'black'
+                },{
+                value: 1585612800000, 
+                dashStyle: 'solid',
+                color: color
                 }]
             }]
         }

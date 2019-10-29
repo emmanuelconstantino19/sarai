@@ -12,11 +12,8 @@ Template.BlogPageAuthor.helpers({
 		return FlowRouter.current().params.authorid;
 	},
 	blogsbaseauthor: function(){
-		//console.log(FlowRouter.current().params._id);
 		var authorid = FlowRouter.current().params.authorid;
-		//console.log(authorid);
 		var blogsbaseauthor = Blog.find({author: authorid}, {sort: {date: -1}}).fetch();
-		//console.log(blogsbaseauthor);
 		return blogsbaseauthor;
 	},
 	recentblogs: function(){

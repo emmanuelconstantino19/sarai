@@ -26,7 +26,8 @@ Package.onUse(function(api) {
   var client = [
     "client/components/route.js",
 
-    "client/components/index.html"
+    "client/components/index.html",
+    "client/components/index.js"
   ]
 
   api.addFiles(client, "client")

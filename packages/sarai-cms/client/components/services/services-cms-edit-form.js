@@ -6,8 +6,6 @@ Template.ServicesCMSEditForm.onCreated(() => {
 
 Template.ServicesCMSEditForm.onRendered((a, template) => {
 
-  // console.log(Template.instance().data) // the service in data is undefined at this point. weird
-  // console.log(this)
   $('#cms-service-col1text-editor').summernote();
   $('#cms-service-col2text-editor').summernote();
 
@@ -105,13 +103,11 @@ Template.ServicesCMSEditForm.events({
   },
 
   'click #media-image-choice': () => {
-    console.log('selecting image')
     $('#cms-service-youtube').attr('display', 'none')
     $('#cms-service-image').attr('display', 'block')
   },
 
   'click #media-youtube-choice': () => {
-    console.log('selecting video')
     $('#cms-service-image').attr('display', 'none')
     $('#cms-service-youtube').attr('display', 'block')
   }

@@ -55,12 +55,7 @@ const downloadRainForecast = () => {
       async: false,
       success: getResult=(result) => {
 
-      // console.log('Sleeping for 6 seconds....')
       sleep(6000)
-      // console.log('Resuming activity....')
-
-      // console.log('Fetching real-time data....')
-      // console.log('location: '+location+' stationID: '+stationID+' past30Days: '+past30Days)
       const completeTxtForecast = result.forecast.txt_forecast.forecastday
 
       const simpleForecast = result.forecast.simpleforecast.forecastday
@@ -102,7 +97,6 @@ const downloadRainForecast = () => {
               rainfallToday_insert = rainfallToday
             }
           }
-          // console.log('location: '+location+' date: '+date+' high temp: '+element.high.celsius+' % chance: '+element.pop+' rainfall: '+element.qpf_allday.mm+' nextSevenDays: '+nextSevenDays+' past30Days: '+past30Days+' date stamp: '+new Date())
       })
 
       if(nextSevenDays == 0 || nextSevenDays == null){
@@ -122,9 +116,6 @@ const downloadRainForecast = () => {
         dateGenerated: new Date()
       })
 
-      // console.log('location: '+location+' date: '+dateToday+' high temp: '+highTemp+' % chance: '+chanceRain+' rainfall: '+rainfallToday+' nextSevenDays: '+nextSevenDays+' past30Days: '+past30Days+' date stamp: '+new Date())
-      // console.log('weatherforecast: '+weatherforecast)
-      // console.log('index: '+index)
       // if(index == (stations.length - 1)){
       if(--numStations == 0){
         const csvContent = CSV.unparse(weatherforecast)

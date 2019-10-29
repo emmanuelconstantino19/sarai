@@ -37,7 +37,6 @@ Template.CornTriviaSlider.helpers({
   },
 
   setSliderIndex: (index, image) => {
-    console.log(`index: ${index}, image: ${image}`)
   }
   // *****************
 

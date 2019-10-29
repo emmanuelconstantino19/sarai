@@ -69,6 +69,14 @@ Package.onUse(function(api) {
 
     "client/layout/forecast-display-layout/index.html",
 
+    // "client/includes/leaflet-tag-filter-button/leaflet.js",
+    // "client/includes/leaflet-tag-filter-button/leaflet.css",
+    // "client/includes/leaflet-tag-filter-button/leaflet-tag-filter-button.js",
+    // "client/includes/leaflet-tag-filter-button/leaflet-tag-filter-button.css",
+    // "client/includes/leaflet-tag-filter-button/ripple.min.css",
+    // "client/includes/leaflet-tag-filter-button/leaflet-easy-button.css",
+    // "client/includes/leaflet-tag-filter-button/leaflet-easy-button.js",
+
 //    "client/layout/wunderground-layout/wu-layout.html",
 //    "client/layout/wunderground-layout/wu-layout.less"
   ]

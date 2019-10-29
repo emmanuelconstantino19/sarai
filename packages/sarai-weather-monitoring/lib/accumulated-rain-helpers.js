@@ -24,9 +24,6 @@ Meteor.AccumulatedRainfall = {
 
     let b = 0 //counter for existing data in weatherData array
 
-    //console.log(fixedData)
-    //console.log(weatherData)
-
     /*for (let a = 0; a < 30; a++) {
       if (weatherData[b] && fixedData[a].dateUTC.getTime() == weatherData[b].dateUTC.getTime()) {
         //found date match in retrieved weather data
@@ -43,11 +40,9 @@ Meteor.AccumulatedRainfall = {
       var year = fixedData[a].dateUTC .getFullYear();
       var new_format = month + '-' + day + '-' + year;
       if(weatherData[new_format]==undefined){
-        //console.log(new_format + ' : ' + weatherData[5][new_format])
         fixedData[a].data.rainfall = 0;
       }
       else{
-        //console.log(new_format + ' : ' + weatherData[5][new_format])
         fixedData[a].data.rainfall = Math.round(weatherData[new_format] * 10) / 10
       }
     }
@@ -74,8 +69,6 @@ Meteor.AccumulatedRainfall = {
   },
 
   getForecast: (forecast, runningTotal, pastRainfall) => {
-    //console.log(forecast)
-    //console.log(pastRainfall['pastRainfall'])
     let forecastRainfall = []
     let forecastAccumulated = []
     //let total = runningTotal
@@ -171,7 +164,6 @@ Meteor.AccumulatedRainfall = {
             point: {
               events: {
                 select: function(e) {
-                  //console.log(Highcharts.dateFormat('%e %b', new Date(e.target.x)))
                 }
               }
             }
