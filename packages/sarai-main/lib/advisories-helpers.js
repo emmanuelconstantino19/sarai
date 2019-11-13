@@ -79,11 +79,11 @@ main_title = "20-day moving cumulative total rainfall in " + place
                 data: new_data,
                 zoneAxis: 'x',
                 zones: [{
-                value: 1551398400000, 
+                value: 1554076800000, 
                 dashStyle: 'solid',
                 color: color
                 },{
-                value: 1569888000000, 
+                value: 1572566400000, 
                 dashStyle: 'dot',
                 color: 'black'
                 },{

@@ -168,17 +168,21 @@ Package.onUse(function(api) {
     "lib/advisories-helpers.js",
 
 
+    "lib/cropping-advisories/barili-helpers.js",
     "lib/cropping-advisories/batac-helpers.js",
     "lib/cropping-advisories/butuan-helpers.js",
     "lib/cropping-advisories/calapan-helpers.js",
-    "lib/cropping-advisories/cdo-helpers.js",
+    "lib/cropping-advisories/cagayandeoro-helpers.js",
     "lib/cropping-advisories/echague-helpers.js",
     "lib/cropping-advisories/guinobatan-helpers.js",
     "lib/cropping-advisories/iloilo-helpers.js",
     "lib/cropping-advisories/lacarlota-helpers.js",
+    "lib/cropping-advisories/lambunao-helpers.js",
     "lib/cropping-advisories/legazpi-helpers.js",
+    "lib/cropping-advisories/ligao-helpers.js",
     "lib/cropping-advisories/losbanos-helpers.js",
     "lib/cropping-advisories/malaybalay-helpers.js",
+    "lib/cropping-advisories/maramag-helpers.js",
     "lib/cropping-advisories/munoz-helpers.js",
 
 

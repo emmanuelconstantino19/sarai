@@ -80,6 +80,28 @@ Template.SeamsImages.onRendered(() => {
 })/** function end of onrendered **/
 
 Template.SeamsImages.events({
+  'click #download': (e) => {
+    $('#form-seams').removeClass('has-error');
+    $('#invalid_alert').hide()
+    $('#input_password').val('')
+    var pdialog = document.querySelector('#passwordDialog');
+    pdialog.showModal()
+  },
+  'click #cancel_password': (e) => {
+    var pdialog = document.querySelector('#passwordDialog');
+    pdialog.close()
+  },
+  'click #submit_password': (e) => {
+    var pdialog = document.querySelector('#passwordDialog');
+    if($('#input_password').val() == "seams2019"){
+      window.location.href = 'seams-data.zip';
+      pdialog.close()
+    }else{
+      $('#form-seams').addClass('has-error');
+      $('#invalid_alert').show()
+    }
+    
+  },
   'click #hide': (e) => {
     $( "#filter-body" ).toggle( "fold" );
   },

@@ -88,7 +88,7 @@
   </style>
 
   <!-- <button type="button" class="mdl-button show-modal">Show Modal</button> -->
-  <dialog class="mdl-dialog" style="border-radius: 5px">
+  <dialog id="loadingDialog" class="mdl-dialog" style="border-radius: 5px">
     <div class="mdl-dialog__content" style="padding: 0">
       <p style="margin-bottom:0">
         Please wait.
@@ -103,19 +103,24 @@
     <button type="button" class="mdl-button close">Disagree</button>
   </div> -->
   </dialog>
-  <script>
-    var dialog = document.querySelector('dialog');
-    var showModalButton = document.querySelector('.show-modal');
-    if (!dialog.showModal) {
-      dialogPolyfill.registerDialog(dialog);
-    }
-    showModalButton.addEventListener('click', function () {
-      dialog.showModal();
-    });
-    dialog.querySelector('.close').addEventListener('click', function () {
-      dialog.close();
-    });
-  </script>
+
+  <dialog id="passwordDialog" class="mdl-dialog">
+      <div class="mdl-dialog__content">
+          <div id="form-seams" class="form-group">
+              <label for="input_password">Enter password to download</label>
+            <input type="password" class="form-control" id="input_password">
+          </div>
+          <div id="invalid_alert" style="color: #a94442"><strong>Invalid Password!</strong> Please try again.</div>
+      </div>
+      <div class="mdl-dialog__actions">
+          <button id="submit_password" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              Submit
+            </button>
+            <button id="cancel_password" class="mdl-button mdl-js-button mdl-button--raised">
+              Cancel
+            </button>
+      </div>
+    </dialog>
 
   <div class="mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--12-col">
@@ -247,6 +252,10 @@
         </button>
         <button id="listview" class="btn">
           <img class="view-icon" src="view-icons/grid5.png" />
+        </button>
+        <button id="download" class="btn">
+            <!-- <i class="material-icons" style="font-size:15px;">cloud_download</i>   -->
+            <i class="fas fa-download"></i>
         </button>
       </div>
     </div>
