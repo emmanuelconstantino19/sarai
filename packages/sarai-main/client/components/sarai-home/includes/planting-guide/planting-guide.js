@@ -1,10 +1,10 @@
 Template.PlantingGuideView.onRendered(() => {
-  var crop_data = Meteor.Barili.rice.data;
-  $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('rice',crop_data,'Barili, Cebu'))
+  var crop_data = Meteor.Batac.rice.data;
+  $('<div class="meteogram">').appendTo('#accumulated_graph').highcharts(Meteor.PlantingGuideGraph.constructChart('rice',crop_data,'Batac, Ilocos Norte'))
   $('#text-advisory-cacao').hide()
   $('#text-advisory-banana').hide()
   $('#text-advisory-rice-corn').hide()
-  $('#advisory-text').html(Meteor.Barili.rice.text.english)
+  $('#advisory-text').html(Meteor.Batac.rice.text.english)
 })
 
 
@@ -18,7 +18,9 @@ Template.PlantingGuideView.events({
     $('#crop-pg').text($('#crop-list').val())
     
     if($('#crop-list').val() == "RICE" || $('#crop-list').val() == "CORN"){
-      $("#sites-list").append($('<option></option>').attr("value", "Barili").text("Barili, Cebu (Climate Type III)"));
+      if($('#crop-list').val() == "CORN"){
+        $("#sites-list").append($('<option></option>').attr("value", "Barili").text("Barili, Cebu (Climate Type III)"));
+      }
       $("#sites-list").append($('<option></option>').attr("value", "Batac").text("Batac, Ilocos Norte (Climate Type I)"));
       $("#sites-list").append($('<option></option>').attr("value", "Butuan").text("Butuan, Agusan del Norte (Climate Type IV)"));
       $("#sites-list").append($('<option></option>').attr("value", "CagayanDeOro").text("Cagayan de Oro, Misamis Oriental (Climate Type III)"));
