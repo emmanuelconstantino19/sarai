@@ -71,7 +71,6 @@ Template.HeatMapRainfallOutlook.helpers({
       var val;
       var six_months = getSixConsecMonths();
       var color, fontcolor;
-      var monthHeader = '2019';
 
       if (weatherOutlook){
         let outlook = []
@@ -104,23 +103,22 @@ Template.HeatMapRainfallOutlook.helpers({
             fontcolor = 'white';
           }
           
-          monthHeader = '2019';
 
-          if(six_months[i] == 'Jan' || six_months[i] == 'Feb' || six_months[i] == 'Mar'){
-            outlook.push({
-              head: six_months[i] + ' 2020',
-              value: val,
-              color: color,
-              fontcolor: fontcolor
-            })
-          }else{
-            outlook.push({
-              head: six_months[i] + ' ' + monthHeader,
-              value: val,
-              color: color,
-              fontcolor: fontcolor
-            })
-          }
+          // if(six_months[i] == 'Dec'){
+          //   outlook.push({
+          //     head: six_months[i] + ' 2019',
+          //     value: val,
+          //     color: color,
+          //     fontcolor: fontcolor
+          //   })
+          // }else{
+          outlook.push({
+            head: six_months[i] + ' ' + '2020',
+            value: val,
+            color: color,
+            fontcolor: fontcolor
+          })
+          // }
 
           
         }
@@ -211,18 +209,18 @@ function createRainfallTable(rain){
           columns: [
               { title: "Province" },
               { title: "Municipality" },
-              { title: "November" },
-              { title: "December" },
               { title: "January" },
               { title: "February" },
               { title: "March" },
+              { title: "April" },
+              { title: "May" },
           ],
           lengthChange: true,
           lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
         });
 
-        $('<div class="meteogram">').appendTo('#rainfall-map1').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet1, months[0] + ' 2019'));
-        $('<div class="meteogram">').appendTo('#rainfall-map2').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet2, months[1] + ' 2019'));
+        $('<div class="meteogram">').appendTo('#rainfall-map1').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet1, months[0] + ' 2020'));
+        $('<div class="meteogram">').appendTo('#rainfall-map2').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet2, months[1] + ' 2020'));
         $('<div class="meteogram">').appendTo('#rainfall-map3').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet3, months[2] + ' 2020'));
         $('<div class="meteogram">').appendTo('#rainfall-map4').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet4, months[3] + ' 2020'));
         $('<div class="meteogram">').appendTo('#rainfall-map5').highcharts('Map', Meteor.RainfallMapChart.constructChart(monthDataSet5, months[4] + ' 2020'));
@@ -252,7 +250,7 @@ function displayRainfallGraph(values){
 function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = 10;
+    var current_month = 0;
     var six_months = [];
     for(var i = 0 ; i < 5 ; i++){
       six_months[i] = months[(i + current_month)%months.length];

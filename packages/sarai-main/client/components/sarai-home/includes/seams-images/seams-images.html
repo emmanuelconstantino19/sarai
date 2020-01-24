@@ -24,13 +24,14 @@
       border: solid 1px #ccc;
       z-index: 1001;
       position: relative;
-      width: 150px;
+      width: 250px;
       background: #fff;
       margin-left: 10px;
       border-radius: 5px;
       margin-top: 10px;
       max-height: 370px;
-      overflow-y: auto;
+      overflow: auto;
+      /* overflow-y: auto; */
     }
 
     .radio,
@@ -41,10 +42,11 @@
 
     .filter-title {
       font-weight: bold;
+      font-size: 16px;
     }
 
     .filter-type {
-      padding: 0 5px;
+      padding: 15px;
     }
 
     .seams-card {
@@ -83,7 +85,7 @@
     }
 
     .filter-header {
-      padding: 10px;
+      padding: 5px 0;
     }
   </style>
 
@@ -134,14 +136,19 @@
 
             <div id="filter-body">
               <hr style="margin:0">
-              <p style="font-size:x-small;line-height:15px;margin:0">Search through the images to view the crop status
-                and the damage reports during natural disasters in the field.</p>
+              <p style="font-size:12px;line-height:15px;margin:0;padding: 10px 0;">
+                Locate the images uploaded in the mobile application by exploring the markers in the map. Click the filters below to limit the displayed markers.
+              </p>
               <hr style="margin:0">
 
-              <p style="font-size:x-small;line-height:15px;margin:0;font-weight:bold">FILTER BY:</p>
+              <p style="font-size:14px;line-height:15px;margin-bottom:0;font-weight:bold;margin-top: 10px;">FILTER BY:</p>
 
-                  <div>
-                  <a href="#purposeCollapse" data-toggle="collapse">Purpose</a>
+                  <div style="padding: 5px 0;">
+                  <a href="#purposeCollapse" data-toggle="collapse" style="font-size: 15px;"><span>Purpose</span> 
+                    <i class="material-icons" style="float:right">
+                      expand_more
+                      </i>
+                  </a>
                   <div id="purposeCollapse" class="collapse">
                       <form class="filter-form">
                         <div class="checkbox">
@@ -158,8 +165,12 @@
 
                   </div>
 
-              <div>
-              <a href="#cropCollapse" data-toggle="collapse">Crop</a>
+              <div style="padding: 5px 0;">
+              <a href="#cropCollapse" data-toggle="collapse" style="font-size: 15px;"><span>Crop</span>
+                <i class="material-icons" style="float:right">
+                  expand_more
+                  </i>
+              </a>
               <div id="cropCollapse" class="collapse">
                 <form class="filter-form">
                   <div class="checkbox">
@@ -168,14 +179,24 @@
                   <div class="checkbox">
                     <label><input type="checkbox" value="Corn" name="Crop" checked>Corn</label>
                   </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" value="Others" name="Crop" checked>Others</label>
+                  </div>
                 </form>
               </div>
               </div>
 
-              <div>
-              <a href="#stageCollapse" data-toggle="collapse">Growth Stage</a>
+              <div style="padding: 5px 0;">
+              <a href="#stageCollapse" data-toggle="collapse" style="font-size: 15px;"><span>Growth Stage</span>
+                <i class="material-icons" style="float:right">
+                  expand_more
+                  </i>
+              </a>
               <div id="stageCollapse" class="collapse">
                 <form class="filter-form">
+                  <div class="checkbox">
+                    <label><input type="checkbox" value="Land Preparation" name="Stage" checked>Land Preparation</label>
+                  </div>
                   <div class="checkbox">
                     <label><input type="checkbox" value="Vegetative" name="Stage" checked>Vegetative</label>
                   </div>
@@ -183,13 +204,16 @@
                     <label><input type="checkbox" value="Reproductive" name="Stage" checked>Reproductive</label>
                   </div>
                   <div class="checkbox">
-                    <label><input type="checkbox" value="Ripening" name="Stage" checked>Ripening</label>
+                    <label><input type="checkbox" value="Mature" name="Stage" checked>Mature</label>
                   </div>
                   <div class="checkbox">
-                    <label><input type="checkbox" value="Idle" name="Stage" checked>Idle land/grass</label>
+                    <label><input type="checkbox" value="Idle land/grass" name="Stage" checked>Idle land/grass</label>
                   </div>
                   <div class="checkbox">
                     <label><input type="checkbox" value="Harvested" name="Stage" checked>Harvested</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" value="Others" name="Stage" checked>Others</label>
                   </div>
                 </form>
               </div>
@@ -206,7 +230,8 @@
       class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
       <div class="mdl-cell mdl-cell--12-col preview-title">
         <h4 style="margin-bottom:0"><b>SICApp</b>: SEAMS Image Capturing Application</h4>
-        <h6 style="margin-top:0; margin-bottom:10px">Below are the images uploaded in SARAi SICApp</h6>
+        <h6 style="margin-top:0; margin-bottom:10px">Search through the images to view the crop status
+          and the damage reports during natural disasters in the field.</h6>
       </div>
     </div>
   </div>
@@ -226,17 +251,20 @@
         <option>All</option>
         <option>Rice</option>
         <option>Corn</option>
+        <option>Others</option>
       </select>
     </div>
     <div class="mdl-cell mdl-cell--2-col">
       <label for="stageSelect">Growth stage:</label><br />
       <select id="stageSelect" class="form-control form-control-sm" style="height:25px;font-size:11px;padding: 6px">
         <option>All</option>
+        <option>Land Preparation</option>
         <option>Vegetative</option>
         <option>Reproductive</option>
-        <option>Ripening</option>
+        <option>Mature</option>
         <option>Idle land/grass</option>
         <option>Harvested</option>
+        <option>Others</option>
       </select>
     </div>
     <div class="mdl-cell mdl-cell--6-col">
@@ -308,21 +336,15 @@
 
   {{/if}}
 
+  <div class="mdl-grid" style="max-width:1000px">
+    <ul id="pagination-section" class="pagination pagination-sm" style="margin:8px">
+        <li class="page active"><a>1</a></li>
+      {{#each noOfPages}}
+        <li class="page" ><a>{{this}}</a></li>
+      {{/each}}
 
-  <!-- <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-end">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav> -->
-
+    </ul>
+  </div>
 
   <div id="myModal" class="modal fade" role="dialog" style="z-index: 9999;">
     <div class="modal-dialog" style="width:80%;margin-top:-100px">

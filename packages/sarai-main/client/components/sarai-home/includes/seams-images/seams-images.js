@@ -1,8 +1,7 @@
-Template.SeamsImages.onCreated(() => {
-})
+// Template.SeamsImages.onCreated(() => {
+// })
 
 Template.SeamsImages.onRendered(() => {
-
   var dialog = document.querySelector('dialog');
   dialog.showModal();
 
@@ -22,6 +21,8 @@ Template.SeamsImages.onRendered(() => {
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(weatherMap);
+
+  Session.set('size', '4');
   
   var monthNames = [
     "January", "February", "March",
@@ -31,16 +32,19 @@ Template.SeamsImages.onRendered(() => {
   ];
 
   let images_data = [];
+  let current_data = [];
+  markers = [];
 
   function getImagesData(token){
+    current_data = [];
     var token;
-    $.getJSON("https://firestore.googleapis.com/v1beta1/projects/seams-image-caputring/databases/(default)/documents/post?pageToken=" + token, (results) => {
+    $.getJSON("https://firestore.googleapis.com/v1beta1/projects/seams-image-caputring/databases/(default)/documents/post?pageSize=6&pageToken=" + token, (results) => {
       for(let i = 0 ; i < results.documents.length; i++){
           let formatDate = new Date(results.documents[i].createTime);
           var day = formatDate.getDate();
           var monthIndex = formatDate.getMonth();
           var year = formatDate.getFullYear();
-          images_data.push({
+          var data = {
             imageUrl: results.documents[i].fields.imageUrl.stringValue, 
             coords: '[' + results.documents[i].fields.coords.arrayValue.values[0].doubleValue + ',' + results.documents[i].fields.coords.arrayValue.values[1].doubleValue + ']',
             purpose: results.documents[i].fields.purpose.stringValue,
@@ -48,38 +52,53 @@ Template.SeamsImages.onRendered(() => {
             stage: results.documents[i].fields.stage.stringValue,
             desc: results.documents[i].fields.description.stringValue,
             date: day + ' ' + monthNames[monthIndex] + ' ' + year,
+            rawDate: formatDate,
             lat: results.documents[i].fields.coords.arrayValue.values[0].doubleValue,
             long: results.documents[i].fields.coords.arrayValue.values[1].doubleValue,
-          })
+          };
+
+          images_data.push(data);
+          current_data.push(data);
         }
-      token = results.nextPageToken;
-    }).done(function(){
-      if(token){
-        getImagesData(token)
+        images_data.sort(function(a,b){
+          return new Date(a.rawDate) - new Date(b.rawDate);
+        });
+      if('nextPageToken' in results){
+        token = results.nextPageToken;
       }else{
-        Session.set('size', '4');
-        Session.set('seams_images', images_data)
+        token = null;
+      }
+    }).done(function(){
         Session.set('all_seams_images', images_data)
+        updateData($('#purposeSelect').val(), $('#cropSelect').val(), $('#stageSelect').val(), '.active', (parseInt($('li.active a').text()) * 6 - 6), "MainUpdate")
 
-        var markers = [];
+        if(dialog.open){
+          dialog.close();
+        }
 
-        for(let a = 0 ;a < images_data.length; a++){
-          var marker = new L.marker([images_data[a].lat, images_data[a].long], {purpose: images_data[a].purpose, crop: images_data[a].crop, stage: images_data[a].stage})
-                .bindPopup(`<div style="max-width:150px"><span>${images_data[a].desc}</span><br/><img src="data:image/jpeg;base64,${images_data[a].imageUrl}" title="${images_data[a].desc}" style="width:100%"/></div>`);
+        for(let a = 0 ;a < current_data.length; a++){
+          var marker = new L.marker([current_data[a].lat, current_data[a].long], {purpose: current_data[a].purpose, crop: current_data[a].crop, stage: current_data[a].stage})
+                .bindPopup(`<div style="max-width:150px"><span>${current_data[a].desc}</span><br/><img src="data:image/jpeg;base64,${current_data[a].imageUrl}" title="${current_data[a].desc}" style="width:100%"/></div>`);
           markers.push(marker)
           marker.addTo(weatherMap);
         }
-        globalMarker = markers;
-        dialog.close();
-      }
+
+        if(token){
+          getImagesData(token);
+        }
+    }).fail(function() {
+      console.log( "error in retrieving data" );
     });
   }
-
+  //function call
   getImagesData('');
-
 })/** function end of onrendered **/
 
 Template.SeamsImages.events({
+  'click .page': (e) => {
+    var startIndex = parseInt($(e.target).text()) * 6 - 6;
+    updateData($('#purposeSelect').val(), $('#cropSelect').val(), $('#stageSelect').val(), e.currentTarget, startIndex, "PaginationUpdate")
+  },
   'click #download': (e) => {
     $('#form-seams').removeClass('has-error');
     $('#invalid_alert').hide()
@@ -117,15 +136,15 @@ Template.SeamsImages.events({
   },
   'change #purposeSelect': (e) => {
     const purpose = e.currentTarget.value
-    updateView(purpose, $('#cropSelect').val(), $('#stageSelect').val())
+    updateData(purpose, $('#cropSelect').val(), $('#stageSelect').val(), '.pagination li:first', 0, "FilterUpdate")
   },
   'change #cropSelect': (e) => {
     const crop = e.currentTarget.value
-    updateView($('#purposeSelect').val(),crop, $('#stageSelect').val())
+    updateData($('#purposeSelect').val(),crop, $('#stageSelect').val(), '.pagination li:first', 0, "FilterUpdate")
   },
   'change #stageSelect': (e) => {
     const stage = e.currentTarget.value
-    updateView($('#purposeSelect').val(),$('#cropSelect').val(), stage)
+    updateData($('#purposeSelect').val(),$('#cropSelect').val(), stage, '.pagination li:first', 0, "FilterUpdate")
   },
   'click #twoview': (event) => {
     Session.set('listView', false);
@@ -155,30 +174,12 @@ Template.SeamsImages.events({
     $.each($("input[name='Stage']:checked"), function(){            
       stage.push($(this).val());
     });
-   globalMarker.forEach(function(element){
-    var purposeFilterPass = false;
-    for(p in purpose){
-      if(element.options.purpose == purpose[p]){
-        purposeFilterPass = true;
-        break;
-      }
-    }
-    var cropFilterPass = false;
-    for(c in crop){
-      if(element.options.crop == crop[c]){
-        cropFilterPass = true;
-        break;
-      }
-    }
-    var stageFilterPass = false;
-    for(s in stage){
-      if(element.options.stage == stage[s]){
-        stageFilterPass = true;
-        break;
-      }
-    }
+   markers.forEach(function(element){
+    var purposeFilterPass = sortByFilter(purpose,element.options.purpose, 'purpose');
+    var cropFilterPass = sortByFilter(crop, element.options.crop, 'crop');
+    var stageFilterPass = sortByFilter(stage, element.options.stage, 'stage');
     
-    if(purposeFilterPass && cropFilterPass && stageFilterPass){
+    if(purposeFilterPass && cropFilterPass && stageFilterPass){  
       element.addTo(weatherMap);
     }else{
       element.remove();
@@ -188,8 +189,16 @@ Template.SeamsImages.events({
 })
 
 Template.SeamsImages.helpers({
-  seamsImages: () => {
+  noOfPages: ()=> {
     const seams_images = Session.get('seams_images')
+    var numbers = [];
+    for(var i = 2 ; i <= Math.ceil(seams_images.length/6); i++){
+      numbers.push(i)
+    }
+    return numbers;
+  },
+  seamsImages: () => {
+    const seams_images = Session.get('page_seams_images')
     return seams_images
   },
   size: ()=> {
@@ -202,14 +211,54 @@ Template.SeamsImages.helpers({
   },
 })
 
-
-function updateView(purpose,crop,stage){
-  const seams_images = Session.get('all_seams_images');
-  const sorted = seams_images.reduce(function(result, doc) {
-    if ( (doc.purpose == purpose || purpose == 'All') &&  (doc.crop == crop || crop == 'All') && (doc.stage == stage || stage == 'All'))  {
-      result.push(doc);
+function sortByFilter(arr, obj, type){
+  for(var i = 0 ; i < arr.length; i++){
+    if(obj == arr[i]){
+      return true;
     }
-    return result;
-  }, []);
-  Session.set('seams_images', sorted);
+  }
+
+  if(arr.includes("Others") && !checkFilterExists(obj, type)){
+    return true;
+  }
+  return false;
+}
+
+function checkFilterExists(obj, type){
+  var type_array;
+  if(type=='crop'){
+    type_array = ['Rice','Corn']
+  }else if(type=="stage"){
+    type_array = ['Land Preparation','Vegetative','Reproductive','Mature','Idle land/grass','Harvested']
+  }
+  if(type_array.includes(obj)){
+    return true;
+  }
+  return false;
+}
+
+function updateData(purpose,crop,stage,element,startIndex, type){
+  //update the pagination
+  if(type=="FilterUpdate" || type=="PaginationUpdate"){
+    $('.page').removeClass("active");
+    $(element).addClass("active");
+  }
+
+  if(type=="FilterUpdate" || type=="MainUpdate"){
+    
+    const all_seams_images = Session.get('all_seams_images');
+    const sorted = all_seams_images.reduce(function(result, doc) {
+      if ( (doc.purpose == purpose || purpose == 'All') && (doc.crop == crop || crop == 'All' || (crop == 'Others' && !checkFilterExists(doc.crop,'crop')) ) && (doc.stage == stage || stage == 'All' || (stage == 'Others' && !checkFilterExists(doc.stage,'stage')) ))  {
+        result.push(doc);
+      }
+      return result;
+    }, []);
+    Session.set('seams_images', sorted);
+    Session.set('page_seams_images', sorted.slice(startIndex,startIndex + 6))
+    
+    
+  }else if(type=="PaginationUpdate"){
+    const seams_images = Session.get('seams_images')
+    Session.set('page_seams_images', seams_images.slice(startIndex,startIndex + 6))
+  }
 }

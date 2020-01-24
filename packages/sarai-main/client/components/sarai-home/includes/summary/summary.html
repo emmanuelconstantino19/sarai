@@ -1,0 +1,662 @@
+<template name="Summary">
+  <div class="container-fluid">
+  
+    <div class="row" style="margin-top: 50px;display: none;">
+      <div class="col-1">
+      </div>
+      <div class="col-10">
+  
+         <h2 style="text-align:center;padding-top: 10px;">SARAi General Advisory</h2>
+         <h5 style="text-align:center;padding-top: 10px;padding-bottom: 10px;">
+  
+          <p>The recommended planting date of rainfed rice in Batac, Ilocos Norte is on May 31*. Flowering stage of short-duration varieties are expected to begin sometime between July 5 to July 25; medium-duration varieties sometime between July 25 to August 14; and long-duration varieties sometime between August 14 to September 3. Expected harvest dates of short-, medium-, and long-duration varieties are September 8 to September 28, September 28 to October 18, and October 18 to November 7, respectively.</p>
+  
+          <p style="font-size:14pt;">Disclaimer: These dates may vary depending on the air temperature and actual amount of rainfall during the cropping season.</p>
+  
+          <p style="font-size:12pt;font-style:italic;">*Planting may start mid-May</p>
+  
+         </h5>
+      </div>
+      <div class="col-1">   
+      </div>
+    </div>
+  
+  
+    <div class="row" style="margin-top: 10px;">
+  
+      <div class="col-1">
+      </div>
+  
+  
+      <div class="col-10">
+  
+  
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left:5%;margin-right:5%">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Rice</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Corn</a>
+    </li>
+  
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade in active" id="home" role="tabpanel" aria-labelledby="home-tab" style="background-color: white;">
+   
+   <h2 style="text-align:center;padding-top: 50px;padding-bottom: 50px;">Top 10 Rice Producing Provinces in the Philippines, October 2019</h2>
+            <div id="ricediv" style="margin-left:5%;margin-right:5%">
+              <table class="table" id="ricetable">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 10%;">Province</th>
+                    <th scope="col" style="text-align:center;width: 15%;">5 Month Rainfall Outlook <a title="weather outlook" href="http://sarai.ph/heat-map-rainfall-outlook"><sup>1</sup></a></th>
+                    <th scope="col" style="text-align:center;width: 15%;">6 Month SVTR Forecast <a title="SVTR forecast" href="http://sarai.ph/drought"><sup>2</sup></a></th>
+                    <th scope="col" style="text-align:center;width: 10%;">Area Planted (ha)</th>
+                    <th scope="col" style="text-align:center;min-width: 150px;">Growth Stage</th>
+                    <th scope="col" style="text-align:center;width: 10%;">Pest Advisory</th>
+                    <th scope="col" style="text-align:center;width:20%">Advisory<a href="http://sarai.ph"><sup>3</sup></a></th>
+                  </tr>
+                </thead>
+  
+  
+                <tbody>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Nueva Ecija</th>
+                    <td style="vertical-align: middle;"><div id="container2" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Severe"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+                    </td>
+                    <td style="vertical-align: middle;text-align: center;">154,937 </td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/1.png" title="Initial to Vegetative"><p style="margin-bottom:0">Initial to Vegetative</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;">The 200-mm threshold is continuously met until the second week of November; however, the declining amount of water may become detrimental to rice seedlings even though the method of planting is direct dry seeding. It is recommended not to take risk in planting rainfed rice for dry season 2019.</td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Isabela</th>
+                    <td style="vertical-align: middle;"><div id="container4" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Jan Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Feb Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">88,163 </td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/3.png" title="Reproductive to Maturity"><p style="margin-bottom:0">Reproductive to Maturity</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;">Direct seeded rainfed rice must have been sowed by the end of November. For transplanting farms, transplants must be prepared by the mid-November, then commence transplanting by December. Expected harvest is on February/March.</td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Pangasinan</th>
+                    <td style="vertical-align: middle;"><div id="container6" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Severe"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">82,009 </td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Cagayan</th>
+                    <td style="vertical-align: middle;"><div id="container8" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Jan Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Feb Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">77,527 </td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Iloilo</th>
+                    <td style="vertical-align: middle;"><div id="container10" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">17,856</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;">During this time, standing crops of rainfed rice planted last October are entering its flowering phase. Planting during the month of November is not advised despite meeting the threshold because the decrease in rainfall by December may be detrimental to young, growing rice plants. Harvesting of rainfed rice planted in October is on January.</td>
+  
+                  </tr>
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Camarines Sur</th>
+                    <td style="vertical-align: middle;"><div id="container12" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">49,607</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Tarlac</th>
+                    <td style="vertical-align: middle;"><div id="container14" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">48,309</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">North Cotabato</th>
+                    <td style="vertical-align: middle;"><div id="container16" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">63,956</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Leyte</th>
+                    <td style="vertical-align: middle;"><div id="container18" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">28,315</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Negros Occidental</th>
+                    <td style="vertical-align: middle;"><div id="container20" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+                    <td style="vertical-align: middle;text-align: center;">13,243</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;">Direct seeded rainfed rice must be sowed until first to second week of November. For transplanting farms, transplants must be prepared by the first week of November, then commence transplanting by the end of November to early December. Expected harvest is on February/March.</td>
+  
+                  </tr>
+  
+  
+  
+  
+                </tbody>
+              </table>
+  
+            </div>
+  
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+       <h2 style="text-align:center;padding-top: 50px;padding-bottom: 50px;">Top 10 Corn Producing Provinces in the Philippines, October 2019</h2>
+  
+  
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="min-width: 150px;">Province</th>
+                    <th scope="col" style="text-align:center;">5 Month Rainfall Outlook <a title="weather outlook" href="http://sarai.ph/heat-map-rainfall-outlook"><sup>1</sup></a></th>
+                    <th scope="col" style="text-align:center;min-width: 150px;">6 Month SVTR Forecast <a title="SVTR forecast" href="http://sarai.ph/drought"><sup>2</sup></a></th>
+                    <th scope="col" style="text-align:center;min-width: 150px;">Area Planted (ha)</th>
+                    <th scope="col" style="text-align:center;min-width: 150px;">Growth Stage</th>
+                    <th scope="col" style="text-align:center;min-width: 150px;">Pest Advisory</th>
+                    <th scope="col" style="text-align:center;">Advisory</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Isabela</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer2" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Jan Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Feb Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">158,491</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: left;">Expect higher incidence of stalk rot, downy mildew, and rust; increase in population of corn
+  leafhopper, fall armyworm, and occurrence of other lepidopterous pest.</td>
+                    <td style="vertical-align: middle;">Planting of corn is advised to start late November to early December to prevent early-season water saturation of young corn plants. Expected harvest will be on February/March.</td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Bukidnon</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer4" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Oct Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Jan Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Feb Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">101,034</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: left;">Expect higher incidence of rust and downy mildew; increase in population of fall armyworm,
+  and occurrence of other lepidopterous pest.</td>
+                    <td style="vertical-align: middle;">Planting of corn is advised to start on December to January to prevent early-season water saturation of young corn plants. Thus, expected harvest period is on March/April.</td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">South Cotabato</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer6" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">47,017</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Maguindanao</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer8" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Oct Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Nov Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">12,907</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Cagayan</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer10" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Jan Mild"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Feb Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">66,297</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c1.png" title="Initial to Vegetative"><p style="margin-bottom:0">Initial to Vegetative</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">North Cotabato</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer12" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">63,863</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c2.png" title="Vegetative to Reproductive"><p style="margin-bottom:0">Vegetative to Reproductive</p></td>
+                    <td style="vertical-align: middle;text-align: left;">Expect higher incidence of stalk rot, rust, and downy mildew; increase in population of fall
+  armyworm, and occurrence of other lepidopterous pest.</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Pangasinan</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer14" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Severe"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">53,106</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c1.png" title="Initial to Vegetative"><p style="margin-bottom:0">Initial to Vegetative</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Sultan Kudarat</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer16" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Oct Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: yellow;border: 1px solid black;float: left;" title="Dec Mild"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">29,509</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c1.png" title="Initial to Vegetative"><p style="margin-bottom:0">Initial to Vegetative</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Lanao del Sur</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer18" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Severe"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">18,953</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c3.png" title="Reproductive to Maturity"><p style="margin-bottom:0">Reproductive to Maturity</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+  
+                  </tr>
+  
+  
+                  <tr>
+                    <th scope="row" style="vertical-align: middle;">Lanao del Norte</th>
+                    <td style="vertical-align: middle;"><div id="corncontainer20" class="graph"></div></td>
+                    <td scope="col" style="min-width: 150px;top: 50%;">
+  
+                      <div style="width:120px;height: 20px;margin:auto;margin-top:50%;">
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Oct Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Nov Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Dec Severe"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Jan Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Feb Normal"></div>
+                        <div style="width:20px;height: 20px;background: white;border: 1px solid black;float: left;" title="Mar Normal"></div>
+                      </div>
+  
+  
+  
+  
+                    </td>
+  
+  
+                    <td style="vertical-align: middle;text-align: center;">26,324</td>
+                    <td style="vertical-align: middle;text-align: center;"><img src="/icons-stage/c3.png" title="Reproductive to Maturity"><p style="margin-bottom:0">Reproductive to Maturity</p></td>
+                    <td style="vertical-align: middle;text-align: center;">None</td>
+                    <td style="vertical-align: middle;"></td>
+                  </tr>
+  
+  
+  
+  
+                </tbody>
+              </table>
+  
+  
+    </div>
+  <div style="width: 100%;margin:auto;text-align: center;">
+    <a href="https://pdf-ace.com/pdfme/" target= "_blank">Save as PDF</a>
+  
+  </div>
+  
+  </div>
+  
+  
+  
+  
+      
+  <!--         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Rainfall (mm)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              
+  
+  
+  
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+   -->    
+  
+  
+      </div>
+  
+  
+      <div class="col-1">
+      </div>
+  
+  
+    </div>
+  
+  
+  
+  
+  </div>
+
+</template>

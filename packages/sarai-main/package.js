@@ -161,6 +161,11 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/forecast-display/forecast-display.less",
     "client/components/sarai-home/includes/forecast-display/route.js",
 
+    "client/components/sarai-home/includes/summary/route.js",
+    "client/components/sarai-home/includes/summary/summary.js",
+    "client/components/sarai-home/includes/summary/summary.html",
+    "client/components/sarai-home/includes/summary/summary.less",
+
 
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",

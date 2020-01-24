@@ -247,6 +247,14 @@ Template.ForecastDisplay.helpers({
 });
 
 Template.ForecastContent.helpers({
+  formatQPF: (qpf) => {
+    if (qpf < 1) {
+      return "< 1"
+    }
+    else {
+      return qpf
+    }
+  },
   isSlideOne: (type) => {
     if(type=="ForecastTime"){
       return true
