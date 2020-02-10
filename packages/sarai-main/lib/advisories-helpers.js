@@ -32,9 +32,9 @@ main_title = "20-day moving cumulative total rainfall in " + place
             title: {
             text: ''
         },
-        tooltip: {
-            xDateFormat: '%b %d'
-        },
+        // tooltip: {
+        //     xDateFormat: '%b %d'
+        // },
         subtitle: {
             text: main_title
         },
@@ -43,9 +43,9 @@ main_title = "20-day moving cumulative total rainfall in " + place
                 text: 'Month'
             },
             type: 'datetime',
-            labels: {
-                format: '{value:%b}'
-            },
+            // labels: {
+            //     format: '{value:%b}'
+            // },
         },
         yAxis: {
             title: {
@@ -79,18 +79,19 @@ main_title = "20-day moving cumulative total rainfall in " + place
                 data: new_data,
                 zoneAxis: 'x',
                 zones: [{
-                value: 1554076800000, 
+                value: 1585699200000, 
                 dashStyle: 'solid',
                 color: color
                 },{
-                value: 1572566400000, 
+                value: 1604102400000, 
                 dashStyle: 'dot',
                 color: 'black'
-                },{
-                value: 1585612800000, 
-                dashStyle: 'solid',
-                color: color
                 }]
+                // ,{
+                // value: 1585612800000, 
+                // dashStyle: 'solid',
+                // color: color
+                // }]
             }]
         }
 }
