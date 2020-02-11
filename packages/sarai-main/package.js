@@ -166,6 +166,11 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/summary/summary.html",
     "client/components/sarai-home/includes/summary/summary.less",
 
+    "client/components/sarai-home/includes/geographic-insurance/geographic-insurance.html",
+    "client/components/sarai-home/includes/geographic-insurance/geographic-insurance.js",
+    "client/components/sarai-home/includes/geographic-insurance/geographic-insurance.less",
+    "client/components/sarai-home/includes/geographic-insurance/route.js",
+
 
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",

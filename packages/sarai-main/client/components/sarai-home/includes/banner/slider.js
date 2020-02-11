@@ -3,6 +3,12 @@ Template.Slider.onRendered(() => {
 })
 
 Template.Slider.helpers({
+  isCommunity: (title) => {
+    if (title == "community") {
+      return true
+    }
+    return false
+  },
 
   slides: () => {
     const record = Main.findOne({name: 'banner'})
@@ -20,6 +26,8 @@ Template.Slider.helpers({
       filtered.sort((a, b) => {
         return a.rank > b.rank ? 1 : ((b.rank > a.rank ? -1 : 0))
       })
+
+      filtered.push({title:'community'})
 
       return filtered
     }
