@@ -2,6 +2,21 @@
 // })
 
 Template.SeamsImages.onRendered(() => {
+  $('input[name="dates"]').daterangepicker({
+    minDate: '10/16/2019',
+    startDate: '10/16/2019',
+    maxDate: moment(),
+    parentEl: '.page-content',
+  });
+  $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
+    var seams_data = Session.get('all_seams_images')
+    var filtered_by_date = seams_data.filter((item) => (new Date(item.rawDate) > picker.startDate && new Date(item.rawDate) < picker.endDate))
+    console.log(filtered_by_date);
+    Session.set('seams_date_filtered', filtered_by_date)
+    Session.set('seams_images', filtered_by_date);
+    Session.set('page_seams_images', filtered_by_date.slice(0, 6))
+  });
+
   var dialog = document.querySelector('dialog');
   dialog.showModal();
 
@@ -70,6 +85,7 @@ Template.SeamsImages.onRendered(() => {
       }
     }).done(function(){
         Session.set('all_seams_images', images_data)
+        Session.set('seams_date_filtered', images_data)
         updateData($('#purposeSelect').val(), $('#cropSelect').val(), $('#stageSelect').val(), '.active', (parseInt($('li.active a').text()) * 6 - 6), "MainUpdate")
 
         if(dialog.open){
@@ -246,7 +262,7 @@ function updateData(purpose,crop,stage,element,startIndex, type){
 
   if(type=="FilterUpdate" || type=="MainUpdate"){
     
-    const all_seams_images = Session.get('all_seams_images');
+    const all_seams_images = Session.get('seams_date_filtered');
     const sorted = all_seams_images.reduce(function(result, doc) {
       if ( (doc.purpose == purpose || purpose == 'All') && (doc.crop == crop || crop == 'All' || (crop == 'Others' && !checkFilterExists(doc.crop,'crop')) ) && (doc.stage == stage || stage == 'All' || (stage == 'Others' && !checkFilterExists(doc.stage,'stage')) ))  {
         result.push(doc);

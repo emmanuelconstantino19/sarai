@@ -161,9 +161,14 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/forecast-display/forecast-display.less",
     "client/components/sarai-home/includes/forecast-display/route.js",
 
+    "client/components/sarai-home/includes/forecast-display-clsu/forecast-display-clsu.html",
+    "client/components/sarai-home/includes/forecast-display-clsu/forecast-display-clsu.js",
+    "client/components/sarai-home/includes/forecast-display-clsu/forecast-display-clsu.less",
+    "client/components/sarai-home/includes/forecast-display-clsu/route.js",
+
     "client/components/sarai-home/includes/summary/route.js",
-    "client/components/sarai-home/includes/summary/summary.js",
     "client/components/sarai-home/includes/summary/summary.html",
+    "client/components/sarai-home/includes/summary/summary.js",
     "client/components/sarai-home/includes/summary/summary.less",
 
     "client/components/sarai-home/includes/geographic-insurance/geographic-insurance.html",
@@ -171,6 +176,10 @@ Package.onUse(function(api) {
     "client/components/sarai-home/includes/geographic-insurance/geographic-insurance.less",
     "client/components/sarai-home/includes/geographic-insurance/route.js",
 
+    "client/components/sarai-home/includes/planting-date-calculator/planting-date-calculator.html",
+    "client/components/sarai-home/includes/planting-date-calculator/planting-date-calculator.js",
+    "client/components/sarai-home/includes/planting-date-calculator/planting-date-calculator.less",
+    "client/components/sarai-home/includes/planting-date-calculator/route.js",
 
     "lib/rainfall-graph-helpers.js",
     "lib/rainfall-map-helpers.js",
