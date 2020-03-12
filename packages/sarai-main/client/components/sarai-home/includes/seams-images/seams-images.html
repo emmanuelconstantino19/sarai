@@ -142,7 +142,6 @@
               <hr style="margin:0">
 
               <p style="font-size:14px;line-height:15px;margin-bottom:0;font-weight:bold;margin-top: 10px;">FILTER BY:</p>
-
                   <div style="padding: 5px 0;">
                   <a href="#purposeCollapse" data-toggle="collapse" style="font-size: 15px;"><span>Purpose</span> 
                     <i class="material-icons" style="float:right">
@@ -267,7 +266,11 @@
         <option>Others</option>
       </select>
     </div>
-    <div class="mdl-cell mdl-cell--6-col">
+    <div class="mdl-cell mdl-cell--2-col">
+      <label for="date-filter">Date range:</label><br />
+      <input id="date-filter" class="form-control form-control-sm" name="dates" style="height:25px;font-size:11px;padding: 6px">
+    </div>
+    <div class="mdl-cell mdl-cell--4-col">
       <div id="gridButtons">
         <button id="twoview" class="btn">
           <img class="view-icon" src="view-icons/grid2.png" />

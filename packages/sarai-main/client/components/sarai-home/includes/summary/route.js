@@ -1,5 +1,5 @@
 FlowRouter.route("/summary", {
   action: function() {
-    BlazeLayout.render("MonitoringLayout", {main: "Summary"})
+    BlazeLayout.render("MonitoringLayout", {main: "SummaryPage"})
   }
 })

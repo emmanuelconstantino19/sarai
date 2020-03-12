@@ -209,11 +209,11 @@ function createRainfallTable(rain){
           columns: [
               { title: "Province" },
               { title: "Municipality" },
-              { title: "February" },
               { title: "March" },
               { title: "April" },
               { title: "May" },
               { title: "June" },
+              { title: "July" },
           ],
           lengthChange: true,
           lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, 'All'] ]
@@ -250,7 +250,7 @@ function displayRainfallGraph(values){
 function getSixConsecMonths(){
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
     var d = new Date()
-    var current_month = 1;
+    var current_month = 2;
     var six_months = [];
     for(var i = 0 ; i < 5 ; i++){
       six_months[i] = months[(i + current_month)%months.length];

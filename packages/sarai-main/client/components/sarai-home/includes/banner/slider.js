@@ -41,9 +41,11 @@ Template.Slider.helpers({
 Template.SliderContent.onRendered(() => {
 
   $('#main-carousel').slick({
-    dots: true,
+    dots:true,
     arrows: true,
     autoplay: true,
+    pauseOnHover:true,
+    pauseOnFocus:true,
     autoplaySpeed: 5000,
   })
 
