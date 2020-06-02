@@ -1,21 +1,20 @@
 <template name="Slider">
-  <div id="main-carousel" class="main-carousel add-remove">
+  <div id="main-carousel" class="main-carousel add-remove" style="margin-top:65px;">
     {{#each entry in slides}}
     {{#if isCommunity entry.title}}
       <div id="banner-slider-community" class="mdl-grid banner-slide" style="display:flex;background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('/homepage-slider/banner2.jpeg')">
 
         <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--5-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone banner-slide-content" style="margin-top:auto;margin-bottom:auto">
-          <div class="bannertextclass" style="padding:0">
+          <div class="bannertextclass">
             <div class="text">
-              <img src="/sarai-community-logo.png" width="70%"/>
+              <img id="community-logo" src="/sarai-community-logo.png" width="100%"/>
 
                   <div style="margin-bottom: 15px;
                       font-family: 'Open Sans', sans-serif;
-                      font-size: 1.3em;">Koleksyon ng Kaalaman para sa Agrikultura</div>
-                  <div style="margin-top:0;font-size: 1.1em;
-                      line-height: 1.4em;">Makialam at maging may Alam</div>
+                      font-size: x-large;">Koleksyon ng Kaalaman para sa Agrikultura</div>
+                  <div style="margin-top:0;font-size: x-large;">Makialam at maging may Alam</div>
 
-                  <p style="font-size:0.7em; margin-top:2em; ">Click on any icon to know more about the crops.</p>
+                  <p style="font-size:medium; margin-top:2em; ">Click on any icon to know more about the crops.</p>
 
                   <div style=" float:left; display:inline; margin-right:5px">
                   <a href="http://202.92.144.48/group/beuabwyiDZra2oijS" title="RICE"><img width="50" src="/crops-flat-icons/rice1.png" alt=""></a>
@@ -60,7 +59,7 @@
           </div>
         </div>
 
-        <div class='mdl-cell mdl-cell--5-col-desktop mdl-cell mdl-cell--8-col-tablet mdl-cell mdl-cell--4-col-phone' style="margin-top:auto;margin-bottom:auto">
+        <div class='mdl-cell mdl-cell--5-col-desktop mdl-cell mdl-cell--8-col-tablet mdl-cell mdl-cell--4-col-phone mdl-layout--large-screen-only' style="margin-top:auto;margin-bottom:auto">
           <div class="videomarginclass">
               <iframe src="https://www.youtube.com/embed/VDf7TkWeU6k" class="videoclass" style="height:320px" frameborder="0" allowfullscreen></iframe>
               <div class='projlinkdiv'>

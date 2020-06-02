@@ -1,18 +1,18 @@
 <template name="RainfallOutlookView">
   <div class="mdl-grid mdl-grid--no-spacing">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title">
+      <div class="mdl-cell mdl-cell--12-col preview-title" style="padding: 0 15px;">
         <h3 style="margin-bottom:0;margin-top:10px">Rainfall Outlook</h3>
-        <h6 style="margin-top:0;font-weight:bold">We apply ensemble forecasting to know the 5-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</h6>
-        <h5 style="margin-bottom:0">(March - July 2020)</h5>
+        <h6 style="margin-top:0">We apply ensemble forecasting to know the 5-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</h6>
+        <h5 style="margin-bottom:0">(June - October 2020)</h5>
         <h6 style="margin-top:0">Source: <a href="/about-us/2.1" target="_blank" style="color:black">SEAMS</a>; NOAA-Climate Prediction Center</h6>
       </div>
       
       <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
       
       <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-       <label for="preview-select-province">PROVINCE</label><br/>
-       <div class="select-container">
+       <label>PROVINCE</label><br/>
+       <div class="select-container" style="width:90%">
           <select class="mdl-select" id="preview-select-province">
             {{#each province in provinces}}
               <option value="{{province.province}}">{{province.province}}</option>
@@ -23,8 +23,8 @@
       </div>
 
       <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <label for="preview-select-municipality">MUNICIPALITY</label><br/>
-        <div class="select-container">
+        <label>MUNICIPALITY</label><br/>
+        <div class="select-container" style="width:90%">
           <select class="mdl-select" id="preview-select-municipality">          
             {{#each municipality in municipalities}}
               <option value="{{municipality.[@index]}}">{{municipality[@index]}}</option>
@@ -35,7 +35,7 @@
       </div>
       </div>
 
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--1-offset-tablet mdl-cell--10-col-tablet mdl-cell--1-offset-phone mdl-cell--10-col-phone">
+      <div class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--10-col-tablet mdl-cell--10-col-phone">
         {{#each monthlyRainfall}}
           {{> PreviewRainfallOutlookCol}}
         {{/each}}
