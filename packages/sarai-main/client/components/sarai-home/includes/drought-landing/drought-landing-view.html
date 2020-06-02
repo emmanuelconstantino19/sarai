@@ -1,9 +1,9 @@
 <template name="DroughtOutlookView">
   <div class="mdl-grid mdl-grid--no-spacing">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title">
+      <div class="mdl-cell mdl-cell--12-col preview-title" style="padding: 0 15px;">
         <h3 style="margin-bottom:0;margin-top:10px">Drought and Crop Assessment Forecast</h3>
-        <h6 style="margin-top:0;font-weight:bold">We forecast which provinces are affected and will be affected by moisture stress. Indices are aggregated per province.</h6>
+        <h6 style="margin-top:0">We forecast which provinces are affected and will be affected by moisture stress. Indices are aggregated per province.</h6>
         <h5 style="margin-bottom:0">(November 2019 - April 2020)</h5>
         <h6 style="margin-top:0">Source: <a href="/about-us/2.6" target="_blank" style="color:black">DCAF Project</a></h6>
         
@@ -13,7 +13,7 @@
       
       <div class="mdl-cell mdl-cell--4-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
        <label for="preview-select-province-drought">PROVINCE</label><br/>
-       <div class="select-container" style="width:100%">
+       <div class="select-container" style="width:90%">
           <select class="mdl-select" id="preview-select-province-drought">
             {{#each province in provinces}}
               <option value="{{province.province}}">{{province.province}}</option>
@@ -25,9 +25,9 @@
 
       </div>
 
-      <div class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--1-offset-tablet mdl-cell--10-col-tablet mdl-cell--1-offset-phone mdl-cell--10-col-phone">
+      <div class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--10-col-tablet mdl-cell--10-col-phone">
         {{#each monthlyDrought}}
-          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--3-col-tablet mdl-cell--3-col-phone drought-outlook-preview-col ">
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone drought-outlook-preview-col ">
           <div class="head"><span class="month">{{head}}</span></div>
             <div class="drought"><span style="color:{{color}}" class="value">{{value}}</span></div>
           </div>

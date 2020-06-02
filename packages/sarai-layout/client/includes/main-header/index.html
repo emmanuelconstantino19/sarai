@@ -1,40 +1,44 @@
 <template name="MainHeader">
-  	<header class="mdl-layout__header mdl-layout--fixed-header" id="my-header" style="z-index: 10;"><!-- mdl-layout__headerdashdashwaterfall-->
 
-      <div class="mdl-layout__header-row" id="navClass">
-
-        <a href="/" class="mdl-layout-title alerts-and-advisories-header-title-anchor">
-        	<img class="main-logo" src="/header_green.png"/>
-          <!-- <span class="alerts-and-advisories-header-title">Integrated Pest Management</span> -->
-
+  <nav class="navbar navbar-default navbar-fixed-top" style="background:white;">
+    <div class="container-fluid" style="margin-left:5%; margin-right:5%">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="/header_green.png" class="logo"/>
         </a>
-
-        <div class="mdl-layout-spacer"></div>
-
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
           {{#each mainLink in mainLinks}}
-          <span>
-              <a class="mdl-navigation__link main-header-top-link" href="{{mainLink.href}}" id="{{mainLink.id}}">{{mainLink.name}}
-                {{#if hasSubLinks mainLink}}
-                  <i class="material-icons">keyboard_arrow_down</i>
-                {{/if}}
-              </a>
-              {{#if hasSubLinks mainLink}}
-                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="{{mainLink.id}}">
+            {{#if hasSubLinks mainLink}}
+              <li class="dropdown" style="color: #6C6B6B;">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{mainLink.name}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
                   {{#each link in mainLink.links}}
-                  <li class="mdl-menu__item mdl-menu__item-full--bleed-divider" data-link-href="{{link.href}}"><a href="{{link.href}}" id="sublinkclass">{{link.name}}</a></li>
+                    <li><a href="{{link.href}}" style="padding:15px">{{link.name}}</a></li>
                   {{/each}}
                 </ul>
-              {{/if}}
-          </span>
+              </li>    
+            {{else}}
+            <li style="color: #6C6B6B;"><a href="{{mainLink.href}}">{{mainLink.name}}</a></li>
+            {{/if}}
           {{/each}}
-              <!-- <div class="mdl-navigation__link">
-          	     {{> loginButtons align="right"}}
-              </div> -->
-              <img class="dost-pcaarrd-uplb-logo" src="/layout/dost-pcaarrd-uplb.png"/>
-        </nav>
+          <li>
+            <a style="padding:8px">
+              <img src="/layout/dost-pcaarrd-uplb.png" class="logo"/>
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-    </header>
+
+  	
 </template>
 

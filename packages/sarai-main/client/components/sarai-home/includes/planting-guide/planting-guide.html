@@ -1,17 +1,17 @@
 <template name="PlantingGuideView">
   <div class="mdl-grid mdl-grid--no-spacing" style="margin-bottom:20px">
     <div id="main-preview" class="mdl-grid mdl-grid--no-spacing mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-      <div class="mdl-cell mdl-cell--12-col preview-title">
-        <h3 style="margin-top:10px;margin-bottom:0">SARAi Cropping Advisories</h3>
-        <h6 style="margin-top:0;font-weight:bold">We craft site-specific recommendations for the representative sites of the different climate types.<br/>Recommendations may or may not be the same with other sites with the same climate type.</h6>
+      <div class="mdl-cell mdl-cell--12-col preview-title" style="padding: 0 15px;">
+        <h3 style="margin-top:10px;margin-bottom:0">SARAi Cropping Advisories  <a href="sarai-pdf/SARAi_Cropping_Advisories.pdf" target="_blank" style="color:grey"><i class="material-icons">info</i></a></h3>
+        <h6 style="margin-top:0">We craft site-specific recommendations for the representative sites of the different climate types.<br/>Recommendations may or may not be the same with other sites with the same climate type.</h6>
       </div>
     </div>
 
     <div class="mdl-grid mdl-grid--no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" id="preview-controls">
 
-      <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top:10px">
        <label for="crop-list" style="margin-bottom:0">CROP</label><br/>
-         <div class="select-container" style="width:100%;margin:0">
+         <div class="select-container" style="width:90%;margin:0">
             <select class="mdl-select" id="crop-list">
                 <option value="RICE">Rainfed Rice</option>
                 <option value="CORN">Corn</option>
@@ -22,9 +22,9 @@
           </div>
       </div>
 
-      <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--4-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" style="margin-top:10px">
        <label for="sites-list" style="margin-bottom:0">SITE</label><br/>
-         <div class="select-container" style="width:100%;margin:0">
+         <div class="select-container" style="width:90%;margin:0">
             <select class="mdl-select" id="sites-list">
                 <!-- <option value="Barili">Barili, Cebu (Climate Type III)</option> -->
                 <option value="Batac">Batac, Ilocos Norte (Climate Type I)</option>

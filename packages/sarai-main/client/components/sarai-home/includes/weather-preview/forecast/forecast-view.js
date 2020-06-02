@@ -1,18 +1,13 @@
 Template.ForecastView.onCreated(() => {
-  Meteor.subscribe('sarai-weather-stations')
-  Meteor.subscribe('weather-data-30')
-
   //default is ICALABAR18
-  Session.set('stationID', 'ICALABAR18')
-  Meteor.subscribe('dss-settings', () => {
-    getForecast('ICALABAR18')
+  Meteor.subscribe('sarai-weather-stations', () => {
+    Session.set('stationID', 'ICALABAR18')
     getOWMData('ICALABAR18')    
   })
+  Meteor.subscribe('weather-data-30')
 })
 
 Template.ForecastView.onRendered(() => {
-  const stationID = Session.get('stationID')
-  $('#preview-select-station').val('ICALABAR18')
 })
 
 Template.ForecastView.events({
@@ -20,35 +15,19 @@ Template.ForecastView.events({
     const stationID = e.currentTarget.value
     Session.set('stationID', stationID)
 
+    if($('#monitoring-station-select option:selected').text()!="Select Weather Station"){
+      $('#main_title').html('6-Day Forecast: <b>' + $('#preview-select-station option:selected').text() + '</b>')
+    }
+
     const forecast = getOWMData(stationID)
   },
 
-  'click .forecast-grid': (e) => {
-    const stationID = Session.get('stationID')
-    FlowRouter.go(`/accumulated-rainfall/${stationID}`)
-  },
-
   'click .preview-more button': () => {
-    // const stationID = Session.get('stationID')
-    // FlowRouter.go(`/accumulated-rainfall/${stationID}`)
     FlowRouter.go(`/weather-monitoring`)
-  },
-
-  'click .download': (e) => {
-    //Add (temporary) spinner
-    $('<div class="download-div download-stub"><div class="mdl-spinner mdl-js-spinner is-active"></div><br/>The download may take a few minutes. <br/> Please wait until finished before clicking anything.<br/></div>').appendTo('#download-container')
-
-    const download = downloadForecast()
   },
 
   'click #view-weather-monitoring': (e) => {
     Session.set('stationID', $('#preview-select-station').val())
-  },
-
-  'click #view-accumulated-rainfall': (e) => {
-    Session.set('stationID', $('#preview-select-station').val())
-    const stationID = Session.get('stationID')
-    FlowRouter.go(`/accumulated-rainfall/${stationID}`)
   },
 })
 
@@ -56,48 +35,6 @@ Template.ForecastView.helpers({
   stationID: () => {
     const stationID = Session.get('stationID')
     return stationID
-  },
-
-  dateToday: () => {
-    const weekdays = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ]
-    const dateToday = weekdays[(new Date()).getDay()]
-
-    return dateToday
-  },
-
-  forecastToday: () => {
-      const stationID = Session.get('stationID')
-      const forecast = Session.get('forecast')
-      const weatherData = WeatherData.find({id: stationID})
-
-      if (forecast && weatherData) {
-        let forecastToday = forecast[0]
-        const rainfall = Meteor.previewHelpers.get30DayRainfall(weatherData.fetch())
-
-        forecastToday.head = 'Today'
-        forecastToday.today = true
-        forecastToday['cumulative'] = rainfall
-
-        return forecastToday
-      }
-  },
-
-  forecastFirst3: () => {
-    //quantitative preciptation forecast
-    //probability of precipitation
-    const forecast = Session.get('forecast')
-
-    if (forecast) {
-      return forecast.splice(1, 3)
-    }
-  },
-
-  forecastNext4: () => {
-    const forecast = Session.get('forecast')
-
-    if (forecast) {
-      return forecast.splice(4, 4)
-    }
   },
 
   forecast2: () => {
@@ -175,48 +112,11 @@ const getOWMData = (stationID) => {
         descNight: results.daypart[0].wxPhraseLong[(i*2) + 1],
         qpf: results.qpf[i],
         chance: results.daypart[0].precipChance[(i*2)],
-        chanceNight: results.daypart[0].precipChance[(i*2)+1]
-        //qpf: element.qpf_allday.mm,
-        //pop: element.pop 
+        chanceNight: results.daypart[0].precipChance[(i*2)+1] 
       })
     }
     Session.set('forecast2', forecast)
   })
-  //Session.set('forecast'2, )
-}
-
-const getForecast = (stationID) => {
-
-  const apiKey = DSSSettings.findOne({name: 'wunderground-api-key'}).value
-
-  $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (result) => {
-    // const result = Meteor.PreviewSampleData.sampleData()
-
-    const completeTxtForecast = result.forecast.txt_forecast.forecastday
-
-    const simpleForecast = result.forecast.simpleforecast.forecastday
-    let txtForecast = []
-    let forecast = []
-
-    for (let a = 0; a < completeTxtForecast.length; a+=2) {
-      txtForecast.push(completeTxtForecast[a])
-    }
-
-    simpleForecast.forEach((element, index) => {
-      const date = `${element.date.day} ${element.date.monthname_short}`
-
-      forecast.push({
-        head: txtForecast[index].title.substring(0, 3),
-        date,
-        icon: txtForecast[index].icon_url,
-        qpf: element.qpf_allday.mm,
-        pop: element.pop })
-    })
-
-    Session.set('forecast', forecast)
-
-  })
-
 }
 
 function sleep(milliseconds) {
