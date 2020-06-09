@@ -9,7 +9,9 @@ Template.WeatherMonitoringV2.onCreated(() => {
     this.apiKey = record.value
 
     //display default station
-    Session.set('stationID', 'ICALABAR18')
+    if(Session.get('stationID') == null){
+      Session.set('stationID', 'ICALABAR18')
+    }
     displayWeatherData(Session.get('stationID'), this.apiKey)
     getCurrentWeather(this.apiKey)
 
@@ -186,16 +188,16 @@ const getOWMData = (stationID) => {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
   var api = '', code = ''; 
   if(stationID == "IPAOAY4"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
     code = 'MMSU-Batac'
   }else if(stationID == "ICAGAYAN3"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
     code = 'ISU-Cabagan'
   }else if(stationID == "ICAGAYAN2"){
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=16.725611,121.698503&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
     code = 'ISU-Echague'
   }else if(stationID == "ICENTRAL91"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=15.738165,120.928400&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=15.738165,120.928400&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
     code = 'CLSU-Munoz'
   }else if(stationID == "ICALABAR18"){
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=14.156233,121.262197&units=m&language=en-US&format=json&apiKey=d12105851d0e4c28a105851d0e8c2833';
@@ -210,7 +212,7 @@ const getOWMData = (stationID) => {
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.130432,120.704186&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
     code = 'PHILRICE-Mindoro'
   }else if(stationID == "IMIMAROP6"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=9.443356,118.560378&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=9.443356,118.560378&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
     code = 'WPU-Aborlan'
   }else if(stationID == "IBICOLGU2"){
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=13.192833,123.595327&units=m&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302';
@@ -228,16 +230,16 @@ const getOWMData = (stationID) => {
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.996182,121.929624&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
     code = 'PCA-Zamboanga'
   }else if(stationID == "INORTHER117"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.855571,125.057929&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.855571,125.057929&units=m&language=en-US&format=json&apiKey=cff86fd9a5404fd3b86fd9a5407fd302';
     code = 'CMU-Maramag'
   }else if(stationID == "INORTHER86"){
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=8.610266,124.883303&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a';
     code = 'USTP-Claveria'
   }else if(stationID == "IDAVAORE19"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.691228,125.188743&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.691228,125.188743&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
     code = 'SPAMAST-Matanao'
   }else if(stationID == "IDAVAORE20"){
-    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.489740,125.545582&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
+    api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.489740,125.545582&units=m&language=en-US&format=json&apiKey=ed7b5e2d0bca4c4bbb5e2d0bca0c4bf3';
     code = 'SPAMAST-Malita'
   }else if(stationID == "IREGIONX6"){
     api = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=7.110252,124.851728&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97';
@@ -427,14 +429,14 @@ const displayRainfallGraph = (tenday) => {
         graphData.push({name: 'IPB-UPLB', code:'ICALABAR18', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
-    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=17.410517,21.813614&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
         $('#rainfall-forecast-table').DataTable().row.add(['ISU-Cabagan', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'ISU-Cabagan', code:'ICAGAYAN3', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
-    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=16.725611,121.698503&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=16.725611,121.698503&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
         $('#rainfall-forecast-table').DataTable().row.add(['ISU-Echague', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
@@ -448,14 +450,14 @@ const displayRainfallGraph = (tenday) => {
         graphData.push({name: 'MINSCAT-Mindoro', code:'IMIMAROP7', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
-    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=18.054028,120.545667&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
         $('#rainfall-forecast-table').DataTable().row.add(['MMSU-Batac', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
         graphData.push({name: 'MMSU-Batac', code:'IPAOAY4', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
-    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.996182,121.929624&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=6.996182,121.929624&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
         $('#rainfall-forecast-table').DataTable().row.add(['PCA-Zamboanga', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
@@ -497,7 +499,7 @@ const displayRainfallGraph = (tenday) => {
         graphData.push({name: 'USM-Kabacan', code:'IREGIONX6', data: [results.qpf[0], results.qpf[1], results.qpf[2], results.qpf[3], results.qpf[4], results.qpf[5]]})
       
     }),
-    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=8.610266,124.883303&units=m&language=en-US&format=json&apiKey=f4664437a9f14d5ba64437a9f13d5b5a`,(results) => {
+    $.getJSON(`https://api.weather.com/v3/wx/forecast/daily/5day?geocode=8.610266,124.883303&units=m&language=en-US&format=json&apiKey=56afd53a907440ecafd53a9074f0ec97`,(results) => {
       
         
         $('#rainfall-forecast-table').DataTable().row.add(['USTP-Claveria', Math.round(parseFloat(results.qpf[0]) * 10)/10, Math.round(parseFloat(results.qpf[1]) * 10)/10, Math.round(parseFloat(results.qpf[2]) * 10)/10, Math.round(parseFloat(results.qpf[3]) * 10)/10, Math.round(parseFloat(results.qpf[4]) * 10)/10, Math.round(parseFloat(results.qpf[5]) * 10)/10]).draw();
@@ -638,7 +640,12 @@ const displayRainfallGraph = (tenday) => {
 	        option.innerHTML = `${stripTitle(element.label)}`
 	        option.setAttribute('value', element.markerID)
 
-	        stationsDropdown.append(option)
+          stationsDropdown.append(option)
+          
+          if(element.id == Session.get("stationID")){
+            $('#monitoring-station-select').val(element.markerID)
+            $('#main_title').html('6-Day Forecast: <b>' + $('#monitoring-station-select option:selected').text() + '</b>')
+          }
 	      })
 
 	      this.stations = stations
