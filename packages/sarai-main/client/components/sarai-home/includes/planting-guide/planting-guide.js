@@ -63,15 +63,6 @@ Template.PlantingGuideView.events({
       $('#text-advisory-rice-corn').hide()
       $('#date-pg').text("")
       $("#project-pg").html("Source: <a href='/about-us/1.4' target='_blank' style='color:black'>Project 1.4</a>")
-    }else if($('#crop-list').val() == "RICE AND CORN"){
-      $("#sites-list").append($('<option></option>').attr("value", "All").text("All"));
-      $('#location-pg').text('THE PHILIPPINES')
-      $('#graph-advisory').hide()
-      $('#text-advisory-cacao').hide()
-      $('#text-advisory-banana').hide()
-      $('#text-advisory-rice-corn').show()
-      $('#date-pg').text("")
-      $("#project-pg").html("")
     }
   }
 })

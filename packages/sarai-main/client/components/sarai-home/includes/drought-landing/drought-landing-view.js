@@ -4,18 +4,18 @@ Template.DroughtOutlookView.onCreated(() => {
   Meteor.subscribe('weather-outlook')
 
   //default is Region IV-A: CALABARZON, Laguna and Los Baños
-  Session.set('province2', 'Laguna')
+  Session.set('province-drought', 'Laguna')
 })
 
 Template.DroughtOutlookView.onRendered(() => {
-  const province = Session.get('province2')
-  $('#preview-select-province').val(province)
+  const province = Session.get('province-drought')
+  $('#preview-select-province-drought-landing').val(province)
 })
 
 Template.DroughtOutlookView.events({
-  'change #preview-select-province-drought': (e) => {
+  'change #preview-select-province-drought-landing': (e) => {
     const province = e.currentTarget.value
-    Session.set('province2', province)
+    Session.set('province-drought', province)
   },
 
   'click .drought-outlook-more button': () => {
@@ -27,7 +27,7 @@ Template.DroughtOutlookView.helpers({
 
   monthlyDrought: () => {
       //const region = Session.get('region')
-      const province = Session.get('province2')
+      const province = Session.get('province-drought')
       const droughtOutlook = 
 
       [
@@ -170,7 +170,7 @@ Template.DroughtOutlookView.helpers({
   },
 
   currentlySelectedProvince: (curr) => {
-    const province = Session.get('province2')
-    $('#preview-select-province-drought').val(province)
+    const province = Session.get('province-drought')
+    $('#preview-select-province-drought-landing').val(province)
   },
 })

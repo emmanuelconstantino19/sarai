@@ -3,8 +3,10 @@ Template.HeatMapRainfallOutlook.onCreated(() => {
   Meteor.subscribe('weather-outlook')
 
   //default is Region IV-A: CALABARZON, Laguna
-  Session.set('province', 'Laguna')
-  Session.set('municipality', 'Los Baños')
+  if(Session.get("province")==null){
+    Session.set('province', 'Laguna')
+    Session.set('municipality', 'Los Baños')
+  }
 })
 
 Template.HeatMapRainfallOutlook.onRendered(() => {

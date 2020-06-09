@@ -46,13 +46,24 @@ Template.SliderContent.onRendered(() => {
     autoplay: true,
     pauseOnHover:true,
     pauseOnFocus:true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 10000,
   })
 
 })
 
-Template.SliderContent.events({
-
+Template.Slider.events({
+  'click #play-next': (e) => {
+    if($('#slider-video').attr('src') == "https://www.youtube.com/embed/VDf7TkWeU6k"){
+      $('#slider-video').attr('src','https://www.youtube.com/embed/s5s6gBN0dpU')
+      $('#video-description').text('Know what to do on your Taal Ashfall affected crops as advised by Dr. Calixto Protacio, professor from the College of Agriculture (CAFS) - UPLB and crop expert of Project SARAi.')
+      $('#play-next').html('<span class="	glyphicon glyphicon-play-circle"></span> Watch SARAi analysis of Taal Ashfall</span>')
+    }else{
+      $('#slider-video').attr('src','https://www.youtube.com/embed/VDf7TkWeU6k')
+      $('#video-description').text("Watch as Dr. Vic Bato, professor from the College of Agriculture and Food Science (CAFS) - UPLB and soil scientist of Project SARAi, explains his team's analysis of the Taal Ashfall.")
+      $('#play-next').html('<span class="	glyphicon glyphicon-play-circle"></span> Watch SARAi Taal Ashfall Crop Advisory</span>')
+    }
+    
+  },
 })
 
 Template.SliderContent.helpers({
