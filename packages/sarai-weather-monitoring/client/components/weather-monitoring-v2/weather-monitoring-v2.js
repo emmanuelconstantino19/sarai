@@ -13,7 +13,7 @@ Template.WeatherMonitoringV2.onCreated(() => {
       Session.set('stationID', 'ICALABAR18')
     }
     displayWeatherData(Session.get('stationID'), this.apiKey)
-    getCurrentWeather(this.apiKey)
+    //getCurrentWeather(this.apiKey)
 
   })
 
@@ -179,9 +179,7 @@ Template.WeatherMonitoringV2.helpers({
 })
 
 const displayWeatherData = (stationID, apiKey) => {
-  //const forecast = getForecast(stationID)
   getOWMData(stationID);
-  //displayForecast(stationID, apiKey)
 }
 
 const getOWMData = (stationID) => {
@@ -290,102 +288,104 @@ const getOWMData = (stationID) => {
   //Session.set('forecast'2, )
 }
 
-const getForecast = (stationID) => {
+// const getForecast = (stationID) => {
 
-  const apiKey = DSSSettings.findOne({name: 'wunderground-api-key'}).value
+//   const apiKey = DSSSettings.findOne({name: 'wunderground-api-key'}).value
 
-  $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (results) => {
-    const completeTxtForecast = result.forecast.txt_forecast.forecastday
+//   $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}/forecast10day/q/pws:${stationID}.json`, (results) => {
+//     const completeTxtForecast = result.forecast.txt_forecast.forecastday
 
-    const simpleForecast = result.forecast.simpleforecast.forecastday
-    let txtForecast = []
-    let forecast = []
+//     const simpleForecast = result.forecast.simpleforecast.forecastday
+//     let txtForecast = []
+//     let forecast = []
 
-    for (let a = 0; a < completeTxtForecast.length; a+=2) {
-      txtForecast.push(completeTxtForecast[a])
-    }
+//     for (let a = 0; a < completeTxtForecast.length; a+=2) {
+//       txtForecast.push(completeTxtForecast[a])
+//     }
 
-    simpleForecast.forEach((element, index) => {
-      const date = `${element.date.day} ${element.date.monthname_short}`
+//     simpleForecast.forEach((element, index) => {
+//       const date = `${element.date.day} ${element.date.monthname_short}`
 
-      forecast.push({
-        head: txtForecast[index].title.substring(0, 3),
-        date,
-        icon: txtForecast[index].icon_url,
-        qpf: element.qpf_allday.mm,
-        pop: element.pop })
-    })
+//       forecast.push({
+//         head: txtForecast[index].title.substring(0, 3),
+//         date,
+//         icon: txtForecast[index].icon_url,
+//         qpf: element.qpf_allday.mm,
+//         pop: element.pop })
+//     })
 
-    $('#subtitle').html("<b>Today's Forecast </b>" + txtForecast[0].fcttext)
+//     $('#subtitle').html("<b>Today's Forecast </b>" + txtForecast[0].fcttext)
     
-    Session.set('forecast', forecast)
+//     Session.set('forecast', forecast)
 
-  })
-.success(function() { 
-	if($('#monitoring-station-select option:selected').text()!="Select Weather Station"){
-		$('#main_title').html('6-Day Forecast: <b>' + $('#monitoring-station-select option:selected').text() + '</b>')
-	}
-})
-.error(function(){ 
-  var snackbarContainer = document.querySelector('#demo-snackbar-example');
-  var data = {
-      message: 'Selected site is currently unavailable',
-      timeout: 2000
-    };
-  snackbarContainer.MaterialSnackbar.showSnackbar(data);
-})
-.complete(function() {});
+//   })
+// .success(function() { 
+// 	if($('#monitoring-station-select option:selected').text()!="Select Weather Station"){
+// 		$('#main_title').html('6-Day Forecast: <b>' + $('#monitoring-station-select option:selected').text() + '</b>')
+// 	}
+// })
+// .error(function(){ 
+//   var snackbarContainer = document.querySelector('#demo-snackbar-example');
+//   var data = {
+//       message: 'Selected site is currently unavailable',
+//       timeout: 2000
+//     };
+//   snackbarContainer.MaterialSnackbar.showSnackbar(data);
+// })
+// .complete(function() {});
 
-}
+// }
 
-const getCurrentWeather = (apiKey) => {
-	var weather_stations2 = [
-		'BUCAF-Albay',	 
-		'CLSU-Munoz',	 
-		'CMU-Maramag',	 
-		'CTU-Barili',	 
-		'DAQAES-Tiaong',	 
-		'IPB-UPLB',	 
-		'ISU-Cabagan',	 
-		'ISU-Echague',	 
-		'MINSCAT-Mindoro',	 
-		'MMSU-Batac',	 
-		'NCAS-UPLB',	 
-		'PCA-Zamboanga',	 
-		'PHILRICE-Mindoro',	 
-		'SPAMAST-Malita',	 
-		'SPAMAST-Matanao',	 
-		'UPLBCA-LaGranja',	 
-		'USM-Kabacan',	 
-		'USTP-Claveria',	 
-		'WPU-Aborlan',	 
-		'WVSU-Iloilo'
-	]
 
-	var rainfall, temp, hum, pres, ws, sr;
+//---------ADD THIS SOON WHEN API IS HTTPS------------
+// const getCurrentWeather = (apiKey) => {
+// 	var weather_stations2 = [
+// 		'BUCAF-Albay',	 
+// 		'CLSU-Munoz',	 
+// 		'CMU-Maramag',	 
+// 		'CTU-Barili',	 
+// 		'DAQAES-Tiaong',	 
+// 		'IPB-UPLB',	 
+// 		'ISU-Cabagan',	 
+// 		'ISU-Echague',	 
+// 		'MINSCAT-Mindoro',	 
+// 		'MMSU-Batac',	 
+// 		'NCAS-UPLB',	 
+// 		'PCA-Zamboanga',	 
+// 		'PHILRICE-Mindoro',	 
+// 		'SPAMAST-Malita',	 
+// 		'SPAMAST-Matanao',	 
+// 		'UPLBCA-LaGranja',	 
+// 		'USM-Kabacan',	 
+// 		'USTP-Claveria',	 
+// 		'WPU-Aborlan',	 
+// 		'WVSU-Iloilo'
+// 	]
 
-	for(var i = 0; i < weather_stations2.length; i++){
-		$.getJSON(`http://202.92.144.43/WL/JSON/${weather_stations2[i]}.json`,(result) => {
-			//rainfall = (result.hasOwnProperty('')) ? '--' : result.davis_current_observation.rain_day_in;
-			temp = (result.hasOwnProperty('temp_c')) ? result.temp_c : '--';
-			hum = (result.hasOwnProperty('relative_humidity') && parseFloat(result.relative_humidity) > 0 ) ? result.relative_humidity : '--';
-			pres = (result.hasOwnProperty('pressure_mb')  && parseFloat(result.pressure_mb) > 0) ? result.pressure_mb : '--';
-			ws = (result.hasOwnProperty('wind_mph')) ? result.wind_mph : '--';
-			sr = (result.davis_current_observation.hasOwnProperty('solar_radiation')) ? result.davis_current_observation.solar_radiation : '--';
-			$('#current-weather-data').DataTable().row.add([
-        result.davis_current_observation.station_name,
-				result.observation_time_rfc822.replace('+0800',''),
-				Math.round((parseFloat(result.davis_current_observation.rain_day_in) * 25.4) * 10)/10,
-				temp,
-				hum,
-				pres,
-				ws,
-				sr
-      ]).draw();		
-		})
-  }
+// 	var rainfall, temp, hum, pres, ws, sr;
 
-}
+// 	for(var i = 0; i < weather_stations2.length; i++){
+// 		$.getJSON(`http://202.92.144.43/WL/JSON/${weather_stations2[i]}.json`,(result) => {
+// 			//rainfall = (result.hasOwnProperty('')) ? '--' : result.davis_current_observation.rain_day_in;
+// 			temp = (result.hasOwnProperty('temp_c')) ? result.temp_c : '--';
+// 			hum = (result.hasOwnProperty('relative_humidity') && parseFloat(result.relative_humidity) > 0 ) ? result.relative_humidity : '--';
+// 			pres = (result.hasOwnProperty('pressure_mb')  && parseFloat(result.pressure_mb) > 0) ? result.pressure_mb : '--';
+// 			ws = (result.hasOwnProperty('wind_mph')) ? result.wind_mph : '--';
+// 			sr = (result.davis_current_observation.hasOwnProperty('solar_radiation')) ? result.davis_current_observation.solar_radiation : '--';
+// 			$('#current-weather-data').DataTable().row.add([
+//         result.davis_current_observation.station_name,
+// 				result.observation_time_rfc822.replace('+0800',''),
+// 				Math.round((parseFloat(result.davis_current_observation.rain_day_in) * 25.4) * 10)/10,
+// 				temp,
+// 				hum,
+// 				pres,
+// 				ws,
+// 				sr
+//       ]).draw();		
+// 		})
+//   }
+
+// }
 
 
 const displayRainfallGraph = (tenday) => {
@@ -656,67 +656,67 @@ const displayRainfallGraph = (tenday) => {
   });
 }
 
-const displayForecast = (stationID, apiKey) => {
+// const displayForecast = (stationID, apiKey) => {
 
-  if (apiKey) { //Make sure key is available
+//   if (apiKey) { //Make sure key is available
 
-    const dataFeatures = [ 'conditions', 'hourly10day', 'forecast10day']
-    $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}${Meteor.chartHelpers.featureURI(dataFeatures)}/q/pws:${stationID}.json`, (results) => {
+//     const dataFeatures = [ 'conditions', 'hourly10day', 'forecast10day']
+//     $.getJSON(`http:\/\/api.wunderground.com/api/${apiKey}${Meteor.chartHelpers.featureURI(dataFeatures)}/q/pws:${stationID}.json`, (results) => {
 
-      const dailySeries = Meteor.chartHelpers.getDailySeries(results)
-      const hourlySeries = Meteor.chartHelpers.getHourlySeries(results)
-      //common data
-      const tickPositions = Meteor.chartHelpers.getTickPositions(results)
-      const altTickPositions = Meteor.chartHelpers.getAltTickPositions(results)
+//       const dailySeries = Meteor.chartHelpers.getDailySeries(results)
+//       const hourlySeries = Meteor.chartHelpers.getHourlySeries(results)
+//       //common data
+//       const tickPositions = Meteor.chartHelpers.getTickPositions(results)
+//       const altTickPositions = Meteor.chartHelpers.getAltTickPositions(results)
 
-      const plotLines = Meteor.chartHelpers.getPlotLines(tickPositions)
+//       const plotLines = Meteor.chartHelpers.getPlotLines(tickPositions)
 
-      const tickQPFMap = Meteor.chartHelpers.getTickQPFMap(altTickPositions, dailySeries.qpf)
-      const tickTempMap = Meteor.chartHelpers.getTickTempMap(altTickPositions, dailySeries.hlTemp)
+//       const tickQPFMap = Meteor.chartHelpers.getTickQPFMap(altTickPositions, dailySeries.qpf)
+//       const tickTempMap = Meteor.chartHelpers.getTickTempMap(altTickPositions, dailySeries.hlTemp)
 
-      const charts = [
-        {
-          element: '#rain-meteogram',
-          title: 'Chance of Rain',
-          name: 'Chance of Rain',
-          id: 'pop',
-          data: hourlySeries.pop,
-          unit: '%',
-          tickPositions: tickPositions,
-          altTickPositions: altTickPositions,
-          color: '#0073e6',
-          dateTicksEnabled: true,
-          plotLines,
-          altTickLabels: tickQPFMap
-        },
-        {
-          element: '#temp-meteogram',
-          title: 'Temperature',
-          name: 'Temp',
-          id: 'temp',
-          data: hourlySeries.temp,
-          unit: '°C',
-          tickPositions: tickPositions,
-          altTickPositions: altTickPositions,
-          color: '#ff8c1a',
-          dateTicksEnabled: true,
-          plotLines,
-          altTickLabels: tickTempMap,
-        }
-      ]
+//       const charts = [
+//         {
+//           element: '#rain-meteogram',
+//           title: 'Chance of Rain',
+//           name: 'Chance of Rain',
+//           id: 'pop',
+//           data: hourlySeries.pop,
+//           unit: '%',
+//           tickPositions: tickPositions,
+//           altTickPositions: altTickPositions,
+//           color: '#0073e6',
+//           dateTicksEnabled: true,
+//           plotLines,
+//           altTickLabels: tickQPFMap
+//         },
+//         {
+//           element: '#temp-meteogram',
+//           title: 'Temperature',
+//           name: 'Temp',
+//           id: 'temp',
+//           data: hourlySeries.temp,
+//           unit: '°C',
+//           tickPositions: tickPositions,
+//           altTickPositions: altTickPositions,
+//           color: '#ff8c1a',
+//           dateTicksEnabled: true,
+//           plotLines,
+//           altTickLabels: tickTempMap,
+//         }
+//       ]
 
-      $('#meteogram-container .meteogram').remove()
-      //add new charts
-      charts.forEach((chart, index) => {
-        $('<div class="meteogram">')
-          .appendTo('#meteogram-container')
-          .highcharts(
-            Meteor.chartHelpers.constructChart(chart))
-      })
-    })
-  }
+//       $('#meteogram-container .meteogram').remove()
+//       //add new charts
+//       charts.forEach((chart, index) => {
+//         $('<div class="meteogram">')
+//           .appendTo('#meteogram-container')
+//           .highcharts(
+//             Meteor.chartHelpers.constructChart(chart))
+//       })
+//     })
+//   }
 
-}
+// }
 
 const stripTitle = (title) => {
   let result = title
