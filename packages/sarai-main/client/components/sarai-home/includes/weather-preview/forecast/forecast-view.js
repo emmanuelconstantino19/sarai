@@ -16,7 +16,7 @@ Template.ForecastView.events({
     Session.set('stationID', stationID)
 
     if($('#monitoring-station-select option:selected').text()!="Select Weather Station"){
-      $('#main_title').html('6-Day Forecast: <b>' + $('#preview-select-station option:selected').text() + '</b>')
+      $('#main_title').html('5-Day Forecast: <b>' + $('#preview-select-station option:selected').text() + '</b>')
     }
 
     const forecast = getOWMData(stationID)
